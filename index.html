@@ -7,11 +7,88 @@
     <style>
         :root { --main-dark: #1a1a1a; --pal-green: #00843d; --pal-red: #ee2335; }
         body { font-family: sans-serif; margin: 0; background: #f4f4f4; color: #333; padding-bottom: 70px; }
-        
-        /* الهيدر والسلة */
         header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
         .logo { font-size: 20px; font-weight: bold; }
         .logo span { color: var(--pal-green); }
         .cart-icon { font-size: 20px; cursor: pointer; position: relative; }
-        #
-        
+        #cart-count { position: absolute; top: -8px; right: -10px; background: var(--pal-red); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; }
+        .categories-nav { background: #fff; display: flex; overflow-x: auto; padding: 10px; gap: 10px; border-bottom: 1px solid #eee; }
+        .cat-item { background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 11px; white-space: nowrap; text-decoration: none; color: #333; }
+        .hero { background: var(--main-dark); color: #fff; padding: 20px; text-align: center; }
+        .hero h1 { font-size: 18px; margin: 0; }
+        .hero p { font-size: 12px; margin-top: 5px; opacity: 0.8; }
+        .shipping-rates { background: #fff; margin: 10px; padding: 12px; border-radius: 8px; border-right: 4px solid var(--pal-green); }
+        .rate-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; text-align: center; font-size: 11px; }
+        .container { padding: 10px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .card { background: #fff; border-radius: 8px; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; }
+        .card img { width: 100%; height: 110px; object-fit: cover; border-radius: 5px; }
+        .card h3 { font-size: 12px; margin: 8px 0; }
+        .card .price { color: var(--pal-red); font-weight: bold; font-size: 14px; margin-bottom: 10px; }
+        .add-btn { width: 100%; background: var(--main-dark); color: #fff; border: none; padding: 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
+        .cart-modal { position: fixed; bottom: -100%; left: 0; width: 100%; height: 70%; background: #fff; z-index: 1000; transition: 0.4s; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); padding: 20px; box-sizing: border-box; }
+        .cart-modal.active { bottom: 0; }
+        .cart-items { height: 60%; overflow-y: auto; margin-top: 15px; }
+        .cart-item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+        .checkout-btn { width: 100%; background: #25d366; color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: bold; margin-top: 15px; }
+        .close-cart { font-size: 20px; float: left; cursor: pointer; }
+        footer { text-align: center; padding: 20px; font-size: 10px; color: #999; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">OARA<span>STORE</span></div>
+    <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
+</header>
+<div class="categories-nav">
+    <a href="#" class="cat-item">ملابس</a><a href="#" class="cat-item">ساعات</a><a href="#" class="cat-item">عطور</a><a href="#" class="cat-item">إكسسوارات</a>
+</div>
+<section class="hero">
+    <h1>متجر OARA فلسطين</h1>
+    <p>ملابس، ساعات، عطور وإكسسوارات بجودة عالمية.</p>
+</section>
+<div class="shipping-rates">
+    <div class="rate-grid">
+        <div>الضفة: 20₪</div><div>القدس: 30₪</div><div>الداخل: 70₪</div>
+    </div>
+</div>
+<div class="container">
+    <div class="grid">
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="ساعة">
+            <h3>ساعة كلاسيك ملكية</h3>
+            <div class="price">150 ₪</div>
+            <button class="add-btn" onclick="addToCart('ساعة كلاسيك', 150)">إضافة للسلة</button>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="عطر">
+            <h3>عطر مسك القدس</h3>
+            <div class="price">90 ₪</div>
+            <button class="add-btn" onclick="addToCart('عطر مسك', 90)">إضافة للسلة</button>
+        </div>
+    </div>
+</div>
+<div class="cart-modal" id="cartModal">
+    <span class="close-cart" onclick="toggleCart()">×</span>
+    <h3>سلة المشتريات</h3>
+    <div class="cart-items" id="cart-items-list"></div>
+    <div style="font-weight: bold; margin-top: 10px;">المجموع: <span id="total-price">0</span> ₪</div>
+    <button class="checkout-btn" onclick="sendToWhatsApp()">إتمام الطلب عبر واتساب</button>
+</div>
+<footer>OARA STORE 2026</footer>
+<script>
+    let cart = []; let total = 0;
+    function addToCart(name, price) {
+        cart.push({name, price}); total += price; updateCartUI();
+        alert('تمت إضافة ' + name + ' للسلة');
+    }
+    function updateCartUI() {
+        document.getElementById('cart-count').innerText = cart.length;
+        document.getElementById('total-price').innerText = total;
+        const list = document.getElementById('cart-items-list');
+        list.innerHTML = cart.map(item => `<div class="cart-item-row"><span>${item.name}</span><span>${item.price} ₪</span></div>`).join('');
+    }
+    function toggleCart() { document.getElementById('cartModal').classList.toggle('active'); }
+    function sendToWhatsApp() {
+        if (cart.length === 0) return alert('الس
+    
