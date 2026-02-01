@@ -32,14 +32,24 @@
         .cart-item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px; }
         .checkout-btn { width: 100%; background: #25d366; color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: bold; margin-top: 15px; }
         .close-cart { font-size: 20px; float: left; cursor: pointer; }
+        .side-menu { position: fixed; top: 0; right: -250px; width: 250px; height: 100%; background: #fff; z-index: 1001; transition: 0.3s; padding-top: 60px; box-shadow: -2px 0 5px rgba(0,0,0,0.1); }
+        .side-menu.active { right: 0; }
+        .side-menu a { display: block; padding: 15px 20px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
         footer { text-align: center; padding: 20px; font-size: 10px; color: #999; }
     </style>
 </head>
 <body>
 <header>
+    <div onclick="toggleMenu()" style="cursor:pointer">☰ القائمة</div>
     <div class="logo">OARA<span>STORE</span></div>
     <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
 </header>
+<div class="side-menu" id="sideMenu">
+    <div onclick="toggleMenu()" style="padding:20px; cursor:pointer">× إغلاق</div>
+    <a href="#">الرئيسية</a>
+    <a href="#">المساعدة</a>
+    <a href="#">سياسة التوصيل</a>
+</div>
 <div class="categories-nav">
     <a href="#" class="cat-item">ملابس</a><a href="#" class="cat-item">ساعات</a><a href="#" class="cat-item">عطور</a><a href="#" class="cat-item">إكسسوارات</a>
 </div>
@@ -75,7 +85,6 @@
     <div style="font-weight: bold; margin-top: 10px;">المجموع: <span id="total-price">0</span> ₪</div>
     <button class="checkout-btn" onclick="sendToWhatsApp()">إتمام الطلب عبر واتساب</button>
 </div>
-<footer>OARA STORE 2026</footer>
 <script>
     let cart = []; let total = 0;
     function addToCart(name, price) {
@@ -89,6 +98,13 @@
         list.innerHTML = cart.map(item => `<div class="cart-item-row"><span>${item.name}</span><span>${item.price} ₪</span></div>`).join('');
     }
     function toggleCart() { document.getElementById('cartModal').classList.toggle('active'); }
+    function toggleMenu() { document.getElementById('sideMenu').classList.toggle('active'); }
     function sendToWhatsApp() {
-        if (cart.length === 0) return alert('الس
-    
+        if (cart.length === 0) return alert('السلة فارغة!');
+        let message = "طلب جديد من OARA STORE:\n" + cart.map(i => `- ${i.name}: ${i.price}₪`).join('\n') + `\n\nالمجموع: ${total} ₪`;
+        window.open(`https://wa.me/970590000000?text=${encodeURIComponent(message)}`);
+    }
+</script>
+</body>
+        </html>
+        
