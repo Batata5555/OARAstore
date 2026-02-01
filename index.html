@@ -3,108 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>OARA STORE</title>
+    <title>OARA STORE | الفخامة الفلسطينية</title>
     <style>
-        :root { --main-dark: #1a1a1a; --pal-green: #00843d; --pal-red: #ee2335; }
-        body { font-family: sans-serif; margin: 0; background: #f4f4f4; color: #333; padding-bottom: 70px; }
-        header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 20px; font-weight: bold; }
-        .logo span { color: var(--pal-green); }
-        .cart-icon { font-size: 20px; cursor: pointer; position: relative; }
-        #cart-count { position: absolute; top: -8px; right: -10px; background: var(--pal-red); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 50%; }
-        .categories-nav { background: #fff; display: flex; overflow-x: auto; padding: 10px; gap: 10px; border-bottom: 1px solid #eee; }
-        .cat-item { background: #f0f0f0; padding: 6px 12px; border-radius: 20px; font-size: 11px; white-space: nowrap; text-decoration: none; color: #333; }
-        .hero { background: var(--main-dark); color: #fff; padding: 20px; text-align: center; }
-        .hero h1 { font-size: 18px; margin: 0; }
-        .hero p { font-size: 12px; margin-top: 5px; opacity: 0.8; }
-        .shipping-rates { background: #fff; margin: 10px; padding: 12px; border-radius: 8px; border-right: 4px solid var(--pal-green); }
-        .rate-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; text-align: center; font-size: 11px; }
-        .container { padding: 10px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .card { background: #fff; border-radius: 8px; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; }
-        .card img { width: 100%; height: 110px; object-fit: cover; border-radius: 5px; }
-        .card h3 { font-size: 12px; margin: 8px 0; }
-        .card .price { color: var(--pal-red); font-weight: bold; font-size: 14px; margin-bottom: 10px; }
-        .add-btn { width: 100%; background: var(--main-dark); color: #fff; border: none; padding: 8px; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
-        .cart-modal { position: fixed; bottom: -100%; left: 0; width: 100%; height: 70%; background: #fff; z-index: 1000; transition: 0.4s; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); padding: 20px; box-sizing: border-box; }
-        .cart-modal.active { bottom: 0; }
-        .cart-items { height: 60%; overflow-y: auto; margin-top: 15px; }
-        .cart-item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px; }
-        .checkout-btn { width: 100%; background: #25d366; color: #fff; border: none; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: bold; margin-top: 15px; }
-        .close-cart { font-size: 20px; float: left; cursor: pointer; }
-        .side-menu { position: fixed; top: 0; right: -250px; width: 250px; height: 100%; background: #fff; z-index: 1001; transition: 0.3s; padding-top: 60px; box-shadow: -2px 0 5px rgba(0,0,0,0.1); }
-        .side-menu.active { right: 0; }
-        .side-menu a { display: block; padding: 15px 20px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
-        footer { text-align: center; padding: 20px; font-size: 10px; color: #999; }
+        :root { --gold: #c5a059; --dark: #0f0f0f; --light: #ffffff; --gray: #f8f9fa; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: var(--gray); color: var(--dark); padding-bottom: 60px; }
+        
+        /* الهيدر */
+        header { background: var(--dark); color: var(--light); padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .logo { font-size: 22px; font-weight: 900; letter-spacing: 1px; }
+        .logo span { color: var(--gold); }
+        .header-icons { display: flex; gap: 15px; align-items: center; }
+
+        /* شريط الفئات */
+        .nav-scroller { background: #fff; padding: 10px; display: flex; overflow-x: auto; gap: 10px; border-bottom: 1px solid #eee; }
+        .nav-item { background: var(--dark); color: var(--gold); padding: 7px 18px; border-radius: 5px; font-size: 12px; text-decoration: none; white-space: nowrap; font-weight: bold; border: 1px solid var(--gold); }
+
+        /* واجهة المتجر */
+        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'); background-size: cover; color: #fff; padding: 40px 20px; text-align: center; }
+        .hero h1 { font-size: 24px; margin: 0; color: var(--gold); }
+        .hero p { font-size: 14px; margin: 10px 0; opacity: 0.9; }
+
+        /* أسعار التوصيل */
+        .shipping-card { background: #fff; margin: -20px 15px 15px; padding: 15px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; z-index: 10; display: flex; justify-content: space-around; }
+        .ship-item { text-align: center; }
+        .ship-item div:first-child { font-size: 10px; color: #888; margin-bottom: 3px; }
+        .ship-item div:last-child { font-size: 14px; font-weight: bold; color: var(--dark); }
+
+        /* شبكة المنتجات */
+        .container { padding: 15px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .product-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); transition: 0.3s; position: relative; }
+        .product-card img { width: 100%; height: 160px; object-fit: cover; }
+        .product-info { padding: 12px; text-align: center; }
+        .product-info h3 { font-size: 13px; margin: 5px 0; color: #444; height: 35px; overflow: hidden; }
+        .product-price { color: var(--gold); font-weight: 800; font-size: 16px; margin: 8px 0; }
+        .add-to-cart { background: var(--dark); color: var(--gold); border: 1px solid var(--gold); width: 100%; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; }
+
+        /* القائمة الجانبية والسلة */
+        .modal { position: fixed; bottom: -100%; left: 0; width: 100%; height: 80%; background: #fff; z-index: 2000; transition: 0.5s; border-radius: 25px 25px 0 0; padding: 25px; box-sizing: border-box; }
+        .modal.active { bottom: 0; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1500; display: none; }
+        .overlay.active { display: block; }
+        
+        .cart-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #eee; }
+        .checkout-btn { background: #25d366; color: #fff; width: 100%; padding: 15px; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; margin-top: 20px; box-shadow: 0 4px 10px rgba(37,211,102,0.3); }
+
+        #cart-count { background: var(--gold); color: var(--dark); font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; top: -5px; right: -10px; font-weight: bold; }
+        footer { background: var(--dark); color: #666; text-align: center; padding: 30px; font-size: 11px; }
     </style>
 </head>
 <body>
+
 <header>
-    <div onclick="toggleMenu()" style="cursor:pointer">☰ القائمة</div>
+    <div onclick="toggleSidebar()" style="font-size: 20px;">☰</div>
     <div class="logo">OARA<span>STORE</span></div>
-    <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
+    <div class="header-icons" onclick="toggleCart()" style="position:relative">
+        🛒 <span id="cart-count">0</span>
+    </div>
 </header>
-<div class="side-menu" id="sideMenu">
-    <div onclick="toggleMenu()" style="padding:20px; cursor:pointer">× إغلاق</div>
-    <a href="#">الرئيسية</a>
-    <a href="#">المساعدة</a>
-    <a href="#">سياسة التوصيل</a>
+
+<div class="nav-scroller">
+    <a href="#" class="nav-item">كل المنتجات</a>
+    <a href="#" class="nav-item">ساعات فاخرة</a>
+    <a href="#" class="nav-item">عطور ملكية</a>
+    <a href="#" class="nav-item">ملابس وأزياء</a>
+    <a href="#" class="nav-item">إكسسوارات</a>
 </div>
-<div class="categories-nav">
-    <a href="#" class="cat-item">ملابس</a><a href="#" class="cat-item">ساعات</a><a href="#" class="cat-item">عطور</a><a href="#" class="cat-item">إكسسوارات</a>
-</div>
+
 <section class="hero">
-    <h1>متجر OARA فلسطين</h1>
-    <p>ملابس، ساعات، عطور وإكسسوارات بجودة عالمية.</p>
+    <h1>نخبة المنتجات العالمية</h1>
+    <p>أناقتك تبدأ من OARA STORE - توصيل لكافة مدن فلسطين</p>
 </section>
-<div class="shipping-rates">
-    <div class="rate-grid">
-        <div>الضفة: 20₪</div><div>القدس: 30₪</div><div>الداخل: 70₪</div>
-    </div>
+
+<div class="shipping-card">
+    <div class="ship-item"><div>الضفة</div><div>20 ₪</div></div>
+    <div class="ship-item"><div>القدس</div><div>30 ₪</div></div>
+    <div class="ship-item"><div>الداخل</div><div>70 ₪</div></div>
 </div>
+
 <div class="container">
-    <div class="grid">
-        <div class="card">
-            <img src="https://via.placeholder.com/150" alt="ساعة">
-            <h3>ساعة كلاسيك ملكية</h3>
-            <div class="price">150 ₪</div>
-            <button class="add-btn" onclick="addToCart('ساعة كلاسيك', 150)">إضافة للسلة</button>
+    <div class="grid" id="product-grid">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80" alt="ساعة">
+            <div class="product-info">
+                <h3>ساعة كلاسيك أصلية - ذهبي</h3>
+                <div class="product-price">150 ₪</div>
+                <button class="add-to-cart" onclick="addToCart('ساعة كلاسيك ذهبي', 150)">إضافة للسلة</button>
+            </div>
         </div>
-        <div class="card">
-            <img src="https://via.placeholder.com/150" alt="عطر">
-            <h3>عطر مسك القدس</h3>
-            <div class="price">90 ₪</div>
-            <button class="add-btn" onclick="addToCart('عطر مسك', 90)">إضافة للسلة</button>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=300&q=80" alt="عطر">
+            <div class="product-info">
+                <h3>عطر بلو دي شانيل - 100 مل</h3>
+                <div class="product-price">280 ₪</div>
+                <button class="add-to-cart" onclick="addToCart('عطر بلو شانيل', 280)">إضافة للسلة</button>
+            </div>
         </div>
     </div>
 </div>
-<div class="cart-modal" id="cartModal">
-    <span class="close-cart" onclick="toggleCart()">×</span>
-    <h3>سلة المشتريات</h3>
-    <div class="cart-items" id="cart-items-list"></div>
-    <div style="font-weight: bold; margin-top: 10px;">المجموع: <span id="total-price">0</span> ₪</div>
-    <button class="checkout-btn" onclick="sendToWhatsApp()">إتمام الطلب عبر واتساب</button>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+<div class="modal" id="cartModal">
+    <div style="display:flex; justify-content:space-between; align-items:center">
+        <h2>سلة المشتريات</h2>
+        <div onclick="closeAll()" style="font-size:24px">×</div>
+    </div>
+    <div id="cart-list" style="max-height: 250px; overflow-y: auto;"></div>
+    <div style="margin-top:20px; border-top:2px solid #eee; padding-top:15px">
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:18px">
+            <span>المجموع النهائي:</span>
+            <span id="total-price">0</span> ₪
+        </div>
+        <button class="checkout-btn" onclick="checkout()">إتمام الطلب (واتساب)</button>
+    </div>
 </div>
+
+<footer>
+    <p>جميع الحقوق محفوظة لمتجر OARA STORE 2026</p>
+    <p>نقبل الدفع عبر: Binance | Visa | Jawwal Pay | Ooredoo</p>
+</footer>
+
 <script>
-    let cart = []; let total = 0;
+    let cart = [];
+    let total = 0;
+
     function addToCart(name, price) {
-        cart.push({name, price}); total += price; updateCartUI();
-        alert('تمت إضافة ' + name + ' للسلة');
+        cart.push({name, price});
+        total += price;
+        updateUI();
+        // تأثير اهتزاز بسيط عند الإضافة
+        const btn = event.target;
+        btn.innerText = "✅ تمت الإضافة";
+        setTimeout(() => btn.innerText = "إضافة للسلة", 1000);
     }
-    function updateCartUI() {
+
+    function updateUI() {
         document.getElementById('cart-count').innerText = cart.length;
         document.getElementById('total-price').innerText = total;
-        const list = document.getElementById('cart-items-list');
-        list.innerHTML = cart.map(item => `<div class="cart-item-row"><span>${item.name}</span><span>${item.price} ₪</span></div>`).join('');
+        const list = document.getElementById('cart-list');
+        list.innerHTML = cart.map((item, index) => `
+            <div class="cart-item">
+                <span>${item.name}</span>
+                <span style="font-weight:bold">${item.price} ₪</span>
+            </div>
+        `).join('');
     }
-    function toggleCart() { document.getElementById('cartModal').classList.toggle('active'); }
-    function toggleMenu() { document.getElementById('sideMenu').classList.toggle('active'); }
-    function sendToWhatsApp() {
-        if (cart.length === 0) return alert('السلة فارغة!');
-        let message = "طلب جديد من OARA STORE:\n" + cart.map(i => `- ${i.name}: ${i.price}₪`).join('\n') + `\n\nالمجموع: ${total} ₪`;
-        window.open(`https://wa.me/970590000000?text=${encodeURIComponent(message)}`);
+
+    function toggleCart() {
+        document.getElementById('cartModal').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
+    }
+
+    function closeAll() {
+        document.getElementById('cartModal').classList.remove('active');
+        document.getElementById('overlay').classList.remove('active');
+    }
+
+    function checkout() {
+        if(cart.length === 0) return alert("السلة فارغة!");
+        let msg = "طلب جديد من OARA STORE:\n\n";
+        cart.forEach(i => msg += `• ${i.name} (${i.price} ₪)\n`);
+        msg += `\nإجمالي المبلغ: ${total} ₪\nيرجى التواصل لتأكيد العنوان.`;
+        window.open(`https://wa.me/970590000000?text=${encodeURIComponent(msg)}`);
     }
 </script>
+
 </body>
-        </html>
-        
+</html>
