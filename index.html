@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OARA STORE | إكسسوارات</title>
+    <title>OARA STORE | المتجر الرسمي</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,15 +17,15 @@
 </header>
 
 <nav class="categories">
-    <a href="#" class="active">الكل</a>
-    <a href="#">ساعات</a>
-    <a href="#">عطور</a>
-    <a href="#">إكسسوارات نسائية</a>
-    <a href="#">هدايا</a>
+    <a href="#" class="active" onclick="filterProducts('all', event)">الكل</a>
+    <a href="#" onclick="filterProducts('watches', event)">ساعات</a>
+    <a href="#" onclick="filterProducts('perfumes', event)">عطور</a>
+    <a href="#" onclick="filterProducts('clothes', event)">ملابس</a>
+    <a href="#" onclick="filterProducts('accessories', event)">إكسسوارات</a>
 </nav>
 
-<main class="products-grid">
-    <div class="card">
+<main class="products-grid" id="productsGrid">
+    <div class="card" data-category="watches">
         <div class="badge">جديد</div>
         <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="ساعة">
         <div class="info">
@@ -34,12 +34,22 @@
             <button onclick="addToCart('ساعة كلاسيك', 150)">إضافة للسلة</button>
         </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-category="perfumes">
         <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400" alt="عطر">
         <div class="info">
             <h3>عطر مسك فاخر</h3>
             <p class="price">90 ₪</p>
             <button onclick="addToCart('عطر ملكي', 90)">إضافة للسلة</button>
+        </div>
+    </div>
+
+    <div class="card" data-category="clothes">
+        <img src="https://images.placeholder.com/400x400?text=Clothes" alt="ملابس">
+        <div class="info">
+            <h3>قميص عصري</h3>
+            <p class="price">120 ₪</p>
+            <button onclick="addToCart('قميص عصري', 120)">إضافة للسلة</button>
         </div>
     </div>
 </main>
@@ -48,19 +58,19 @@
 <div class="cart-panel" id="cartPanel">
     <div class="panel-header">
         <h3>حقيبة المشتريات</h3>
-        <span onclick="toggleCart()">×</span>
+        <span onclick="toggleCart()" style="cursor:pointer; font-size:30px">×</span>
     </div>
     <div id="cart-items"></div>
     
     <div class="order-form">
-        <input type="text" id="city" placeholder="المدينة (مثال: نابلس - الدوار)">
+        <input type="text" id="city" placeholder="المدينة (مثال: نابلس - رفيديا)">
         <select id="payment">
             <option value="Visa/MasterCard">بطاقة بنكية (Visa / MasterCard)</option>
             <option value="PayPal">باي بال (PayPal)</option>
             <option value="Binance">بينانس (Binance)</option>
             <option value="Cash">دفع عند الاستلام</option>
         </select>
-        <div class="total">المجموع: <span id="total-price">0</span> ₪</div>
+        <div class="total">المجموع الكلي: <span id="total-price">0</span> ₪</div>
         <button class="whatsapp-btn" onclick="sendToWhatsApp()">إتمام الطلب عبر واتساب</button>
     </div>
 </div>
@@ -69,5 +79,4 @@
 
 <script src="script.js"></script>
 </body>
-                </html>
-    
+</html>
