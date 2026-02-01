@@ -5,73 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>OARA STORE</title>
     <style>
-        /* ألوان الهوية */
-        :root { --main-dark: #1a1a1a; --pal-green: #00843d; --pal-red: #ee2335; --text-gray: #666; }
+        :root { --main-dark: #1a1a1a; --pal-green: #00843d; --pal-red: #ee2335; }
+        body { font-family: sans-serif; margin: 0; background: #f4f4f4; color: #333; padding-bottom: 70px; }
         
-        body { font-family: sans-serif; margin: 0; background: #f4f4f4; overflow-x: hidden; }
-        
-        /* شريط علوي صغير */
-        .top-info { background: #000; color: #fff; font-size: 10px; text-align: center; padding: 5px; }
-
-        /* هيدر نحيف */
-        header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; }
-        .logo { font-size: 18px; font-weight: bold; letter-spacing: -1px; }
+        /* الهيدر والسلة */
+        header { background: #fff; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 20px; font-weight: bold; }
         .logo span { color: var(--pal-green); }
-
-        /* قسم الترحيب */
-        .hero { background: var(--main-dark); color: #fff; padding: 20px 15px; text-align: center; }
-        .hero h1 { font-size: 18px; margin: 0; }
-        .hero p { font-size: 12px; opacity: 0.8; margin: 5px 0 0; }
-
-        /* شبكة المنتجات - صغرنا البطاقات لتناسب الهاتف */
-        .container { padding: 10px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; } /* منتجين في كل صف */
-
-        .card { background: #fff; border-radius: 8px; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; }
-        .card img { width: 100%; height: 120px; object-fit: cover; border-radius: 5px; background: #eee; }
-        .card h3 { font-size: 13px; margin: 8px 0 5px; height: 32px; overflow: hidden; }
-        .card .price { color: var(--pal-red); font-weight: bold; font-size: 14px; margin-bottom: 8px; }
+        .cart-icon { font-size: 20px; cursor: pointer; position: relative; }
+        #
         
-        /* زر شراء صغير ومناسب للواتساب */
-        .btn { display: block; background: #25d366; color: #fff; text-decoration: none; padding: 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-
-        footer { text-align: center; padding: 20px; font-size: 10px; color: #999; }
-    </style>
-</head>
-<body>
-
-<div class="top-info">خدمة التوصيل متاحة لجميع مناطق الضفة والقدس والداخل 🇵🇸</div>
-
-<header>
-    <div class="logo">OARA<span>STORE</span></div>
-    <div style="font-size: 12px; font-weight: bold;">القائمة ☰</div>
-</header>
-
-<section class="hero">
-    <h1>متجر أورا الإلكتروني</h1>
-    <p>فخامة الاختيار بين يديك</p>
-</section>
-
-<div class="container">
-    <div class="grid">
-        
-        <div class="card">
-            <img src="https://via.placeholder.com/150" alt="منتج">
-            <h3>ساعة كلاسيك سوداء</h3>
-            <div class="price">150 ₪</div>
-            <a href="https://wa.me/970590000000?text=أريد طلب ساعة كلاسيك" class="btn">اطلب عبر واتساب</a>
-        </div>
-        <div class="card">
-            <img src="https://via.placeholder.com/150" alt="منتج">
-            <h3>عطر مسك ملكي</h3>
-            <div class="price">90 ₪</div>
-            <a href="https://wa.me/970590000000?text=أريد طلب عطر المسك" class="btn">اطلب عبر واتساب</a>
-        </div>
-        </div>
-</div>
-
-<footer>OARA STORE 2026 - جميع الحقوق محفوظة</footer>
-
-</body>
-                </html>
-                
