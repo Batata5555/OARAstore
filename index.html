@@ -3,78 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
-    <title>OARA STORE | Luxury Dark Edition</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>OARA STORE | Luxury Selection</title>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
-        :root { --gold: #c5a059; --black: #050505; --card: #0f0f0f; }
+        :root { --gold: #c5a059; --black: #050505; --card: #0f0f0f; --sale: #e74c3c; }
         body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--black); color: white; line-height: 1.6; overflow-x: hidden; }
-        
         header { background: rgba(5,5,5,0.9); padding: 15px 5%; text-align: center; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(8px); }
         .logo { font-family: 'Bodoni Moda', serif; font-size: 26px; letter-spacing: 4px; color: white; text-decoration: none; font-weight: 700; text-transform: uppercase; }
         .logo span { color: var(--gold); }
-
         .hero { padding: 40px 10% 20px; text-align: center; }
         .hero h1 { font-family: 'Bodoni Moda', serif; font-size: 30px; color: var(--gold); margin: 0 0 10px; }
-        .hero p { font-size: 12px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
-
         .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px 5%; }
         @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
-
-        .cat-card {
-            height: 220px; position: relative; overflow: hidden; display: flex;
-            align-items: center; justify-content: center; cursor: pointer;
-            border: 1px solid #1a1a1a; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: #111;
-        }
-
-        .cat-card::before {
-            content: ""; position: absolute; inset: 0;
-            background-size: cover; background-position: center;
-            filter: blur(3px) brightness(0.4); transition: 0.4s;
-            will-change: filter;
-        }
-        
-        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=60'); }
-        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&q=60'); }
-        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&q=60'); }
-        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=60'); }
-
-        .cat-card span { position: relative; z-index: 2; color: var(--gold); border: 1px solid var(--gold); padding: 6px 15px; font-size: 15px; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); }
-        .cat-card:hover { border-color: var(--gold); }
-        .cat-card:hover::before { filter: blur(1px) brightness(0.6); transform: scale(1.05); }
-
-        #products-view { display: none; padding: 20px 5%; animation: fadeIn 0.3s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .product-card { background: var(--card); border: 1px solid #1a1a1a; text-align: center; padding-bottom: 12px; transition: 0.3s; }
-        .product-card:hover { border-color: var(--gold); }
-        .product-card img { width: 100%; height: 220px; object-fit: cover; background: #050505; }
+        .cat-card { height: 220px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #1a1a1a; transition: 0.3s; background: #111; }
+        .cat-card::before { content: ""; position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(3px) brightness(0.4); transition: 0.4s; }
+        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400'); }
+        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=400'); }
+        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400'); }
+        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400'); }
+        .cat-card span { position: relative; z-index: 2; color: var(--gold); border: 1px solid var(--gold); padding: 6px 15px; font-size: 15px; background: rgba(0,0,0,0.4); }
+        #products-view { display: none; padding: 20px 5%; }
+        .product-card { background: var(--card); border: 1px solid #1a1a1a; text-align: center; padding-bottom: 12px; position: relative; }
+        .product-card img { width: 100%; height: 220px; object-fit: cover; }
+        .badge { position: absolute; top: 10px; right: 10px; background: var(--sale); color: white; padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 3px; }
         .product-info h4 { font-weight: 300; font-size: 14px; margin: 10px 5px 5px; color: #eee; }
-        .product-price { color: var(--gold); font-family: 'Bodoni Moda'; font-size: 18px; font-weight: bold; }
-
-        .back-nav { cursor: pointer; font-size: 11px; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 5px; }
-        .cart-trigger { position: fixed; bottom: 20px; left: 20px; background: var(--gold); color: black; padding: 10px 20px; font-weight: 700; font-size: 11px; letter-spacing: 1px; z-index: 2000; border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .price-container { display: flex; flex-direction: column; align-items: center; }
+        .old-price { color: #888; text-decoration: line-through; font-size: 12px; }
+        .current-price { color: var(--gold); font-family: 'Bodoni Moda'; font-size: 18px; font-weight: bold; }
+        .back-nav { cursor: pointer; font-size: 11px; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; display: inline-flex; }
+        .btn-buy { background: var(--gold); color: black; border: none; padding: 8px 15px; margin-top: 10px; font-weight: bold; cursor: pointer; width: 80%; border-radius: 2px; }
     </style>
 </head>
 <body>
 
-<header>
-    <a href="javascript:location.reload()" class="logo">OARA <span>STORE</span></a>
-</header>
+<header><a href="javascript:location.reload()" class="logo">OARA <span>STORE</span></a></header>
 
 <div id="home-view">
-    <section class="hero">
-        <p>Palestine Exclusive</p>
-        <h1>التجربة الذهبية</h1>
-    </section>
+    <section class="hero"><p>Luxury Selection</p><h1>التجربة الذهبية</h1></section>
     <div class="categories-grid">
-        <div class="cat-card cat-1" onclick="loadCategory('ملابس')"><span>ملابس</span></div>
-        <div class="cat-card cat-2" onclick="loadCategory('عطور')"><span>عطور</span></div>
-        <div class="cat-card cat-3" onclick="loadCategory('ساعات')"><span>ساعات</span></div>
+        <div class="cat-card cat-1" onclick="loadCategory('ملابس')"><span>ملابس أنيقة</span></div>
+        <div class="cat-card cat-2" onclick="loadCategory('عطور')"><span>عطور فاخرة</span></div>
+        <div class="cat-card cat-3" onclick="loadCategory('ساعات')"><span>ساعات راقية</span></div>
         <div class="cat-card cat-4" onclick="loadCategory('اكسسوارات')"><span>إكسسوارات</span></div>
     </div>
 </div>
@@ -84,9 +54,16 @@
     <div id="products-container" class="categories-grid" style="padding:0;"></div>
 </section>
 
-<button class="cart-trigger">SELECTION (<span id="count">0</span>)</button>
-
 <script>
+    // المنتجات الجديدة المأخوذة من الصور (سعر الجملة + 20)
+    const manualProducts = [
+        { name: "ساعة الجنت الشبابية (أصفر/أحمر)", price: 80, old: 120, cat: "ساعات", img: "https://i.ibb.co/VpXN1Xh/wheel-watch.jpg" },
+        { name: "ساعات رولكس صبايا - جودة ممتازة", price: 90, old: 150, cat: "ساعات", img: "https://i.ibb.co/L6S8G9r/rolex-ladies.jpg" },
+        { name: "ساعات صبايا كلاسيك مع علبة", price: 60, old: 100, cat: "ساعات", img: "https://i.ibb.co/m0f9zYp/ladies-classic.jpg" },
+        { name: "ساعة yue Du الشبابية (كفالة سنة)", price: 70, old: 110, cat: "ساعات", img: "https://i.ibb.co/kMByYV5/yue-du.jpg" },
+        { name: "ساعات شبابية أصلية ثقيلة", price: 70, old: 120, cat: "ساعات", img: "https://i.ibb.co/p3Vp8W0/heavy-men.jpg" }
+    ];
+
     const SHEET_URL = "https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json";
     let storeData = [];
 
@@ -95,42 +72,43 @@
             const response = await fetch(SHEET_URL);
             const data = await response.text();
             const json = JSON.parse(data.substring(data.indexOf("{"), data.lastIndexOf("}") + 1));
-            storeData = json.table.rows.map(row => ({
+            const sheetItems = json.table.rows.map(row => ({
                 name: row.c[0]?.v || '',
-                price: row.c[1]?.v || '',
+                price: (parseFloat(row.c[1]?.v) || 0) + 20, // زيادة 20 على سعر الجملة من الجدول أيضاً
+                old: (parseFloat(row.c[1]?.v) || 0) + 60,
                 img: row.c[2]?.v || '',
                 cat: row.c[3]?.v || ''
             }));
-        } catch (error) {
-            console.error("Connection Error");
-        }
+            storeData = [...manualProducts, ...sheetItems];
+        } catch (e) { storeData = manualProducts; }
     }
 
     function loadCategory(catName) {
-        window.scrollTo({top: 0, behavior: 'instant'});
+        window.scrollTo(0,0);
         document.getElementById('home-view').style.display = 'none';
         document.getElementById('products-view').style.display = 'block';
-        
         const container = document.getElementById('products-container');
-        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--gold);">جاري التحميل...</div>';
         
-        const filtered = storeData.filter(p => p.cat && p.cat.toString().includes(catName));
-        
-        setTimeout(() => {
-            if (!filtered.length) {
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px;">قريباً في هذا القسم...</div>';
-                return;
-            }
-            container.innerHTML = filtered.map(p => `
-                <div class="product-card">
-                    <img src="${p.img}" loading="lazy">
-                    <div class="product-info">
-                        <h4>${p.name}</h4>
-                        <div class="product-price">${p.price} ر.س</div>
+        const filtered = storeData.filter(p => p.cat.includes(catName));
+        container.innerHTML = filtered.map(p => `
+            <div class="product-card">
+                <div class="badge">تخفيض لفترة محدودة</div>
+                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/400x500/0f0f0f/c5a059?text=OARA+GOLD'">
+                <div class="product-info">
+                    <h4>${p.name}</h4>
+                    <div class="price-container">
+                        <span class="old-price">${p.old} ₪</span>
+                        <span class="current-price">${p.price} ₪</span>
                     </div>
+                    <button class="btn-buy" onclick="order('${p.name}')">اطلب الآن</button>
                 </div>
-            `).join('');
-        }, 50);
+            </div>
+        `).join('');
+    }
+
+    function order(name) {
+        const msg = encodeURIComponent(`مرحباً OARA STORE، أريد طلب: ${name}`);
+        window.open(`https://wa.me/YOUR_PHONE_NUMBER?text=${msg}`); // استبدل YOUR_PHONE_NUMBER برقمك
     }
 
     document.addEventListener('DOMContentLoaded', fetchStore);
