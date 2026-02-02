@@ -7,176 +7,201 @@
     
     <title>OARA STORE | Luxury Experience</title>
     <link rel="icon" type="image/jpeg" href="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@1&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,700&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root { --gold: #c5a059; --black: #050505; --dark: #0d0d0d; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
         body { background: var(--black); color: #fff; font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
 
-        /* إشعارات OARA STORE */
+        /* إشعارات OARA STORE الذهبية - English Name */
         #oara-notification {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-120px);
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-150px);
             background: var(--dark); border: 1px solid var(--gold); padding: 15px 30px;
-            border-radius: 8px; z-index: 10000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); text-align: center; min-width: 280px;
+            border-radius: 8px; z-index: 10000; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.9); text-align: center; min-width: 290px;
         }
         #oara-notification.active { transform: translateX(-50%) translateY(0); }
-        .notif-header { color: var(--gold); font-family: 'Bodoni Moda'; font-weight: bold; font-size: 14px; letter-spacing: 2px; display: block; }
+        .notif-header { color: var(--gold); font-family: 'Bodoni Moda'; font-weight: bold; font-size: 15px; letter-spacing: 2px; }
 
         /* شاشة الدخول والتسجيل */
         #auth-overlay { position: fixed; inset: 0; background: var(--black); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .auth-card { width: 100%; max-width: 340px; text-align: center; padding: 35px; border: 1px solid var(--gold); background: var(--dark); border-radius: 15px; }
-        input, textarea, select { width: 100%; padding: 14px; margin: 10px 0; background: #000; border: 1px solid #222; color: var(--gold); border-radius: 8px; text-align: center; font-family: 'Tajawal'; }
-        .btn-gold { background: var(--gold); color: #000; border: none; padding: 15px; width: 100%; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .auth-toggle { color: #555; font-size: 12px; margin-top: 15px; cursor: pointer; text-decoration: underline; }
+        .auth-card { width: 100%; max-width: 360px; text-align: center; padding: 40px; border: 1px solid var(--gold); background: var(--dark); border-radius: 20px; }
+        input, select, textarea { width: 100%; padding: 15px; margin: 12px 0; background: #000; border: 1px solid #222; color: var(--gold); border-radius: 10px; text-align: center; font-family: 'Tajawal'; }
+        .btn-gold { background: var(--gold); color: #000; border: none; padding: 16px; width: 100%; font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 15px; }
+        .auth-toggle { color: #888; font-size: 12px; margin-top: 20px; cursor: pointer; text-decoration: underline; }
 
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(0,0,0,0.98); border-bottom: 1px solid rgba(197,160,89,0.3); position: sticky; top: 0; z-index: 1000; }
-        .logo-img { height: 35px; border-radius: 5px; }
-
-        /* القائمة الجانبية */
-        .sidebar { position: fixed; right: -320px; top: 0; width: 300px; height: 100%; background: var(--dark); border-left: 1px solid var(--gold); z-index: 3000; transition: 0.5s; padding: 25px; }
+        /* الهيدر والقائمة الجانبية السريعة جداً */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 18px 25px; background: rgba(0,0,0,0.95); border-bottom: 1px solid rgba(197,160,89,0.2); position: sticky; top: 0; z-index: 1000; }
+        .logo-img { height: 38px; border-radius: 6px; }
+        
+        .sidebar { position: fixed; right: -320px; top: 0; width: 310px; height: 100%; background: var(--dark); border-left: 1px solid var(--gold); z-index: 3000; transition: 0.3s linear; padding: 30px; }
         .sidebar.active { right: 0; }
-        .sidebar-item { padding: 15px 0; border-bottom: 1px solid #1a1a1a; color: #ccc; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .sidebar-item { padding: 18px 0; border-bottom: 1px solid #1a1a1a; color: #eee; font-size: 15px; cursor: pointer; display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .sidebar-item:hover { color: var(--gold); }
 
-        /* المنتجات */
-        .row-label { text-align: center; color: var(--gold); font-family: 'Tajawal'; font-weight: bold; margin: 40px 0 15px; font-size: 22px; }
-        .grid-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 15px; margin-bottom: 30px; }
-        .card-regular { background: #111; opacity: 0.3; filter: grayscale(100%); border-radius: 8px; overflow: hidden; position: relative; }
-        .card-luxury { background: var(--dark); border: 1px solid var(--gold); border-radius: 8px; overflow: hidden; text-align: center; position: relative; }
-        .item-img { width: 100%; height: 180px; object-fit: cover; }
-
+        /* الأقسام والتحفيز */
+        .row-label { text-align: center; color: var(--gold); font-weight: 700; margin: 45px 0 10px; font-size: 24px; }
+        .motivational-txt { text-align: center; color: #888; font-size: 11px; margin-bottom: 30px; padding: 0 20px; line-height: 1.5; }
+        
+        .grid-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 18px; margin-bottom: 35px; }
+        .card-regular { background: #0a0a0a; opacity: 0.4; filter: grayscale(100%); border-radius: 12px; position: relative; border: 1px solid #1a1a1a; height: 200px; }
+        .card-luxury { background: var(--dark); border: 1px solid var(--gold); border-radius: 12px; text-align: center; position: relative; padding-bottom: 15px; }
+        .item-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px 12px 0 0; }
+        
         /* التعليقات */
-        .reviews-section { padding: 20px; background: #080808; margin-top: 40px; border-top: 1px solid #222; }
-        .review-card { background: #0d0d0d; border-right: 3px solid var(--gold); padding: 15px; margin-bottom: 15px; }
-        .stars { color: var(--gold); font-size: 14px; }
-        .reviewer-info { display: flex; justify-content: space-between; font-size: 12px; margin-top: 5px; color: var(--gold); }
+        .reviews-section { padding: 30px 20px; background: #070707; margin-top: 50px; }
+        .review-card { background: #0d0d0d; border-right: 4px solid var(--gold); padding: 20px; margin-bottom: 20px; }
+        .stars { color: var(--gold); margin-bottom: 8px; }
+        .reviewer-info { display: flex; justify-content: space-between; font-size: 13px; color: var(--gold); margin-top: 10px; }
         .more-reviews { display: none; }
 
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 20px; }
         .modal.active { display: flex; }
-        .modal-content { background: var(--dark); border: 1px solid var(--gold); padding: 25px; border-radius: 15px; width: 100%; max-width: 380px; }
+        .modal-content { background: var(--dark); border: 1px solid var(--gold); padding: 30px; border-radius: 20px; width: 100%; max-width: 400px; }
 
-        footer { padding: 40px; text-align: center; border-top: 1px solid #111; margin-top: 50px; }
-        .gateway-name { color: var(--gold); font-size: 9px; margin: 0 10px; letter-spacing: 1.5px; text-transform: uppercase; }
+        footer { padding: 50px 20px; text-align: center; border-top: 1px solid #111; }
+        .gateway-name { color: var(--gold); font-size: 10px; border: 1px solid rgba(197,160,89,0.3); padding: 4px 10px; border-radius: 4px; margin: 5px; display: inline-block; }
     </style>
 </head>
 <body>
 
 <div id="oara-notification">
     <span class="notif-header">OARA STORE</span>
-    <span id="notif-text" style="color:#eee; font-size:13px; margin-top:5px; display:block;"></span>
+    <div id="notif-text" style="color:#eee; font-size:13px; margin-top:6px;"></div>
 </div>
 
 <div id="auth-overlay">
     <div class="auth-card" id="login-form">
-        <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" style="height: 60px; margin-bottom: 20px;">
+        <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" style="height: 70px; margin-bottom: 25px;">
         <h2 style="color:var(--gold); font-family:'Bodoni Moda';">OARA ACCESS</h2>
         <input type="text" id="l-user" placeholder="اسم المستخدم">
         <input type="password" id="l-pass" placeholder="كلمة المرور">
-        <button class="btn-gold" id="login-btn" onclick="handleAuth('login')">دخول المتجر</button>
+        <button class="btn-gold" onclick="handleAuth('login')">دخول المتجر</button>
         <div class="auth-toggle" onclick="toggleAuth()">ليس لديك حساب؟ إنشاء حساب جديد</div>
-        <p id="loader" style="display:none; color:var(--gold); font-size:11px; margin-top:10px;">جاري المعالجة الملكية...</p>
     </div>
 
     <div class="auth-card" id="register-form" style="display:none;">
-        <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" style="height: 60px; margin-bottom: 20px;">
-        <h2 style="color:var(--gold); font-family:'Bodoni Moda';">OARA REGISTER</h2>
-        <input type="text" id="r-user" placeholder="اختر اسم مستخدم">
-        <input type="password" id="r-pass" placeholder="اختر كلمة مرور">
-        <input type="tel" id="r-phone" placeholder="رقم الهاتف">
-        <button class="btn-gold" onclick="handleAuth('register')">تأكيد الحساب</button>
-        <div class="auth-toggle" onclick="toggleAuth()">لديك حساب بالفعل؟ تسجيل الدخول</div>
+        <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" style="height: 70px; margin-bottom: 20px;">
+        <h2 style="color:var(--gold); font-family:'Bodoni Moda';">OARA JOIN</h2>
+        <p style="color:#888; font-size:12px; margin-bottom:20px; line-height:1.6;">"انضم إلى عالم النخبة.. حيث تلتقي الأصالة الفلسطينية بفخامة التصميم العالمي. حسابك هو مفتاحك لتجربة استثنائية."</p>
+        <input type="text" id="r-user" placeholder="اسم مستخدم جديد">
+        <input type="password" id="r-pass" placeholder="كلمة مرور قوية">
+        <input type="tel" id="r-phone" placeholder="رقم الواتساب">
+        <button class="btn-gold" onclick="handleAuth('register')">تأكيد الانضمام</button>
+        <div class="auth-toggle" onclick="toggleAuth()">لديك حساب؟ سجل دخولك</div>
     </div>
 </div>
 
 <div id="site-content" style="display:none;">
     <header>
-        <div onclick="toggleSidebar()" style="color:var(--gold); font-size:26px; cursor:pointer;">☰</div>
+        <div onclick="toggleSidebar()" style="color:var(--gold); font-size:28px; cursor:pointer;">☰</div>
         <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" class="logo-img">
         <div onclick="openModal('cart-modal')" style="color:var(--gold); cursor:pointer;">🛒 <span id="cart-count">0</span></div>
     </header>
 
     <div class="sidebar" id="sidebar">
-        <div style="display:flex; justify-content:space-between; margin-bottom:30px;">
-            <span style="color:var(--gold); font-weight:bold;">OARA MENU</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
+            <span style="color:var(--gold); font-family:'Bodoni Moda';">OARA MENU</span>
             <span onclick="toggleSidebar()" style="color:var(--gold); cursor:pointer;">✕</span>
         </div>
-        <div class="sidebar-item">👕 الملابس الراقية</div>
-        <div class="sidebar-item">💻 الإلكترونيات الذكية</div>
-        <div class="sidebar-item">💎 العطور والجمال</div>
-        <div class="sidebar-item">⌚ الساعات والنظارات</div>
-        <div class="sidebar-item">👞 الأحذية والحقائب</div>
+        <a href="#clothing-sec" class="sidebar-item" onclick="toggleSidebar()">👕 الملابس الراقية</a>
+        <a href="#tech-sec" class="sidebar-item" onclick="toggleSidebar()">💻 الإلكترونيات الذكية</a>
+        <a href="#perfume-sec" class="sidebar-item" onclick="toggleSidebar()">💎 العطور والجمال</a>
+        <a href="#watch-sec" class="sidebar-item" onclick="toggleSidebar()">⌚ الساعات والنظارات</a>
+        <a href="#shoes-sec" class="sidebar-item" onclick="toggleSidebar()">👞 الأحذية والحقائب</a>
     </div>
 
-    <div style="text-align:center; padding:40px 20px;">
-        <h1 style="font-family:'Bodoni Moda'; color:var(--gold); font-size:35px; letter-spacing:10px; margin:0;">OARA</h1>
-        <p style="color:#555; font-size:11px; margin-top:10px;">التميز الفلسطيني في عالم الفخامة</p>
+    <div style="text-align:center; padding:50px 20px;">
+        <h1 style="font-family:'Bodoni Moda'; color:var(--gold); font-size:45px; letter-spacing:10px; margin:0;">OARA</h1>
+        <p style="color:#555; font-size:11px; margin-top:10px;">The Palestinian Luxury Standard</p>
     </div>
 
-    <div class="row-label">التشكيلة المختارة</div>
-    <div class="grid-compare" id="products-container">
-        <div class="card-regular"><img src="https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg" class="item-img"></div>
-        <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg" class="item-img">
-            <span style="color:var(--gold); font-size:11px; padding:10px; display:block;">قميص OARA الفاخر</span>
-            <button class="btn-gold" style="padding:5px; font-size:10px; width:80%; margin-bottom:10px;" onclick="addToCart('قميص OARA الفاخر', 280)">إضافة للحقيبة</button>
+    <div id="clothing-sec">
+        <div class="row-label">الملابس الراقية</div>
+        <p class="motivational-txt">"أناقتك هي رسالتك الصامتة للعالم.. اختر ما يليق بمقامك"</p>
+        <div class="grid-compare">
+            <div class="card-regular"></div>
+            <div class="card-luxury">
+                <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg" class="item-img">
+                <span style="font-size:12px; display:block; padding:10px;">قميص OARA LUXE</span>
+                <button class="btn-gold" style="width:80%; padding:8px; font-size:11px;" onclick="addToCart('قميص OARA LUXE', 280)">إضافة</button>
+            </div>
         </div>
     </div>
+
+    <div id="tech-sec">
+        <div class="row-label">الإلكترونيات الذكية</div>
+        <p class="motivational-txt">"التكنولوجيا ليست مجرد أدوات، بل هي أسلوب حياة يختصر لك الزمن"</p>
+        <div class="grid-compare">
+            <div class="card-regular"></div>
+            <div class="card-luxury">
+                <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg" class="item-img">
+                <span style="font-size:12px; display:block; padding:10px;">سماعات OARA PRO</span>
+                <button class="btn-gold" style="width:80%; padding:8px; font-size:11px;" onclick="addToCart('سماعات OARA PRO', 950)">إضافة</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="perfume-sec">
+        <div class="row-label">العطور والجمال</div>
+        <p class="motivational-txt">"عطرك هو الأثر الذي تتركه خلفك في قلوب وعقول الآخرين"</p>
+    </div>
+
+    <div id="watch-sec">
+        <div class="row-label">الساعات والنظارات</div>
+        <p class="motivational-txt">"الوقت من ذهب، فلا ترتدي إلا ما يعكس قيمة وقتك وفخامة حضورك"</p>
+    </div>
+
+    <div id="shoes-sec">
+        <div class="row-label">الأحذية والحقائب</div>
+        <p class="motivational-txt">"الرحلة الطويلة تبدأ بخطوة واثقة.. وبحذاء يمنحك الراحة والهيبة"</p>
+    </div>
+
+    <div id="dynamic-products" class="grid-compare"></div>
 
     <section class="reviews-section">
-        <h3 style="color:var(--gold); text-align:center;">آراء الزبائن (43)</h3>
+        <h3 style="color:var(--gold); text-align:center;">صدى الفخامة في فلسطين (43)</h3>
         <div class="review-card">
             <div class="stars">★★★★★</div>
+            <p style="font-size:13px; color:#bbb;">يا ويلي على هالعطر! فخامة من الآخر، الريحة بتضل معلقة بالدواوين. يسلمو دياتكم يا جماعة OARA.</p>
             <div class="reviewer-info"><span>أبو العز - نابلس</span><span>منذ يومين</span></div>
-            <p style="font-size:12px; color:#ccc;">يا ويلي على هالعطر! فخامة من الآخر، الريحة بتضل معلقة بالدواوين والمكاتب.</p>
         </div>
         <div class="review-card">
-            <div class="stars">★★★☆☆ <span style="font-size:10px;">(3.5)</span></div>
+            <div class="stars">★★★☆☆</div>
+            <p style="font-size:13px; color:#bbb;">الخامة كويسة والريحة فخمة، بس التوصيل أخد وقت كثير ليوصل عندي لغزة.</p>
             <div class="reviewer-info"><span>إياد الغزاوي</span><span>منذ أسبوع</span></div>
-            <p style="font-size:12px; color:#ccc;">الخامة كويسة والريحة فخمة، بس التوصيل لغزة أخد وقت.</p>
-        </div>
-        <div class="review-card">
-            <div class="stars">★★☆☆☆</div>
-            <div class="reviewer-info"><span>أمير - رام الله</span><span>منذ أسبوعين</span></div>
-            <p style="font-size:12px; color:#ccc;">المنتج غالي على حجمه الصغير. توقعت العلبة تكون أكبر.</p>
         </div>
         <div id="more-reviews" class="more-reviews">
             <div class="review-card">
                 <div class="stars">★★★★★</div>
+                <p style="font-size:13px; color:#bbb;">يسلمو يا ذوق، أهل الخليل بيشهدولكم بالذوق والترتيب!</p>
                 <div class="reviewer-info"><span>خلود - الخليل</span></div>
-                <p style="font-size:12px; color:#ccc;">يسلمو يا ذوق، طلبت الساعة وطلعت ملكية بجد.</p>
             </div>
         </div>
-        <button class="btn-gold" style="background:none; border:1px solid var(--gold); color:var(--gold);" id="show-btn" onclick="toggleReviews()">عرض المزيد من التعليقات (40)</button>
+        <button class="btn-gold" style="background:none; border:1px solid var(--gold); color:var(--gold);" onclick="toggleReviews()" id="rev-btn">عرض الـ 40 تعليق الباقية</button>
     </section>
 
     <footer>
-        <div class="gateway-name">Visa &bull; Mastercard &bull; Binance Pay &bull; PayPal</div>
-        <div style="font-size:9px; color:#333; margin-top:10px;">OARA STORE &copy; 2026</div>
+        <div class="gateway-name">Visa</div><div class="gateway-name">Mastercard</div><div class="gateway-name">Binance Pay</div><div class="gateway-name">PayPal</div>
+        <p style="font-size:9px; color:#333; margin-top:20px;">OARA STORE &copy; 2026 - Palestinian Elite</p>
     </footer>
 </div>
 
-<div class="modal" id="cart-modal">
-    <div class="modal-content">
-        <h3 style="color:var(--gold); text-align:center;">حقيبة التسوق</h3>
-        <div id="cart-list"></div>
-        <button class="btn-gold" onclick="openModal('addr-modal')">متابعة العنوان</button>
-    </div>
-</div>
+<div class="modal" id="cart-modal"><div class="modal-content"><h3 style="color:var(--gold);">الحقيبة الملكية</h3><div id="cart-list" style="margin-bottom:20px;"></div><button class="btn-gold" onclick="openModal('addr-modal')">متابعة العنوان</button></div></div>
 
 <div class="modal" id="addr-modal">
     <div class="modal-content">
-        <h3 style="color:var(--gold); text-align:center;">بيانات الشحن والدفع</h3>
+        <h3 style="color:var(--gold);">بيانات الشحن</h3>
         <input id="c-name" placeholder="الاسم الكامل">
-        <input id="c-city" placeholder="المدينة / العنوان">
+        <input id="c-city" placeholder="المدينة">
         <select id="c-payment">
             <option value="Visa">فيزا / ماستر كارد</option>
             <option value="PayPal">بايبال</option>
             <option value="Binance">بينانس باي</option>
-            <option value="COD">الدفع عند الاستلام</option>
+            <option value="Cash">عند الاستلام</option>
         </select>
-        <button class="btn-gold" onclick="sendOrder()">تأكيد الطلب واتساب</button>
+        <button class="btn-gold" onclick="sendOrder()">تأكيد عبر واتساب</button>
     </div>
 </div>
 
@@ -188,7 +213,7 @@
     function triggerNotify(msg) {
         document.getElementById('notif-text').innerText = msg;
         document.getElementById('oara-notification').classList.add('active');
-        setTimeout(() => document.getElementById('oara-notification').classList.remove('active'), 3500);
+        setTimeout(() => document.getElementById('oara-notification').classList.remove('active'), 3000);
     }
 
     function toggleAuth() {
@@ -198,47 +223,20 @@
     }
 
     async function handleAuth(type) {
-        let u, p, phone = '';
-        if(type === 'login') {
-            u = document.getElementById('l-user').value; p = document.getElementById('l-pass').value;
-        } else {
-            u = document.getElementById('r-user').value; p = document.getElementById('r-pass').value; phone = document.getElementById('r-phone').value;
-        }
-
-        if(!u || !p) return triggerNotify("أكمل البيانات أولاً");
-        document.getElementById('loader').style.display = 'block';
-
-        fetch(ACCOUNTS_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({u, p, phone, action: type}) });
-
-        setTimeout(() => {
-            localStorage.setItem('oara_verified', 'true');
-            document.getElementById('auth-overlay').style.display = 'none';
-            document.getElementById('site-content').style.display = 'block';
-            triggerNotify(type === 'login' ? "مرحباً بعودتك" : "تم إنشاء حسابك الملكي بنجاح");
-            loadProducts();
-        }, 1500);
+        localStorage.setItem('oara_verified', 'true');
+        document.getElementById('auth-overlay').style.display = 'none';
+        document.getElementById('site-content').style.display = 'block';
+        triggerNotify(type === 'login' ? "مرحباً بعودتك" : "أهلاً بك في النخبة");
+        fetch(ACCOUNTS_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({action: type}) });
     }
 
-    async function loadProducts() {
-        try {
-            const res = await fetch(PRODUCTS_URL + "?action=getProducts");
-            const data = await res.json();
-            const container = document.getElementById('products-container');
-            data.forEach(item => {
-                container.innerHTML += `<div class="card-regular"><img src="${item.image}" class="item-img"></div>
-                <div class="card-luxury"><img src="${item.image}" class="item-img"><span style="color:var(--gold); font-size:11px; padding:10px; display:block;">${item.name}</span><p style="color:var(--gold); font-weight:bold;">${item.price} SAR</p><button class="btn-gold" style="padding:5px; font-size:10px; width:80%; margin-bottom:10px;" onclick="addToCart('${item.name}', ${item.price})">أضف للحقيبة</button></div>`;
-            });
-        } catch(e) {}
-    }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+    function addToCart(n, p) { cart.push({n, p}); document.getElementById('cart-count').innerText = cart.length; triggerNotify("أضيف للحقيبة"); }
+    function openModal(id) { document.querySelectorAll('.modal').forEach(m => m.classList.remove('active')); document.getElementById(id).classList.add('active'); if(id==='cart-modal') document.getElementById('cart-list').innerHTML = cart.map(i=>`<div style='padding:5px; border-bottom:1px solid #222;'>${i.n}</div>`).join('') || "فارغة"; }
+    function toggleReviews() { const m = document.getElementById('more-reviews'), b = document.getElementById('rev-btn'); m.style.display = m.style.display === 'block' ? 'none' : 'block'; b.innerText = m.style.display === 'block' ? 'إغلاق' : 'عرض الـ 40 تعليق الباقية'; }
+    function sendOrder() { const n = document.getElementById('c-name').value, p = document.getElementById('c-payment').value; let msg = `طلب من OARA\nالاسم: ${n}\nالدفع: ${p}\n`; cart.forEach(i=>msg+=`- ${i.n}\n`); window.open(`https://wa.me/972568486065?text=${encodeURIComponent(msg)}`); }
 
-    function addToCart(n, p) { cart.push({n, p}); document.getElementById('cart-count').innerText = cart.length; triggerNotify("أضيف للحقيبة الملكية"); }
-    function toggleReviews() { const m = document.getElementById('more-reviews'); m.style.display = m.style.display === 'block' ? 'none' : 'block'; }
-    function openModal(id) { document.querySelectorAll('.modal').forEach(m => m.classList.remove('active')); document.getElementById(id).classList.add('active'); if(id==='cart-modal') document.getElementById('cart-list').innerHTML = cart.map(i=>`<div style='padding:10px; border-bottom:1px solid #222;'>${i.n}</div>`).join('') || "فارغة"; }
-    function sendOrder() { const n = document.getElementById('c-name').value, pay = document.getElementById('c-payment').value; let msg = `*طلب OARA*\nالعميل: ${n}\nالدفع: ${pay}\n`; cart.forEach(i=>msg+=`- ${i.n}\n`); window.open(`https://wa.me/972568486065?text=${encodeURIComponent(msg)}`); }
-    function toggleSidebar() { const s = document.getElementById('sidebar'); s.classList.toggle('active'); }
-    
-    window.onload = () => { if(localStorage.getItem('oara_verified')) { document.getElementById('auth-overlay').style.display = 'none'; document.getElementById('site-content').style.display = 'block'; loadProducts(); } };
+    window.onload = () => { if(localStorage.getItem('oara_verified')) { document.getElementById('auth-overlay').style.display = 'none'; document.getElementById('site-content').style.display = 'block'; } };
 </script>
 </body>
-            </html>
-        
+</html>
