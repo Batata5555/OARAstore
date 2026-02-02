@@ -5,115 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OARA STORE | Luxury Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
-    
     <style>
         :root { --gold: #c5a059; --black: #050505; --card: #0f0f0f; --sale: #e74c3c; }
-        body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--black); color: white; line-height: 1.6; }
-        header { background: rgba(5,5,5,0.9); padding: 15px 5%; text-align: center; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(8px); }
-        .logo { font-family: 'Bodoni Moda', serif; font-size: 26px; letter-spacing: 4px; color: white; text-decoration: none; font-weight: 700; text-transform: uppercase; }
+        body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--black); color: white; overflow-x: hidden; }
+        
+        /* Header & Navigation */
+        header { background: rgba(5,5,5,0.95); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 1000; }
+        .menu-btn { font-size: 24px; color: var(--gold); cursor: pointer; background: none; border: none; }
+        .logo { font-family: 'Bodoni Moda', serif; font-size: 24px; letter-spacing: 3px; color: white; text-decoration: none; font-weight: 700; text-transform: uppercase; }
         .logo span { color: var(--gold); }
-        .hero { padding: 40px 10% 20px; text-align: center; }
-        .hero h1 { font-family: 'Bodoni Moda', serif; font-size: 30px; color: var(--gold); margin: 0 0 10px; }
-        .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px 5%; }
-        @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
-        .cat-card { height: 200px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #1a1a1a; background: #111; }
-        .cat-card::before { content: ""; position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.4); transition: 0.4s; }
-        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400'); }
-        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=400'); }
-        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400'); }
-        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400'); }
-        .cat-card span { position: relative; z-index: 2; color: var(--gold); border: 1px solid var(--gold); padding: 6px 15px; background: rgba(0,0,0,0.4); }
-        #products-view { display: none; padding: 20px 5%; }
-        .product-card { background: var(--card); border: 1px solid #1a1a1a; text-align: center; padding-bottom: 12px; position: relative; }
-        .product-card img { width: 100%; height: 220px; object-fit: cover; }
-        .badge { position: absolute; top: 10px; right: 10px; background: var(--sale); color: white; padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 3px; }
-        .product-info h4 { font-weight: 300; font-size: 14px; margin: 10px 5px 5px; color: #eee; height: 40px; overflow: hidden; }
-        .price-container { display: flex; flex-direction: column; align-items: center; }
-        .old-price { color: #888; text-decoration: line-through; font-size: 12px; }
-        .current-price { color: var(--gold); font-family: 'Bodoni Moda'; font-size: 18px; font-weight: bold; }
-        .btn-buy { background: var(--gold); color: black; border: none; padding: 8px 15px; margin-top: 10px; font-weight: bold; cursor: pointer; width: 85%; }
-        .back-nav { cursor: pointer; font-size: 12px; color: var(--gold); margin-bottom: 20px; display: inline-block; }
+
+        /* شريط التوصيل الفاخر */
+        .shipping-luxury-bar { background: #000; border-bottom: 1px solid #1a1a1a; padding: 10px 0; text-align: center; font-size: 11px; letter-spacing: 1.5px; color: var(--gold); display: flex; justify-content: center; gap: 20px; font-weight: 300; }
+        .shipping-item span { color: #fff; font-weight: 700; }
+
+        /* Sidebar Style */
+        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #0a0a0a; border-left: 1px solid var(--gold); transition: 0.4s; z-index: 2000; padding: 30px 20px; box-sizing: border-box; text-align: right; }
+        .sidebar.active { right: 0; }
+        .sidebar h3 { color: var(--gold); border-bottom: 1px solid #222; padding-bottom: 10px; font-size: 18px; margin-top: 25px; }
+        .side-link { display: block; color: #ccc; text-decoration: none; padding: 12px 0; border-bottom: 1px solid #111; cursor: pointer; transition: 0.3s; }
+        .side-link:hover { color: var(--gold); padding-right: 10px; }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; z-index: 1500; }
+
+        /* Main Content & Products */
+        #main-view, #products-view, #admin-view { padding: 20px 5%; animation: fadeIn 0.5s; }
+        .hero { text-align: center; padding: 40px 0; }
+        .hero h1 { font-family: 'Bodoni Moda'; font-size: 32px; margin: 0; }
+        .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .product-card { background: var(--card); border: 1px solid #1a1a1a; text-align: center; padding-bottom: 15px; position: relative; }
+        .product-card img, .product-card video { width: 100%; height: 220px; object-fit: cover; }
+        .price-current { color: var(--gold); font-weight: bold; font-size: 18px; }
+        .btn-buy { background: var(--gold); color: black; border: none; padding: 10px; width: 90%; font-weight: bold; margin-top: 10px; cursor: pointer; }
+
+        /* Reviews */
+        .reviews-section { margin-top: 40px; padding: 30px 0; background: #080808; border-top: 1px solid #1a1a1a; }
+        .review-card { background: #111; padding: 20px; margin-bottom: 15px; border-right: 3px solid var(--gold); }
+        .review-author { display: block; color: var(--gold); font-weight: bold; margin-top: 10px; font-size: 12px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-<header><a href="javascript:location.reload()" class="logo">OARA <span>STORE</span></a></header>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-<div id="home-view">
-    <section class="hero"><p>Exclusive Collection</p><h1>OARA STORE</h1></section>
+<div class="sidebar" id="sidebar">
+    <h2 style="color:white; font-family:'Bodoni Moda';">OARA MENU</h2>
+    <h3>اللغة / Language</h3>
+    <div style="display:flex; gap:10px; margin-top:10px;">
+        <button onclick="alert('تم تفعيل العربية')" style="flex:1; background:none; border:1px solid var(--gold); color:white; padding:5px; cursor:pointer;">العربية</button>
+        <button onclick="alert('English Activated')" style="flex:1; background:none; border:1px solid var(--gold); color:white; padding:5px; cursor:pointer;">English</button>
+    </div>
+
+    <h3>الفئات</h3>
+    <div class="side-link" onclick="loadCategory('ساعات')">قسم الساعات</div>
+    <div class="side-link" onclick="loadCategory('عطور')">قسم العطور</div>
+    <div class="side-link" onclick="loadCategory('ملابس')">قسم الملابس</div>
+
+    <h3>خدمة العملاء</h3>
+    <div class="side-link" onclick="window.open('https://wa.me/970568486065')">واتساب: 0568486065</div>
+
+    <h3>إعدادات المالك</h3>
+    <div class="side-link" style="color:var(--sale);" onclick="accessAdmin()">دخول القسم السري</div>
+</div>
+
+<header>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <a href="javascript:location.reload()" class="logo">OARA <span>STORE</span></a>
+    <div style="width:24px;"></div>
+</header>
+
+<div class="shipping-luxury-bar">
+    <div class="shipping-item">توصيل الداخل <span>70 ₪</span></div>
+    <div style="color:#222">|</div>
+    <div class="shipping-item">توصيل الضفة <span>20 ₪</span></div>
+    <div style="color:#222">|</div>
+    <div class="shipping-item">توصيل القدس <span>30 ₪</span></div>
+</div>
+
+<div id="main-view">
+    <section class="hero">
+        <p style="color:var(--gold); letter-spacing:3px; font-size:12px;">EST. 2024</p>
+        <h1>OARA LUXURY STORE</h1>
+    </section>
+
     <div class="categories-grid">
-        <div class="cat-card cat-1" onclick="loadCategory('ملابس')"><span>ملابس</span></div>
-        <div class="cat-card cat-2" onclick="loadCategory('عطور')"><span>عطور</span></div>
-        <div class="cat-card cat-3" onclick="loadCategory('ساعات')"><span>ساعات</span></div>
-        <div class="cat-card cat-4" onclick="loadCategory('اكسسوارات')"><span>إكسسوارات</span></div>
+        <div class="product-card" onclick="loadCategory('ساعات')" style="cursor:pointer; height:150px; display:flex; align-items:center; justify-content:center; background:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400') center/cover;">
+            <span style="background:rgba(0,0,0,0.7); padding:10px 20px; border:1px solid var(--gold);">الساعات</span>
+        </div>
+        <div class="product-card" onclick="loadCategory('عطور')" style="cursor:pointer; height:150px; display:flex; align-items:center; justify-content:center; background:url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=400') center/cover;">
+            <span style="background:rgba(0,0,0,0.7); padding:10px 20px; border:1px solid var(--gold);">العطور</span>
+        </div>
+    </div>
+
+    <section class="reviews-section">
+        <h3 style="text-align:center; color:var(--gold); font-family:'Bodoni Moda';">REVIEWS</h3>
+        <div class="review-card">
+            <p style="font-size:13px; font-style:italic; margin:0;">"أفخم تعامل وأسرع توصيل، الساعة خيال!"</p>
+            <span class="review-author">— خالد العلي</span>
+        </div>
+        <div class="review-card">
+            <p style="font-size:13px; font-style:italic; margin:0;">"الجودة فعلاً للأغنياء، شكراً أورا ستور."</p>
+            <span class="review-author">— مريم القدس</span>
+        </div>
+    </section>
+</div>
+
+<div id="products-view" style="display:none;">
+    <div onclick="location.reload()" style="color:var(--gold); margin-bottom:20px; cursor:pointer;">← العودة</div>
+    <div id="products-container" class="categories-grid"></div>
+</div>
+
+<div id="admin-view" style="display:none;">
+    <div style="background:#111; padding:30px; border:1px solid var(--gold); text-align:center;">
+        <h2 style="color:var(--gold);">قسم العروض السري</h2>
+        <p>مرحباً بك في لوحة التحكم الخاصة بالمالك.</p>
+        <button class="btn-buy" onclick="window.open('https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/edit')">إدارة الحسابات والعروض</button>
     </div>
 </div>
 
-<section id="products-view">
-    <div class="back-nav" onclick="location.reload()">← العودة للأقسام</div>
-    <div id="products-container" class="categories-grid" style="padding:0;"></div>
-</section>
-
 <script>
-    // تم ربط جدولك الخاص بنجاح
     const SHEET_URL = "https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json";
+    const ADMIN_CODE = "0000";
     let storeData = [];
 
-    async function fetchStore() {
+    async function init() {
         try {
-            const response = await fetch(SHEET_URL);
-            const text = await response.text();
-            // استخراج JSON من استجابة جوجل
+            const res = await fetch(SHEET_URL);
+            const text = await res.text();
             const json = JSON.parse(text.substring(47).slice(0, -2));
-            
-            storeData = json.table.rows.map(row => {
-                const wholesalePrice = parseFloat(row.c[1]?.v) || 0;
-                return {
-                    name: row.c[0]?.v || 'منتج جديد',
-                    price: wholesalePrice + 20, // إضافة ربح 20 شيكل
-                    oldPrice: wholesalePrice + 50, // سعر قبل التخفيض
-                    img: row.c[2]?.v || 'https://via.placeholder.com/400',
-                    cat: row.c[3]?.v ? row.c[3].v.toString().trim() : ''
-                };
-            });
-        } catch (e) { console.error("خطأ في جلب البيانات من الجدول"); }
+            storeData = json.table.rows.map(r => ({
+                name: r.c[0]?.v || '', price: (r.c[1]?.v || 0) + 20, img: r.c[2]?.v || '', cat: r.c[3]?.v || ''
+            }));
+        } catch(e) { console.log("Error loading data"); }
     }
 
-    function loadCategory(catName) {
-        document.getElementById('home-view').style.display = 'none';
-        document.getElementById('products-view').style.display = 'block';
-        const container = document.getElementById('products-container');
-        
-        const filtered = storeData.filter(p => p.cat === catName);
-        
-        if(filtered.length === 0) {
-            container.innerHTML = `<p style="text-align:center; width:100%; color:#888; grid-column: 1/-1; padding: 50px 0;">قريباً.. سيتم إضافة منتجات في هذا القسم</p>`;
-            return;
-        }
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('active');
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+    }
 
+    function loadCategory(cat) {
+        if(document.getElementById('sidebar').classList.contains('active')) toggleMenu();
+        document.getElementById('main-view').style.display = 'none';
+        document.getElementById('admin-view').style.display = 'none';
+        document.getElementById('products-view').style.display = 'block';
+        
+        const container = document.getElementById('products-container');
+        const filtered = storeData.filter(p => p.cat.trim() === cat);
+        
         container.innerHTML = filtered.map(p => `
             <div class="product-card">
-                <div class="badge">تخفيض</div>
-                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/400'" loading="lazy">
-                <div class="product-info">
-                    <h4>${p.name}</h4>
-                    <div class="price-container">
-                        <span class="old-price">${p.oldPrice} ₪</span>
-                        <span class="current-price">${p.price} ₪</span>
-                    </div>
-                    <button class="btn-buy" onclick="sendOrder('${p.name}')">اطلب عبر واتساب</button>
-                </div>
+                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/400?text=OARA+STORE'">
+                <h4>${p.name}</h4>
+                <p class="price-current">${p.price} ₪</p>
+                <button class="btn-buy" onclick="window.open('https://wa.me/970568486065?text=أريد طلب: ${p.name}')">طلب الآن</button>
             </div>
         `).join('');
     }
 
-    function sendOrder(product) {
-        const phone = "970568486065"; 
-        const text = encodeURIComponent(`مرحباً OARA STORE، أريد طلب المنتج التالي: ${product}`);
-        window.open(`https://wa.me/${phone}?text=${text}`);
+    function accessAdmin() {
+        if(prompt("أدخل الكود السري:") === ADMIN_CODE) {
+            toggleMenu();
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('products-view').style.display = 'none';
+            document.getElementById('admin-view').style.display = 'block';
+        }
     }
 
-    window.onload = fetchStore;
+    window.onload = init;
 </script>
 </body>
 </html>
