@@ -1,5 +1,5 @@
 function smoothOpen(cat) {
-    const hero = document.getElementById('hero-section');
+    const hero = document.querySelector('.hero');
     const mainMenu = document.getElementById('main-menu');
     const productsSection = document.getElementById('products-section');
     const backBtn = document.getElementById('backBtn');
@@ -9,25 +9,21 @@ function smoothOpen(cat) {
         card.style.display = (card.getAttribute('data-category') === cat) ? 'block' : 'none';
     });
 
-    // إخفاء الواجهة بحركة ناعمة
+    // إخفاء "الزحام"
     hero.style.display = 'none';
-    mainMenu.style.opacity = '0';
+    mainMenu.style.display = 'none';
+
+    // إظهار المنتجات في مساحة واسعة
+    productsSection.style.display = 'block';
+    backBtn.style.display = 'block';
     
     setTimeout(() => {
-        mainMenu.style.display = 'none';
-        productsSection.style.display = 'block';
-        backBtn.style.display = 'block';
-        
-        setTimeout(() => {
-            productsSection.style.opacity = '1';
-            productsSection.style.transform = 'translateY(0)';
-        }, 50);
-        
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }, 400);
+        productsSection.style.opacity = '1';
+    }, 50);
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function smoothBack() {
-    // العودة للرئيسية بإعادة التحميل لضمان ظهور الشرح الكبير
-    location.reload();
+    location.reload(); 
 }
