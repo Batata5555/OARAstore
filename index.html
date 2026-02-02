@@ -6,101 +6,133 @@
     <title>OARA STORE | الفخامة</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* التنسيق الفخم لضمان وضوح الأسماء والصور */
-        .main-menu { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 25px; }
-        .category-card { 
-            position: relative; height: 180px; border-radius: 15px; overflow: hidden; 
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid #eee;
+        /* أنيميشن الانتقال الناعم */
+        .fade-in { animation: fadeIn 0.6s ease-in-out; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(15px); } 
+            to { opacity: 1; transform: translateY(0); } 
         }
-        .category-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 1; filter: brightness(0.7); transition: 0.5s; }
-        .category-card:hover img { filter: brightness(0.5); transform: scale(1.05); }
+        
+        /* تنسيق الواجهة الرئيسية */
+        .main-menu { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 25px; transition: 0.5s; }
+        .category-card { 
+            position: relative; height: 180px; border-radius: 20px; overflow: hidden; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); border: 1px solid #eee;
+        }
+        .category-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 1; filter: brightness(0.65); transition: 0.5s; }
+        .category-card:hover img { filter: brightness(0.4); transform: scale(1.05); }
+        
+        /* تنسيق النصوص لتكون واضحة جداً */
         .category-card span { 
             position: relative; z-index: 2; color: #fff; font-size: 22px; font-weight: bold; 
-            background: rgba(0, 0, 0, 0.6); padding: 12px 35px; border-radius: 50px;
-            border: 2px solid #c5a059; backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.5); padding: 12px 35px; border-radius: 50px;
+            border: 2px solid #c5a059; backdrop-filter: blur(4px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
+
         #products-section, #backBtn { display: none; }
-        .back-btn { margin: 15px; padding: 12px 25px; background: #121212; color: #c5a059; border: 1px solid #c5a059; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .back-btn { margin: 15px; padding: 12px 25px; background: #121212; color: #c5a059; border: 1px solid #c5a059; border-radius: 8px; cursor: pointer; font-weight: bold; display: none; }
     </style>
 </head>
 <body>
 
-<header style="justify-content: center; display: flex; align-items: center; position: relative;">
-    <div class="logo" style="font-size: 26px;">OARA<span style="color: #c5a059;">STORE</span></div>
-    <div class="cart-icon" onclick="toggleCart()" style="position: absolute; left: 20px;">🛒 <span id="cart-count">0</span></div>
+<header style="justify-content: center; display: flex; align-items: center; position: relative; background: #121212; padding: 15px;">
+    <div class="logo" style="font-size: 24px; color: #fff; font-weight: bold;">OARA<span style="color: #c5a059;">STORE</span></div>
+    <div class="cart-icon" onclick="toggleCart()" style="position: absolute; left: 20px; color: #fff; cursor: pointer;">
+        🛒 <span id="cart-count" style="background: #c5a059; color: #fff; padding: 2px 6px; border-radius: 50%; font-size: 12px;">0</span>
+    </div>
 </header>
 
-<div id="main-menu" class="main-menu">
-    <h2 style="text-align: center; color: #121212; margin-bottom: 20px;">أهلاً بك في OARA STORE.. اختر القسم</h2>
-    
-    <div class="category-card" onclick="startApp('watch')">
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt="ساعات">
+<div id="main-menu" class="main-menu fade-in">
+    <h2 style="text-align: center; color: #121212; margin-bottom: 10px; font-size: 20px;">أهلاً بك.. اختر القسم</h2>
+    <div class="category-card" onclick="smoothOpen('watch')">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
         <span>ساعات فاخرة</span>
     </div>
-
-    <div class="category-card" onclick="startApp('perfume')">
-        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600" alt="عطور">
+    <div class="category-card" onclick="smoothOpen('perfume')">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600">
         <span>عطور ملكية</span>
     </div>
-
-    <div class="category-card" onclick="startApp('clothes')">
-        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600" alt="ملابس">
+    <div class="category-card" onclick="smoothOpen('clothes')">
+        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600">
         <span>أزياء وملابس</span>
     </div>
 </div>
 
-<button id="backBtn" class="back-btn" onclick="goToHome()">⬅ العودة للأقسام الرئيسية</button>
+<button id="backBtn" class="back-btn" onclick="smoothBack()">⬅ العودة للأقسام</button>
 
 <div id="products-section">
-    <section class="store-intro" style="text-align:center; padding: 25px; background:#fff;">
+    <section class="store-intro" style="text-align:center; padding: 25px; border-bottom: 1px solid #eee;">
         <h2 style="color: #c5a059;">نخبة الفخامة</h2>
         <p style="color:#666;">منتجات مختارة بعناية لتناسب ذوقك الرفيع</p>
     </section>
 
-    <main class="products-grid">
-        <div class="card" data-category="watch">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400">
-            <div class="info"><h3>ساعة ملكية</h3><p class="price">150 ₪</p><button onclick="addToCart('ساعة ملكية', 150)">إضافة للسلة</button></div>
+    <main class="products-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 15px;">
+        <div class="card" data-category="watch" style="border: 1px solid #eee; border-radius: 10px; overflow: hidden; text-align: center;">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" style="width: 100%; height: 150px; object-fit: cover;">
+            <div class="info" style="padding: 10px;">
+                <h3 style="font-size: 14px;">ساعة ملكية</h3>
+                <p style="color: #c5a059; font-weight: bold;">150 ₪</p>
+                <button onclick="addToCart('ساعة ملكية', 150)" style="background: #121212; color: #c5a059; border: 1px solid #c5a059; width: 100%; padding: 8px; border-radius: 5px;">إضافة للسلة</button>
+            </div>
         </div>
-        <div class="card" data-category="perfume">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400">
-            <div class="info"><h3>عطر فخم</h3><p class="price">90 ₪</p><button onclick="addToCart('عطر فخم', 90)">إضافة للسلة</button></div>
-        </div>
-        <div class="card" data-category="clothes">
-            <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400">
-            <div class="info"><h3>جاكيت عصري</h3><p class="price">250 ₪</p><button onclick="addToCart('جاكيت عصري', 250)">إضافة للسلة</button></div>
+        
+        <div class="card" data-category="perfume" style="border: 1px solid #eee; border-radius: 10px; overflow: hidden; text-align: center;">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400" style="width: 100%; height: 150px; object-fit: cover;">
+            <div class="info" style="padding: 10px;">
+                <h3 style="font-size: 14px;">عطر فخم</h3>
+                <p style="color: #c5a059; font-weight: bold;">90 ₪</p>
+                <button onclick="addToCart('عطر فخم', 90)" style="background: #121212; color: #c5a059; border: 1px solid #c5a059; width: 100%; padding: 8px; border-radius: 5px;">إضافة للسلة</button>
+            </div>
         </div>
     </main>
 </div>
 
-<script src="script.js"></script>
+<div id="cartPanel" style="position: fixed; bottom: -100%; left: 0; width: 100%; height: 80%; background: #fff; z-index: 2000; transition: 0.5s; padding: 20px; border-radius: 20px 20px 0 0; box-shadow: 0 -5px 20px rgba(0,0,0,0.2); overflow-y: auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+        <h3>سلة المشتريات</h3>
+        <span onclick="toggleCart()" style="font-size: 30px; cursor: pointer;">×</span>
+    </div>
+    <div id="cart-items" style="margin-top: 20px;"></div>
+    <div style="margin-top: 20px; border-top: 2px solid #f4f4f4; padding-top: 15px;">
+        <p>المجموع: <span id="total-price" style="font-weight: bold; color: #c5a059;">0</span> ₪</p>
+        <button onclick="sendToWhatsApp()" style="background: #25d366; color: #fff; width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; font-size: 16px;">إتمام الطلب عبر واتساب</button>
+    </div>
+</div>
 
+<script src="script.js"></script>
 <script>
-    // وظائف التأكد من العمل الفوري
-    function startApp(cat) {
-        document.getElementById('main-menu').style.display = 'none';
-        document.getElementById('products-section').style.display = 'block';
-        document.getElementById('backBtn').style.display = 'block';
-        
-        // التأكد من استدعاء التصفية
-        if (typeof filterProducts === "function") {
-            filterProducts(cat, null);
-        } else {
-            // حل احتياطي إذا لم يحمل ملف JS الخارجي
-            const products = document.querySelectorAll('.card');
-            products.forEach(p => {
-                p.style.display = (p.getAttribute('data-category') === cat || cat === 'all') ? 'block' : 'none';
-            });
-        }
+    // وظائف الانتقالات الناعمة
+    function smoothOpen(cat) {
+        const menu = document.getElementById('main-menu');
+        menu.style.opacity = '0';
+        setTimeout(() => {
+            menu.style.display = 'none';
+            const section = document.getElementById('products-section');
+            section.style.display = 'block';
+            section.classList.add('fade-in');
+            document.getElementById('backBtn').style.display = 'block';
+            if (typeof filterProducts === "function") filterProducts(cat, null);
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }, 400);
+    }
+
+    function smoothBack() {
+        document.getElementById('products-section').style.display = 'none';
+        document.getElementById('backBtn').style.display = 'none';
+        const menu = document.getElementById('main-menu');
+        menu.style.display = 'grid';
+        setTimeout(() => {
+            menu.style.opacity = '1';
+            menu.classList.add('fade-in');
+        }, 50);
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
-    function goToHome() {
-        document.getElementById('main-menu').style.display = 'grid';
-        document.getElementById('products-section').style.display = 'none';
-        document.getElementById('backBtn').style.display = 'none';
-        window.scrollTo({top: 0, behavior: 'smooth'});
+    function toggleCart() {
+        const panel = document.getElementById('cartPanel');
+        panel.style.bottom = panel.style.bottom === '0px' ? '-100%' : '0px';
     }
 </script>
 </body>
