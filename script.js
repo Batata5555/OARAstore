@@ -1,19 +1,17 @@
 function smoothOpen(cat) {
-    const hero = document.querySelector('.hero');
-    const mainMenu = document.getElementById('main-menu');
+    const welcomeArea = document.getElementById('welcome-area');
     const productsSection = document.getElementById('products-section');
     const backBtn = document.getElementById('backBtn');
 
-    // تصفية المنتجات
+    // 1. تصفية المنتجات
     document.querySelectorAll('.card').forEach(card => {
         card.style.display = (card.getAttribute('data-category') === cat) ? 'block' : 'none';
     });
 
-    // إخفاء "الزحام"
-    hero.style.display = 'none';
-    mainMenu.style.display = 'none';
+    // 2. إخفاء الشرح والأقسام فوراً لتوفير مساحة
+    welcomeArea.style.display = 'none';
 
-    // إظهار المنتجات في مساحة واسعة
+    // 3. إظهار المنتجات وحدها
     productsSection.style.display = 'block';
     backBtn.style.display = 'block';
     
