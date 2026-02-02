@@ -1,6 +1,25 @@
 let cart = [];
 let total = 0;
 
+// وظيفة الفئات (تصفية المنتجات)
+function filterProducts(category, event) {
+    // 1. تحديث شكل الأزرار (إزالة active من الجميع ووضعها على المختار)
+    const links = document.querySelectorAll('.categories a');
+    links.forEach(link => link.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // 2. تصفية المنتجات في الشبكة
+    const products = document.querySelectorAll('.card');
+    products.forEach(product => {
+        const productCat = product.getAttribute('data-category');
+        if (category === 'all' || productCat === category) {
+            product.style.display = 'block'; // إظهار
+        } else {
+            product.style.display = 'none'; // إخفاء
+        }
+    });
+}
+
 function toggleCart() {
     document.getElementById('cartPanel').classList.toggle('active');
     document.getElementById('overlay').classList.toggle('active');
@@ -15,7 +34,7 @@ function addToCart(name, price) {
     cart.push({name, price});
     total += price;
     updateUI();
-    alert("تمت إضافة " + name + " للسلة بنجاح!");
+    alert("تمت إضافة " + name + " للسلة!");
 }
 
 function updateUI() {
@@ -33,7 +52,7 @@ function updateUI() {
 function sendToWhatsApp() {
     const city = document.getElementById('city').value;
     const payment = document.getElementById('payment').value;
-    if(!city) return alert("يرجى إدخال المدينة لتوصيل الطلب");
+    if(!city) return alert("يرجى إدخال المدينة");
     
     let msg = `طلب جديد من OARA STORE:\n\n`;
     cart.forEach(i => msg += `• ${i.name} - ${i.price}₪\n`);
@@ -41,4 +60,3 @@ function sendToWhatsApp() {
     
     window.open(`https://wa.me/970568486065?text=${encodeURIComponent(msg)}`);
 }
-
