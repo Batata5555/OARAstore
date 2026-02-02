@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OARA STORE | الفخامة الفلسطينية</title>
+    <title>OARA STORE | القائمة الرئيسية</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* تنسيقات إضافية للواجهة الرئيسية والشرح */
-        .main-menu { display: grid; grid-template-columns: 1fr; gap: 15px; padding: 20px; }
+        /* تصميم مربعات الأقسام الكبيرة للواجهة الرئيسية */
+        .main-menu { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 20px; }
         .category-card { 
-            position: relative; height: 160px; border-radius: 15px; overflow: hidden; 
+            position: relative; height: 200px; border-radius: 20px; overflow: hidden; 
             display: flex; align-items: center; justify-content: center; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
-        .category-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 1; filter: brightness(0.5); transition: 0.4s; }
-        .category-card:hover img { transform: scale(1.08); filter: brightness(0.3); }
-        .category-card span { position: relative; z-index: 2; color: white; font-size: 22px; font-weight: bold; border: 2px solid #c5a059; padding: 8px 20px; border-radius: 5px; background: rgba(0,0,0,0.2); }
+        .category-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 1; filter: brightness(0.4); transition: 0.5s; }
+        .category-card:hover img { transform: scale(1.1); filter: brightness(0.3); }
+        .category-card span { 
+            position: relative; z-index: 2; color: white; font-size: 26px; font-weight: bold; 
+            border: 2px solid #c5a059; padding: 12px 30px; border-radius: 10px; background: rgba(0,0,0,0.3);
+        }
         
-        #products-section { display: none; }
-        .back-btn { margin: 15px; padding: 10px 20px; background: #121212; color: #c5a059; border: 1px solid #c5a059; border-radius: 5px; display: none; cursor: pointer; font-weight: bold; }
-
-        /* تنسيق قسم الشرح */
-        .store-intro { background: #fff; padding: 30px 20px; text-align: center; border-bottom: 2px solid #f8f8f8; margin-bottom: 20px; }
-        .store-intro h2 { font-size: 24px; color: #121212; margin-bottom: 10px; }
-        .store-intro p { font-size: 14px; color: #666; line-height: 1.6; max-width: 500px; margin: 0 auto; }
-        .store-intro p span { color: #c5a059; font-weight: bold; }
-        .features { display: flex; justify-content: center; gap: 10px; margin-top: 15px; font-size: 12px; font-weight: bold; }
+        /* إخفاء قسم المنتجات في البداية لضمان ظهور الواجهة */
+        #products-section, #backBtn { display: none; }
     </style>
 </head>
 <body>
@@ -36,18 +32,58 @@
 </header>
 
 <div id="main-menu" class="main-menu">
-    <h2 style="text-align: center; color: #121212; margin-bottom: 10px;">أهلاً بك.. اختر القسم</h2>
+    <h1 style="text-align: center; color: #121212; font-size: 22px; margin-bottom: 10px;">مرحباً بك في OARA STORE</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 20px;">اختر القسم الذي تود تسوقه:</p>
     
     <div class="category-card" onclick="openCategory('watch')">
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="ساعات">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt="ساعات">
         <span>ساعات فاخرة</span>
     </div>
 
     <div class="category-card" onclick="openCategory('perfume')">
-        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=500" alt="عطور">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600" alt="عطور">
         <span>عطور ملكية</span>
     </div>
 
     <div class="category-card" onclick="openCategory('clothes')">
-        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500" alt="ملابس">
-        <span>أ
+        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600" alt="ملابس">
+        <span>أزياء وملابس</span>
+    </div>
+</div>
+
+<button id="backBtn" class="back-btn" onclick="showMainMenu()" style="margin: 15px; padding: 10px 20px; background: #121212; color: #c5a059; border: 1px solid #c5a059; border-radius: 5px; cursor: pointer;">⬅ العودة للقائمة الرئيسية</button>
+
+<div id="products-section">
+    <section class="store-intro" style="text-align:center; padding: 20px;">
+        <h2 style="color:#c5a059">نخبة الفخامة</h2>
+        <p>جودة عالمية بأيادي فلسطينية</p>
+    </section>
+
+    <main class="products-grid">
+        <div class="card" data-category="watch">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="ساعة">
+            <div class="info"><h3>ساعة ملكية</h3><p class="price">150 ₪</p><button onclick="addToCart('ساعة ملكية', 150)">إضافة للسلة</button></div>
+        </div>
+        </main>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // هذه الوظيفة هي المسؤولة عن إخفاء الواجهة وإظهار المنتجات
+    function openCategory(cat) {
+        document.getElementById('main-menu').style.display = 'none';
+        document.getElementById('products-section').style.display = 'block';
+        document.getElementById('backBtn').style.display = 'block';
+        window.scrollTo(0,0);
+        filterProducts(cat, null);
+    }
+
+    function showMainMenu() {
+        document.getElementById('main-menu').style.display = 'grid';
+        document.getElementById('products-section').style.display = 'none';
+        document.getElementById('backBtn').style.display = 'none';
+        window.scrollTo(0,0);
+    }
+</script>
+</body>
+</html>
