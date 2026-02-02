@@ -14,25 +14,22 @@
 </header>
 
 <div id="main-menu" class="main-menu">
-    <h2 style="text-align: center; color: #121212; margin-bottom: 20px;">أهلاً بك.. اختر القسم</h2>
-    <div class="category-card" onclick="smoothOpen('watch')">
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
-        <span>ساعات فاخرة</span>
-    </div>
-    <div class="category-card" onclick="smoothOpen('perfume')">
-        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600">
-        <span>عطور ملكية</span>
-    </div>
+    <h2 class="welcome-text">أهلاً بك.. اختر القسم</h2>
+    <div class="categories-grid">
+        <div class="category-card" onclick="smoothOpen('watch')">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
+            <span>ساعات فاخرة</span>
+        </div>
+        <div class="category-card" onclick="smoothOpen('perfume')">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600">
+            <span>عطور ملكية</span>
+        </div>
+        </div>
 </div>
 
 <button id="backBtn" class="back-btn" onclick="smoothBack()">⬅ العودة للأقسام</button>
 
 <div id="products-section" style="display: none; opacity: 0;">
-    <section class="store-intro" style="text-align:center; padding: 20px;">
-        <h2 style="color: #c5a059;">نخبة الفخامة</h2>
-        <p style="color:#666;">جودة تليق بك في OARA STORE</p>
-    </section>
-
     <main class="products-grid">
         <div class="card" data-category="watch">
             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400">
