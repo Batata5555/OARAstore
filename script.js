@@ -1,7 +1,7 @@
 // 1. مصفوفة تخزين المنتجات في السلة
 let cart = [];
 
-// 2. دالة إضافة المنتج وتحديث العداد (تعمل فور الضغط)
+// 2. دالة إضافة المنتج وتحديث العداد
 function addToCart(name, price) {
     cart.push({ name: name, price: price });
     
@@ -20,6 +20,8 @@ function showCart() {
     const list = document.getElementById('cart-items-list');
     const totalDisp = document.getElementById('total-price');
     
+    if (!list || !totalDisp || !modal) return;
+
     list.innerHTML = ""; // مسح القائمة القديمة قبل التحديث
     let total = 0;
 
@@ -41,7 +43,7 @@ function closeCart() {
     document.getElementById('cart-modal').style.display = "none";
 }
 
-// 5. دالة الدفع وإرسال الطلب عبر واتساب (تم وضع رقمك هنا)
+// 5. دالة الدفع وإرسال الطلب عبر واتساب (تم تحديث الرقم هنا)
 function checkout(method) {
     if (cart.length === 0) return alert("سلتك فارغة حالياً!");
 
@@ -51,12 +53,13 @@ function checkout(method) {
     msg += "%0Aالإجمالي الكلي: " + total + " ₪";
 
     if (method === 'whatsapp') {
-        // تم استبدال الرقم برقمك الخاص المذكور: 970568486065
+        // تم وضع رقمك المعتمد: 970568486065
         window.open("https://wa.me/970568486065?text=" + msg); 
     } else {
         alert("تم استلام طلبك (دفع عند الاستلام). شكراً لثقتك بنا!");
         cart = [];
-        document.getElementById('cart-count').innerText = "0";
+        const count = document.getElementById('cart-count');
+        if (count) count.innerText = "0";
         closeCart();
         location.reload();
     }
@@ -64,16 +67,21 @@ function checkout(method) {
 
 // 6. دالة فتح الأقسام وإخفاء الشرح (للمساحة الواسعة)
 function smoothOpen(cat) {
-    document.getElementById('welcome-area').style.display = 'none';
+    const welcome = document.getElementById('welcome-area');
     const section = document.getElementById('products-section');
-    section.style.display = 'block';
-    document.getElementById('backBtn').style.display = 'block';
+    const backBtn = document.getElementById('backBtn');
+
+    if (welcome) welcome.style.display = 'none';
+    if (section) section.style.display = 'block';
+    if (backBtn) backBtn.style.display = 'block';
     
     document.querySelectorAll('.card').forEach(c => {
         c.style.display = (c.getAttribute('data-category') === cat) ? 'block' : 'none';
     });
     
-    setTimeout(() => { section.style.opacity = '1'; }, 50);
+    setTimeout(() => { 
+        if (section) section.style.opacity = '1'; 
+    }, 50);
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
