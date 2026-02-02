@@ -13,7 +13,6 @@
     <meta property="og:title" content="OARA STORE">
     <meta property="og:description" content="التسجيل في متجر OARA طريقك نحو القمة">
     <meta property="og:image" content="https://i.ibb.co/m56Yp9X/1770013749718.png">
-    <meta property="og:image:type" content="image/png">
     <meta property="og:type" content="website">
 
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,700;1,400&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
@@ -23,6 +22,7 @@
             --gold: #d4af37; 
             --black: #000000; 
             --dark-gray: #0a0a0a;
+            --soft-gray: #1a1a1a;
         }
 
         body { 
@@ -43,18 +43,15 @@
             position: sticky; top: 0; z-index: 1000; 
         }
 
-        /* الشعار الملكي في الهيدر */
-        .logo-img { 
-            height: 55px; 
-            cursor: pointer; 
-            transition: transform 0.3s;
-        }
+        .logo-img { height: 55px; cursor: pointer; transition: transform 0.3s; }
         .logo-img:hover { transform: scale(1.05); }
 
+        /* الكلمات التحفيزية باللون الذهبي الملكي */
         .hero-statement { 
             padding: 60px 10%; 
             text-align: center; 
             background: linear-gradient(to bottom, #000, #080808); 
+            border-bottom: 1px solid var(--soft-gray);
         }
         
         .hero-statement h2 { 
@@ -62,7 +59,7 @@
             font-size: 26px; 
             line-height: 1.6; 
             color: var(--gold); 
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); 
+            text-shadow: 0 0 12px rgba(212, 175, 55, 0.3); 
             font-style: italic;
             margin: 0 auto;
             max-width: 800px;
@@ -73,12 +70,13 @@
             cursor: pointer; 
             color: var(--gold); 
             border: 1px solid var(--gold); 
-            padding: 5px 12px; 
-            border-radius: 20px; 
+            padding: 6px 14px; 
+            border-radius: 25px; 
             font-size: 13px;
+            background: transparent;
         }
 
-        .cart-trigger { color: var(--gold); font-size: 22px; position: relative; cursor: pointer; }
+        .cart-trigger { color: var(--gold); font-size: 24px; position: relative; cursor: pointer; }
         .cart-badge { 
             position: absolute; top: -5px; right: -10px; 
             background: var(--gold); color: black; 
@@ -87,8 +85,15 @@
         }
 
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
-        .product-card { background: var(--dark-gray); border: 1px solid #1a1a1a; text-align: center; padding-bottom: 15px; }
-        .product-card img { width: 100%; height: 250px; object-fit: cover; }
+        .product-card { 
+            background: var(--dark-gray); 
+            border: 1px solid var(--soft-gray); 
+            text-align: center; 
+            padding-bottom: 15px; 
+            transition: 0.3s;
+        }
+        .product-card img { width: 100%; height: 260px; object-fit: cover; background: #000; }
+        .cat-label { padding: 10px; color: var(--gold); font-size: 14px; letter-spacing: 1px; }
 
         .btn { 
             background: var(--gold); 
@@ -99,20 +104,33 @@
             font-weight: bold; 
             cursor: pointer; 
             font-size: 14px;
+            transition: 0.3s;
         }
+        .btn:hover { background: #b8952d; }
 
+        /* المودالات */
         .modal { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.98); z-index: 2000; display: none; padding: 40px 20px; box-sizing: border-box; 
+            background: rgba(0,0,0,0.98); z-index: 2000; display: none; 
+            padding: 40px 20px; box-sizing: border-box; overflow-y: auto;
         }
         .modal.active { display: block; }
-        .modal h2, .modal p { color: var(--gold) !important; text-align: center; }
+        .modal-content { max-width: 500px; margin: auto; }
+        .modal h2, .modal p { color: var(--gold); text-align: center; margin-bottom: 20px; }
         
         input { 
-            width: 100%; padding: 12px; margin: 10px 0; 
-            background: #000; border: 1px solid #333; 
-            color: var(--gold); box-sizing: border-box; 
+            width: 100%; padding: 14px; margin: 10px 0; 
+            background: #050505; border: 1px solid #333; 
+            color: var(--gold); box-sizing: border-box; font-family: 'Tajawal';
         }
+        input:focus { border-color: var(--gold); outline: none; }
+
+        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #222; }
+
+        /* قسم الآراء */
+        .reviews { padding: 40px 5%; background: #050505; }
+        .review-card { background: #0a0a0a; padding: 15px; border: 1px solid #111; margin-bottom: 10px; display: flex; gap: 15px; align-items: center; }
+        .rev-img { width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--gold); }
     </style>
 </head>
 <body>
@@ -121,8 +139,8 @@
     <div onclick="location.reload()" style="color:var(--gold); cursor:pointer; font-size:24px;">☰</div>
     <img src="https://i.ibb.co/m56Yp9X/1770013749718.png" alt="OARA" class="logo-img" onclick="location.reload()">
     <div class="nav-icons">
-        <div class="user-icon" onclick="openLoginModal()">👤 <span id="user-display">النخبة</span></div>
-        <div class="cart-trigger" onclick="openCheckout()">🛒 <span class="cart-badge" id="cart-count">0</span></div>
+        <div class="user-icon" onclick="openModal('login-modal')">👤 <span id="user-display">النخبة</span></div>
+        <div class="cart-trigger" onclick="openModal('checkout-modal')">🛒 <span class="cart-badge" id="cart-count">0</span></div>
     </div>
 </header>
 
@@ -131,28 +149,115 @@
         <h2>"أنت لا تشتري مجرد منتج، أنت تقتني قطعة من الفخامة التي تليق بمكانتك"</h2>
     </section>
 
-    <div class="grid">
-        <div class="product-card" onclick="loadCategory('عطور')"><img src="https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg?w=600"></div>
-        <div class="product-card" onclick="loadCategory('ساعات')"><img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?w=600"></div>
+    <div class="grid" id="category-grid">
+        <div class="product-card" onclick="loadCategory('عطور')">
+            <img src="https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg?w=600">
+            <div class="cat-label">مجموعة العطور</div>
+        </div>
+        <div class="product-card" onclick="loadCategory('ساعات')">
+            <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?w=600">
+            <div class="cat-label">عالم الساعات</div>
+        </div>
+    </div>
+
+    <div class="reviews">
+        <h3 style="text-align:center; color:var(--gold); font-size:14px; letter-spacing:2px;">آراء النخبة</h3>
+        <div id="reviews-list">
+            <div class="review-card">
+                <img src="https://i.pravatar.cc/100?u=oara" class="rev-img">
+                <div><b style="color:var(--gold);">عبد الله محمد</b><p style="font-size:12px; margin:5px 0;">تجربة تسوق فريدة، الجودة تتحدث عن نفسها.</p></div>
+            </div>
+        </div>
     </div>
 </div>
 
+<div id="category-view" style="display:none;">
+    <div onclick="hideCategory()" style="color:var(--gold); padding:20px; cursor:pointer; text-align:center;">← العودة للقائمة الرئيسية</div>
+    <div class="grid" id="products-list"></div>
+</div>
+
 <div class="modal" id="login-modal">
-    <div style="max-width:400px; margin:auto;">
+    <div class="modal-content">
         <span onclick="closeModals()" style="color:var(--gold); float:left; cursor:pointer; font-size:24px;">✕</span>
-        <h2 style="margin-top:40px;">عضوية النخبة</h2>
-        <p>التسجيل في متجر OARA طريقك نحو القمة</p>
+        <h2>عضوية النخبة</h2>
+        <p>انضمامك لمتجر OARA هو خطوتك الأولى نحو القمة</p>
         <input type="text" id="reg-name" placeholder="الاسم الكامل">
         <input type="tel" id="reg-phone" placeholder="رقم الهاتف">
-        <button class="btn" onclick="saveProfile()">انضم للقمة الآن</button>
+        <button class="btn" onclick="saveProfile()">تأكيد الانضمام</button>
+    </div>
+</div>
+
+<div class="modal" id="checkout-modal">
+    <div class="modal-content">
+        <span onclick="closeModals()" style="color:var(--gold); float:left; cursor:pointer; font-size:24px;">✕</span>
+        <h2>ملخص الطلب الفاخر</h2>
+        <div id="cart-items-list"></div>
+        <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
+        <input type="text" id="order-city" placeholder="المدينة">
+        <button class="btn" onclick="sendWhatsApp()">إرسال الطلب عبر واتساب</button>
     </div>
 </div>
 
 <script>
+    let cart = [];
+    let storeData = [];
     let currentUser = JSON.parse(localStorage.getItem('oara_user')) || null;
-    function init() { if(currentUser) document.getElementById('user-display').innerText = currentUser.name; }
-    function openLoginModal() { document.getElementById('login-modal').classList.add('active'); }
+
+    async function fetchProducts() {
+        try {
+            const res = await fetch("https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json");
+            const text = await res.text();
+            const data = JSON.parse(text.substring(47).slice(0, -2));
+            storeData = data.table.rows.map(r => ({
+                name: r.c[0]?.v || 'منتج OARA',
+                price: (parseFloat(r.c[1]?.v) || 0) + 20,
+                img: r.c[2]?.v || '',
+                cat: (r.c[3]?.v || '').trim()
+            }));
+        } catch(e) { console.log("خطأ في تحميل البيانات"); }
+    }
+
+    function loadCategory(cat) {
+        document.getElementById('main-view').style.display = 'none';
+        document.getElementById('category-view').style.display = 'block';
+        const list = document.getElementById('products-list');
+        const items = storeData.filter(p => p.cat === cat);
+        list.innerHTML = items.map(p => `
+            <div class="product-card">
+                <img src="${p.img}" onerror="this.src='https://i.ibb.co/m56Yp9X/1770013749718.png'">
+                <div class="cat-label">${p.name}</div>
+                <div style="color:var(--gold); margin-bottom:10px;">${p.price} ₪</div>
+                <button class="btn" style="width:90%; padding:10px;" onclick="addToCart('${p.name}', ${p.price})">إضافة للسلة</button>
+            </div>
+        `).join('');
+    }
+
+    function hideCategory() {
+        document.getElementById('main-view').style.display = 'block';
+        document.getElementById('category-view').style.display = 'none';
+    }
+
+    function addToCart(n, p) {
+        cart.push({name: n, price: p});
+        document.getElementById('cart-count').innerText = cart.length;
+        alert("تمت إضافة " + n + " إلى سلتك");
+    }
+
+    function openModal(id) {
+        if(id === 'checkout-modal') {
+            const list = document.getElementById('cart-items-list');
+            if(cart.length === 0) { list.innerHTML = "<p>السلة فارغة</p>"; }
+            else {
+                let total = cart.reduce((s, i) => s + i.price, 0);
+                list.innerHTML = cart.map(i => `<div class="cart-item"><span>${i.name}</span><span>${i.price} ₪</span></div>`).join('') + 
+                                `<div class="cart-item"><b>المجموع</b><b>${total} ₪</b></div>`;
+            }
+        }
+        document.getElementById(id).classList.add('active');
+    }
+
     function closeModals() { document.querySelectorAll('.modal').forEach(m => m.classList.remove('active')); }
+
     function saveProfile() {
         const name = document.getElementById('reg-name').value;
         if(!name) return;
@@ -161,7 +266,18 @@
         document.getElementById('user-display').innerText = name;
         closeModals();
     }
-    window.onload = init;
+
+    function sendWhatsApp() {
+        if(cart.length === 0) return alert("السلة فارغة");
+        let msg = "طلب جديد من OARA STORE:%0A" + cart.map(i => "- " + i.name).join("%0A") + "%0Aالمدينة: " + document.getElementById('order-city').value;
+        window.open("https://wa.me/972568486065?text=" + msg);
+    }
+
+    window.onload = () => {
+        if(currentUser) document.getElementById('user-display').innerText = currentUser.name;
+        fetchProducts();
+    };
 </script>
 </body>
-</html>
+    </html>
+    
