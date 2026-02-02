@@ -3,108 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OARA STORE | Luxury Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>OARA STORE | Luxury Black & Gold</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #c5a059; --black: #050505; --card: #0f0f0f; --sale: #e74c3c; }
+        :root { --gold: #d4af37; --dark-gold: #aa841e; --black: #000000; --card-bg: #0a0a0a; }
         body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--black); color: white; overflow-x: hidden; }
         
-        /* Header & Navigation */
-        header { background: rgba(5,5,5,0.95); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 1000; }
-        .menu-btn { font-size: 24px; color: var(--gold); cursor: pointer; background: none; border: none; }
-        .logo { font-family: 'Bodoni Moda', serif; font-size: 24px; letter-spacing: 3px; color: white; text-decoration: none; font-weight: 700; text-transform: uppercase; }
+        /* Header */
+        header { background: rgba(0,0,0,0.95); padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Bodoni Moda', serif; font-size: 28px; letter-spacing: 5px; color: white; text-decoration: none; font-weight: 700; text-transform: uppercase; }
         .logo span { color: var(--gold); }
 
-        /* شريط التوصيل الفاخر */
-        .shipping-luxury-bar { background: #000; border-bottom: 1px solid #1a1a1a; padding: 10px 0; text-align: center; font-size: 11px; letter-spacing: 1.5px; color: var(--gold); display: flex; justify-content: center; gap: 20px; font-weight: 300; }
-        .shipping-item span { color: #fff; font-weight: 700; }
+        /* Shipping Luxury Bar */
+        .shipping-luxury-bar { background: #050505; padding: 12px 0; text-align: center; font-size: 11px; letter-spacing: 2px; color: #888; display: flex; justify-content: center; gap: 25px; border-bottom: 1px solid #111; }
+        .shipping-item span { color: var(--gold); font-weight: 700; margin-right: 5px; }
 
-        /* Sidebar Style */
-        .sidebar { position: fixed; top: 0; right: -280px; width: 280px; height: 100%; background: #0a0a0a; border-left: 1px solid var(--gold); transition: 0.4s; z-index: 2000; padding: 30px 20px; box-sizing: border-box; text-align: right; }
-        .sidebar.active { right: 0; }
-        .sidebar h3 { color: var(--gold); border-bottom: 1px solid #222; padding-bottom: 10px; font-size: 18px; margin-top: 25px; }
-        .side-link { display: block; color: #ccc; text-decoration: none; padding: 12px 0; border-bottom: 1px solid #111; cursor: pointer; transition: 0.3s; }
-        .side-link:hover { color: var(--gold); padding-right: 10px; }
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: none; z-index: 1500; }
+        /* Hero Section */
+        .hero { text-align: center; padding: 70px 5% 40px; }
+        .hero p { color: var(--gold); font-weight: 300; letter-spacing: 6px; font-size: 12px; margin-bottom: 10px; }
+        .hero h1 { font-family: 'Bodoni Moda'; font-size: 45px; margin: 0; color: white; letter-spacing: 2px; }
 
-        /* Main Content & Products */
-        #main-view, #products-view, #admin-view { padding: 20px 5%; animation: fadeIn 0.5s; }
-        .hero { text-align: center; padding: 40px 0; }
-        .hero h1 { font-family: 'Bodoni Moda'; font-size: 32px; margin: 0; }
-        .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); } }
+        /* Category Portrait Grid */
+        .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px 5%; }
+        .cat-card { 
+            height: 400px; /* Portrait Style */
+            position: relative; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; 
+            cursor: pointer; border: 1px solid #1a1a1a; transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .cat-card::before { content: ""; position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.4) grayscale(100%); transition: 0.8s; }
+        .cat-card:hover::before { filter: brightness(0.6) grayscale(0%); transform: scale(1.05); }
+        .cat-card:hover { border-color: var(--gold); }
+        
+        /* صور الأقسام - Portrait */
+        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600'); }
+        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1583467875263-d50dec37a88c?w=600'); }
+        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1508685096489-77a5ad2ba67d?w=600'); }
+        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600'); }
 
-        .product-card { background: var(--card); border: 1px solid #1a1a1a; text-align: center; padding-bottom: 15px; position: relative; }
-        .product-card img, .product-card video { width: 100%; height: 220px; object-fit: cover; }
-        .price-current { color: var(--gold); font-weight: bold; font-size: 18px; }
-        .btn-buy { background: var(--gold); color: black; border: none; padding: 10px; width: 90%; font-weight: bold; margin-top: 10px; cursor: pointer; }
+        .cat-card span { 
+            position: relative; z-index: 2; color: white; border: 1px solid var(--gold); 
+            padding: 12px 30px; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+            margin-bottom: 40px; font-weight: 500; font-size: 16px; letter-spacing: 3px;
+        }
 
-        /* Reviews */
-        .reviews-section { margin-top: 40px; padding: 30px 0; background: #080808; border-top: 1px solid #1a1a1a; }
-        .review-card { background: #111; padding: 20px; margin-bottom: 15px; border-right: 3px solid var(--gold); }
-        .review-author { display: block; color: var(--gold); font-weight: bold; margin-top: 10px; font-size: 12px; }
+        /* Products View */
+        .product-card { background: var(--card-bg); border: 1px solid #111; text-align: center; padding-bottom: 25px; transition: 0.4s; }
+        .product-card:hover { border-color: var(--gold); }
+        .product-card img, .product-card video { width: 100%; height: 280px; object-fit: cover; border-bottom: 1px solid #111; }
+        .product-card h4 { color: #fff; font-weight: 400; font-size: 15px; margin: 20px 0 5px; letter-spacing: 1px; }
+        .price-current { color: var(--gold); font-weight: 700; font-size: 22px; font-family: 'Bodoni Moda'; }
+        .btn-buy { 
+            background: none; color: var(--gold); border: 1px solid var(--gold); padding: 12px; 
+            width: 85%; font-weight: 700; margin-top: 20px; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .btn-buy:hover { background: var(--gold); color: black; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-</head>
-<body>
+        /* Reviews Luxury */
+        .review-card { background: #050505; border: 1px solid #111; padding: 30px; margin: 20px 5%; text-align: center; }
+        .review-text { font-style: italic; color: #888; font-size: 14px; line-height: 1.8; }
+        .review-author { color: var(--gold); font-weight: bold; display: block; margin-top: 15px; letter-spacing: 2px; font-size: 12px; }
 
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-
-<div class="sidebar" id="sidebar">
-    <h2 style="color:white; font-family:'Bodoni Moda';">OARA MENU</h2>
-    <h3>اللغة / Language</h3>
-    <div style="display:flex; gap:10px; margin-top:10px;">
-        <button onclick="alert('تم تفعيل العربية')" style="flex:1; background:none; border:1px solid var(--gold); color:white; padding:5px; cursor:pointer;">العربية</button>
-        <button onclick="alert('English Activated')" style="flex:1; background:none; border:1px solid var(--gold); color:white; padding:5px; cursor:pointer;">English</button>
-    </div>
-
-    <h3>الفئات</h3>
-    <div class="side-link" onclick="loadCategory('ساعات')">قسم الساعات</div>
-    <div class="side-link" onclick="loadCategory('عطور')">قسم العطور</div>
-    <div class="side-link" onclick="loadCategory('ملابس')">قسم الملابس</div>
-
-    <h3>خدمة العملاء</h3>
-    <div class="side-link" onclick="window.open('https://wa.me/970568486065')">واتساب: 0568486065</div>
-
-    <h3>إعدادات المالك</h3>
-    <div class="side-link" style="color:var(--sale);" onclick="accessAdmin()">دخول القسم السري</div>
-</div>
-
-<header>
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    <a href="javascript:location.reload()" class="logo">OARA <span>STORE</span></a>
-    <div style="width:24px;"></div>
-</header>
-
-<div class="shipping-luxury-bar">
-    <div class="shipping-item">توصيل الداخل <span>70 ₪</span></div>
-    <div style="color:#222">|</div>
-    <div class="shipping-item">توصيل الضفة <span>20 ₪</span></div>
-    <div style="color:#222">|</div>
-    <div class="shipping-item">توصيل القدس <span>30 ₪</span></div>
-</div>
-
-<div id="main-view">
-    <section class="hero">
-        <p style="color:var(--gold); letter-spacing:3px; font-size:12px;">EST. 2024</p>
-        <h1>OARA LUXURY STORE</h1>
-    </section>
-
-    <div class="categories-grid">
-        <div class="product-card" onclick="loadCategory('ساعات')" style="cursor:pointer; height:150px; display:flex; align-items:center; justify-content:center; background:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400') center/cover;">
-            <span style="background:rgba(0,0,0,0.7); padding:10px 20px; border:1px solid var(--gold);">الساعات</span>
-        </div>
-        <div class="product-card" onclick="loadCategory('عطور')" style="cursor:pointer; height:150px; display:flex; align-items:center; justify-content:center; background:url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=400') center/cover;">
-            <span style="background:rgba(0,0,0,0.7); padding:10px 20px; border:1px solid var(--gold);">العطور</span>
-        </div>
-    </div>
-
-    <section class="reviews-section">
-        <h3 style="text-align:center; color:var(--gold); font-family:'Bodoni Moda';">REVIEWS</h3>
-        <div class="review-card">
-            <p style="font-size:13px; font-style:italic; margin:0;">"أفخم تعامل وأسرع توصيل، الساعة خيال!"</p>
-            <span class="review-author">— خالد العلي</span>
+        /* Sidebar */
+        .sidebar { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: #00
+                              <span class="review-author">— خالد العلي</span>
         </div>
         <div class="review-card">
             <p style="font-size:13px; font-style:italic; margin:0;">"الجودة فعلاً للأغنياء، شكراً أورا ستور."</p>
@@ -180,3 +142,4 @@
 </script>
 </body>
 </html>
+
