@@ -18,7 +18,6 @@
         @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
         .cat-card { height: 200px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #1a1a1a; background: #111; }
         .cat-card::before { content: ""; position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.4); transition: 0.4s; }
-        /* خلفيات الأقسام */
         .cat-1::before { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400'); }
         .cat-2::before { background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=400'); }
         .cat-3::before { background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400'); }
@@ -56,28 +55,28 @@
 </section>
 
 <script>
-    // ضع رابط جدول بياناتك هنا
-    const SHEET_URL = "https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json";
+    // تم ربط جدولك الخاص بنجاح
+    const SHEET_URL = "https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json";
     let storeData = [];
 
     async function fetchStore() {
         try {
             const response = await fetch(SHEET_URL);
             const text = await response.text();
-            // معالجة البيانات القادمة من جوجل شيتس
+            // استخراج JSON من استجابة جوجل
             const json = JSON.parse(text.substring(47).slice(0, -2));
             
             storeData = json.table.rows.map(row => {
                 const wholesalePrice = parseFloat(row.c[1]?.v) || 0;
                 return {
                     name: row.c[0]?.v || 'منتج جديد',
-                    price: wholesalePrice + 20, // إضافة 20 شيكل تلقائياً
-                    oldPrice: wholesalePrice + 50, // سعر وهمي للتخفيض
+                    price: wholesalePrice + 20, // إضافة ربح 20 شيكل
+                    oldPrice: wholesalePrice + 50, // سعر قبل التخفيض
                     img: row.c[2]?.v || 'https://via.placeholder.com/400',
-                    cat: row.c[3]?.v || ''
+                    cat: row.c[3]?.v ? row.c[3].v.toString().trim() : ''
                 };
             });
-        } catch (e) { console.error("خطأ في جلب البيانات"); }
+        } catch (e) { console.error("خطأ في جلب البيانات من الجدول"); }
     }
 
     function loadCategory(catName) {
@@ -85,12 +84,17 @@
         document.getElementById('products-view').style.display = 'block';
         const container = document.getElementById('products-container');
         
-        const filtered = storeData.filter(p => p.cat.toString().includes(catName));
+        const filtered = storeData.filter(p => p.cat === catName);
         
+        if(filtered.length === 0) {
+            container.innerHTML = `<p style="text-align:center; width:100%; color:#888; grid-column: 1/-1; padding: 50px 0;">قريباً.. سيتم إضافة منتجات في هذا القسم</p>`;
+            return;
+        }
+
         container.innerHTML = filtered.map(p => `
             <div class="product-card">
                 <div class="badge">تخفيض</div>
-                <img src="${p.img}" loading="lazy">
+                <img src="${p.img}" onerror="this.src='https://via.placeholder.com/400'" loading="lazy">
                 <div class="product-info">
                     <h4>${p.name}</h4>
                     <div class="price-container">
@@ -104,8 +108,8 @@
     }
 
     function sendOrder(product) {
-        const phone = "97059XXXXXXX"; // ضع رقمك هنا بالصيغة الدولية
-        const text = encodeURIComponent(`مرحباً OARA STORE، أريد طلب: ${product}`);
+        const phone = "970568486065"; 
+        const text = encodeURIComponent(`مرحباً OARA STORE، أريد طلب المنتج التالي: ${product}`);
         window.open(`https://wa.me/${phone}?text=${text}`);
     }
 
