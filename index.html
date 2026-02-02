@@ -10,19 +10,19 @@
 
 <header>
     <div class="logo">OARA<span>STORE</span></div>
-    <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
+    <div class="cart-icon">🛒 <span id="cart-count">0</span></div>
 </header>
 
-<section id="hero-section" class="hero">
-    <div class="hero-content fade-in">
-        <h1>OARA STORE | عنوان الفخامة</h1>
-        <p>نحن لا نبيع مجرد منتجات، بل نقدم لك تجربة فريدة من الرقي والجمال عبر تشكيلة مختارة من أرقى الساعات والعطور العالمية.</p>
-        <a href="#main-menu" class="btn-shop">اكتشف مجموعتنا</a>
+<section class="hero">
+    <div class="hero-content">
+        <h1>نخبة الفخامة</h1>
+        <p>تجربة تسوق فريدة تجمع بين أصالة العطور ودقة الساعات العالمية.</p>
+        <a href="#main-menu" class="btn-explore">اكتشف الأقسام ↓</a>
     </div>
 </section>
 
 <div id="main-menu" class="main-menu">
-    <h2 class="section-title">تسوق حسب الفئة</h2>
+    <h2 class="section-title">الأقسام المختارة</h2>
     <div class="categories-grid">
         <div class="category-card" onclick="smoothOpen('watch')">
             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
@@ -41,15 +41,19 @@
     <div class="products-grid">
         <div class="card" data-category="watch">
             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400">
-            <h3>ساعة رويال الذهبية</h3>
-            <p class="price">150 ₪</p>
-            <button class="add-btn">إضافة للسلة</button>
+            <div class="p-info">
+                <h3>ساعة رويال</h3>
+                <p class="price">150 ₪</p>
+                <button class="add-btn">إضافة للسلة</button>
+            </div>
         </div>
         <div class="card" data-category="perfume">
             <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400">
-            <h3>عطر العود الفاخر</h3>
-            <p class="price">90 ₪</p>
-            <button class="add-btn">إضافة للسلة</button>
+            <div class="p-info">
+                <h3>عطر فخم</h3>
+                <p class="price">90 ₪</p>
+                <button class="add-btn">إضافة للسلة</button>
+            </div>
         </div>
     </div>
 </div>
