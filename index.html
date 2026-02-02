@@ -6,90 +6,95 @@
     
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
     
-    <title>OARA | Luxury Collection</title>
+    <title>OARA | Luxury Dark Edition</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@200;400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --premium-gold: #c5a059;
-            --pure-white: #ffffff;
-            --soft-gray: #fcfcfc;
-            --rich-black: #0a0a0a;
-            --border-color: #e5e5e5;
+            --deep-black: #050505; /* خلفية داكنة جداً */
+            --card-bg: #0f0f0f; /* لون الكروت */
+            --text-gray: #a0a0a0;
+            --white: #ffffff;
         }
 
         body {
             font-family: 'Tajawal', sans-serif;
             margin: 0;
-            background-color: var(--pure-white);
-            color: var(--rich-black);
+            background-color: var(--deep-black);
+            color: var(--white);
             line-height: 1.6;
         }
 
-        /* هيدر أرستقراطي */
+        /* هيدر فاخر غامق */
         header {
-            background: var(--pure-white);
-            padding: 30px 5%;
+            background: rgba(5, 5, 5, 0.95);
+            padding: 25px 5%;
             display: flex;
             justify-content: center;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            letter-spacing: 4px;
+            border-bottom: 1px solid #1a1a1a;
+            backdrop-filter: blur(10px);
         }
 
-        .logo { font-family: 'Bodoni Moda', serif; font-size: 32px; font-weight: 400; text-transform: uppercase; }
+        .logo { 
+            font-family: 'Bodoni Moda', serif; 
+            font-size: 35px; 
+            font-weight: 400; 
+            letter-spacing: 5px;
+            color: var(--white);
+        }
         .logo span { color: var(--premium-gold); }
 
-        /* قسم الترحيب الفاخر */
+        /* قسم الترحيب الملكي */
         .hero {
-            padding: 100px 10%;
+            padding: 80px 10%;
             text-align: center;
-            background: var(--soft-gray);
+            background: linear-gradient(to bottom, #0a0a0a, var(--deep-black));
         }
 
         .hero h1 { 
             font-family: 'Bodoni Moda', serif; 
-            font-size: 42px; 
+            font-size: 38px; 
             font-weight: 300; 
             margin-bottom: 20px; 
-            letter-spacing: 1px;
+            color: var(--premium-gold);
+            letter-spacing: 2px;
         }
 
         .hero p { 
-            font-size: 16px; 
-            color: #888; 
+            font-size: 14px; 
+            color: var(--text-gray); 
             max-width: 600px; 
             margin: 0 auto; 
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 200;
+            letter-spacing: 3px;
         }
 
-        /* شبكة الفئات بطراز الأغنياء (تغبيش سينمائي) */
+        /* شبكة الفئات بالتغبيش والخلفية الداكنة */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            padding: 40px 5%;
-            background: var(--pure-white);
+            padding: 20px 5%;
         }
 
         @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); } }
 
         .cat-card {
-            height: 300px;
-            border-radius: 0; /* الحواف الحادة توحي بالفخامة أكثر في البراندات العالمية */
+            height: 320px;
             position: relative;
             overflow: hidden;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 1px solid #1a1a1a;
+            transition: 0.5s;
         }
 
         .cat-card::before {
@@ -98,80 +103,54 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background-size: cover;
             background-position: center;
-            filter: blur(8px) brightness(0.7); /* تغبيش عميق */
-            transition: 0.6s;
+            filter: blur(10px) brightness(0.4); /* تغبيش قوي لزيادة الفخامة */
+            transition: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .cat-card:hover::before { filter: blur(2px) brightness(0.9); transform: scale(1.05); }
+        .cat-card:hover::before { filter: blur(3px) brightness(0.6); transform: scale(1.1); }
+        .cat-card:hover { border-color: var(--premium-gold); }
 
         .cat-card span {
             position: relative;
             z-index: 2;
-            color: var(--white);
+            color: var(--premium-gold);
             font-weight: 300;
             font-size: 18px;
             letter-spacing: 2px;
-            padding: 20px;
-            width: 100%;
-            text-align: center;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
+            border: 1px solid var(--premium-gold);
+            padding: 10px 25px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
         }
 
-        /* خلفيات الفئات من Unsplash بجودة عالية */
-        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000'); } /* ملابس */
-        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1583467875263-d50dec37a88c?q=80&w=1000'); } /* عطور */
-        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000'); } /* ساعات */
-        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1000'); } /* اكسسوارات */
+        /* خلفيات فخمة */
+        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80'); }
+        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?q=80'); }
+        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80'); }
+        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80'); }
 
         /* عرض المنتجات */
-        #products-view { display: none; padding: 60px 5%; animation: fadeIn 1s; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        #products-view { display: none; padding: 40px 5%; animation: fadeIn 0.8s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .product-card {
-            background: var(--pure-white);
-            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            border: 1px solid #1a1a1a;
             transition: 0.4s;
             text-align: center;
             padding-bottom: 20px;
         }
 
-        .product-card:hover { border-color: var(--premium-gold); }
-        .product-card img { width: 100%; height: 350px; object-fit: cover; filter: grayscale(20%); }
-        .product-info h4 { font-weight: 400; letter-spacing: 1px; margin: 20px 0 10px; }
-        .product-price { color: var(--premium-gold); font-family: 'Bodoni Moda'; font-size: 20px; }
+        .product-card:hover { border-color: var(--premium-gold); transform: translateY(-5px); }
+        .product-card img { width: 100%; height: 300px; object-fit: cover; opacity: 0.9; }
+        .product-info h4 { font-weight: 400; color: var(--white); margin: 15px 0 5px; }
+        .product-price { color: var(--premium-gold); font-family: 'Bodoni Moda'; font-size: 22px; }
 
         .back-nav { 
-            cursor: pointer; font-size: 12px; letter-spacing: 3px; 
-            text-transform: uppercase; margin-bottom: 40px; color: #aaa;
-            transition: 0.3s;
+            cursor: pointer; font-size: 11px; letter-spacing: 3px; 
+            text-transform: uppercase; margin-bottom: 30px; color: var(--premium-gold);
         }
-        .back-nav:hover { color: var(--rich-black); }
 
-        /* سلة المشتريات */
+        /* سلة المشتريات الذهبية */
         .cart-trigger {
-            position: fixed; bottom: 40px; left: 40px;
-            background: var(--rich-black); color: var(--premium-gold);
-            padding: 20px 40px; border-radius: 0;
-            font-size: 12px; letter-spacing: 3px; cursor: pointer;
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <div class="logo">OARA<span>.</span></div>
-</header>
-
-<div id="home-view">
-    <section class="hero">
-        <p>Palestine Exclusive</p>
-        <h1>أفخم المقتنيات المختارة بعناية</h1>
-        <p>ملابس • عطور • ساعات • اكسسوارات</p>
-    </section>
-
-    <div class="categories-grid">
-        <div class="cat-card cat-1" onclick="loadCategory('ملابس')"><span>ملابس أنيقة</span></div>
-        <div class="cat-card cat-2" onclick="loadCategory('عطور')"><span>عطور فا
+            position: fixed; bottom: 30px; left:
