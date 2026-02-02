@@ -60,3 +60,58 @@ function sendToWhatsApp() {
     
     window.open(`https://wa.me/970568486065?text=${encodeURIComponent(msg)}`);
 }
+
+function smoothOpen(cat) {
+    const mainMenu = document.getElementById('main-menu');
+    const productsSection = document.getElementById('products-section');
+    const backBtn = document.getElementById('backBtn');
+
+    // تلاشي الواجهة الرئيسية
+    mainMenu.style.opacity = '0';
+    mainMenu.style.transform = 'translateY(-20px)';
+
+    setTimeout(() => {
+        mainMenu.style.display = 'none';
+        
+        // إظهار المنتجات بنعومة
+        productsSection.style.display = 'block';
+        backBtn.style.display = 'block';
+        
+        // تفعيل الأنيميشن بعد لحظة بسيطة
+        setTimeout(() => {
+            productsSection.style.opacity = '1';
+            productsSection.style.transform = 'translateY(0)';
+        }, 50);
+
+        filterProducts(cat);
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }, 500);
+}
+
+function smoothBack() {
+    const mainMenu = document.getElementById('main-menu');
+    const productsSection = document.getElementById('products-section');
+    const backBtn = document.getElementById('backBtn');
+
+    productsSection.style.opacity = '0';
+    productsSection.style.transform = 'translateY(20px)';
+
+    setTimeout(() => {
+        productsSection.style.display = 'none';
+        backBtn.style.display = 'none';
+        
+        mainMenu.style.display = 'grid';
+        setTimeout(() => {
+            mainMenu.style.opacity = '1';
+            mainMenu.style.transform = 'translateY(0)';
+        }, 50);
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }, 500);
+}
+
+function filterProducts(category) {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.style.display = (card.getAttribute('data-category') === category) ? 'block' : 'none';
+    });
+}
