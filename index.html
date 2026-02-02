@@ -8,124 +8,123 @@
     <link rel="icon" type="image/jpeg" href="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #d4af37; --black: #000; --dark: #0a0a0a; --soft-gold: rgba(212, 175, 55, 0.1); }
-        body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--black); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
-        
-        /* شاشة الدخول الفخمة */
-        #auth-overlay { position: fixed; inset: 0; background: var(--black); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: 1s; }
+        :root { --gold: #d4af37; --black: #000; --dark: #0a0a0a; --gray: #888; }
+        body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--black); color: #fff; overflow-x: hidden; }
+
+        /* شاشة الدخول */
+        #auth-overlay { position: fixed; inset: 0; background: var(--black); z-index: 9999; display: flex; align-items: center; justify-content: center; }
         .auth-card { width: 90%; max-width: 380px; text-align: center; padding: 40px 20px; border: 1px solid var(--gold); border-radius: 15px; background: var(--dark); box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); }
         
-        input { width: 100%; padding: 15px; margin: 10px 0; background: #080808; border: 1px solid #222; color: var(--gold); border-radius: 8px; box-sizing: border-box; font-family: 'Tajawal'; }
+        input { width: 100%; padding: 15px; margin: 10px 0; background: #080808; border: 1px solid #222; color: var(--gold); border-radius: 8px; box-sizing: border-box; }
         .btn-gold { background: var(--gold); color: #000; border: none; padding: 15px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 8px; transition: 0.3s; }
-        .btn-gold:hover { box-shadow: 0 0 15px var(--gold); }
 
-        header { background: rgba(0,0,0,0.95); padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
-        .logo-img { height: 50px; border-radius: 5px; cursor: pointer; }
+        /* الهيدر المحسن */
+        header { background: rgba(0,0,0,0.95); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gold); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
+        .logo-img { height: 45px; border-radius: 5px; cursor: pointer; }
 
-        /* الجمل الملكية المتوهجة */
-        .royal-quote {
-            padding: 30px 20px;
-            text-align: center;
-            font-family: 'Bodoni Moda', serif;
-            color: var(--gold);
-            font-style: italic;
-            font-size: 20px;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        .sidebar { position: fixed; right: -280px; top: 0; width: 280px; height: 100%; background: var(--dark); border-left: 1px solid var(--gold); z-index: 3000; transition: 0.4s; padding: 20px; box-sizing: border-box; }
+        /* القائمة الجانبية بالصور المصغرة */
+        .sidebar { position: fixed; right: -300px; top: 0; width: 300px; height: 100%; background: var(--dark); border-left: 1px solid var(--gold); z-index: 3000; transition: 0.4s; padding: 20px; box-sizing: border-box; overflow-y: auto; }
         .sidebar.active { right: 0; }
-        .sidebar-item { padding: 15px; border-bottom: 1px solid #1a1a1a; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .sidebar-item:hover { color: var(--gold); background: var(--soft-gold); }
+        .nav-thumb { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 1px solid var(--gold); }
+        .sidebar-item { padding: 12px; border-bottom: 1px solid #1a1a1a; cursor: pointer; display: flex; align-items: center; gap: 15px; transition: 0.3s; }
+        .sidebar-item:hover { background: rgba(212, 175, 55, 0.1); }
 
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; }
-        .product-card { background: #050505; border: 1px solid #1a1a1a; text-align: center; border-radius: 12px; overflow: hidden; transition: 0.3s; position: relative; }
-        .img-container { height: 220px; overflow: hidden; position: relative; }
-        .img-container::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%); }
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 4000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        /* شبكة المنتجات الاحترافية */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
+        .product-card { background: #050505; border: 1px solid #1a1a1a; border-radius: 12px; overflow: hidden; transition: 0.4s transform; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .img-container { height: 230px; overflow: hidden; background: #111; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; } /* توحيد زوايا الصور */
+
+        /* التذييل الاحترافي (Footer) */
+        footer { background: #050505; padding: 40px 20px; border-top: 1px solid #222; text-align: center; margin-top: 50px; }
+        .footer-logo { height: 60px; filter: grayscale(1); opacity: 0.5; margin-bottom: 20px; }
+        .pay-icons { display: flex; justify-content: center; gap: 15px; margin: 20px 0; font-size: 24px; opacity: 0.7; }
+        .copy { font-size: 11px; color: var(--gray); letter-spacing: 1px; }
+
+        .royal-quote { padding: 30px 20px; text-align: center; color: var(--gold); font-style: italic; font-size: 19px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
+
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 4000; display: none; align-items: center; justify-content: center; }
         .modal.active { display: flex; }
-        .modal-content { background: var(--dark); border: 1px solid var(--gold); padding: 25px; border-radius: 15px; width: 100%; max-width: 400px; position: relative; }
-        .close-btn { position: absolute; left: 15px; top: 15px; color: var(--gold); cursor: pointer; font-size: 20px; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-content { background: var(--dark); border: 1px solid var(--gold); padding: 25px; border-radius: 15px; width: 90%; max-width: 400px; }
     </style>
 </head>
 <body>
 
 <div id="auth-overlay">
     <div class="auth-card">
-        <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" style="height: 90px; border-radius: 10px; margin-bottom: 15px;">
-        <h2 style="color:var(--gold); font-family: 'Bodoni Moda'; letter-spacing: 2px;">OARA MEMBERSHIP</h2>
+        <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" style="height: 80px; border-radius: 10px; margin-bottom: 10px;">
+        <h2 style="color:var(--gold); font-family: 'Bodoni Moda';">OARA MEMBERSHIP</h2>
         <input type="text" id="user-field" placeholder="اسم المستخدم">
         <input type="password" id="pass-field" placeholder="كلمة المرور">
-        <button class="btn-gold" onclick="login()">دخول العالم الفاخر</button>
+        <button class="btn-gold" onclick="login()">دخول المتجر</button>
     </div>
 </div>
 
 <div id="site-content" style="display:none;">
     <header>
-        <div onclick="toggleSidebar()" style="color:var(--gold); font-size:28px; cursor:pointer;">☰</div>
+        <div onclick="toggleSidebar()" style="color:var(--gold); font-size:26px; cursor:pointer;">☰</div>
         <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" class="logo-img" onclick="location.reload()">
-        <div onclick="openModal('cart-modal')" style="color:var(--gold); font-size:24px; position:relative; cursor:pointer;">
-            🛒 <span id="cart-count" style="position:absolute; top:-5px; right:-10px; background:var(--gold); color:#000; font-size:10px; padding:2px 6px; border-radius:50%;">0</span>
-        </div>
+        <div onclick="openModal('cart-modal')" style="color:var(--gold); cursor:pointer;">🛒 <span id="cart-count">0</span></div>
     </header>
 
     <div id="main-view">
-        <div class="royal-quote">"أهلاً بك في مَجتمع الأناقة والنخبة"</div>
+        <div class="royal-quote">"الفخامة ليست خياراً، بل أسلوب حياة"</div>
         <div class="grid">
-            <div class="product-card" onclick="loadCategory('عطور')"><div class="img-container"><img src="https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg?w=400"></div><p style="color:var(--gold); padding:10px;">عطور</p></div>
-            <div class="product-card" onclick="loadCategory('ساعات')"><div class="img-container"><img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?w=400"></div><p style="color:var(--gold); padding:10px;">ساعات</p></div>
-            <div class="product-card" onclick="loadCategory('ملابس')"><div class="img-container"><img src="https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?w=400"></div><p style="color:var(--gold); padding:10px;">ملابس</p></div>
-            <div class="product-card" onclick="loadCategory('الكترونيات')"><div class="img-container"><img src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?w=400"></div><p style="color:var(--gold); padding:10px;">إلكترونيات</p></div>
+            <div class="product-card" onclick="loadCategory('عطور')">
+                <div class="img-container"><img src="https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg"></div>
+                <p style="text-align:center; color:var(--gold);">عطور فرنسية</p>
+            </div>
+            <div class="product-card" onclick="loadCategory('ساعات')">
+                <div class="img-container"><img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg"></div>
+                <p style="text-align:center; color:var(--gold);">ساعات ملكية</p>
+            </div>
         </div>
     </div>
-    
+
     <div id="category-view" style="display:none;">
-        <div onclick="location.reload()" style="color:var(--gold); padding:15px; cursor:pointer; font-weight:bold;">← العودة للمجموعات</div>
+        <div onclick="location.reload()" style="color:var(--gold); padding:20px; cursor:pointer;">← العودة</div>
         <div class="royal-quote" id="category-quote"></div>
         <div id="products-list" class="grid"></div>
     </div>
+
+    <footer>
+        <img src="https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg" class="footer-logo">
+        <div class="pay-icons">
+            <span>💳</span> <span>🅿️</span> <span>🏦</span>
+        </div>
+        <p style="font-size:12px;">شحن سريع لجميع المحافظات</p>
+        <p class="copy">© 2026 OARA STORE. ALL RIGHTS RESERVED.</p>
+    </footer>
 </div>
 
 <div class="sidebar" id="sidebar">
-    <div class="close-btn" onclick="toggleSidebar()" style="position:static; margin-bottom:20px;">✕ إغلاق</div>
-    <div class="sidebar-item" onclick="location.reload()">🏠 الصفحة الرئيسية</div>
-    <div class="sidebar-item" onclick="window.open('https://wa.me/972568486065')">📞 خدمة العملاء</div>
-    <div class="sidebar-item" onclick="logout()">🚪 تسجيل الخروج</div>
+    <h3 style="color:var(--gold); border-bottom:1px solid #333; padding-bottom:15px;">الأقسام</h3>
+    <div class="sidebar-item" onclick="loadCategory('عطور')">
+        <img src="https://images.pexels.com/photos/965989/pexels-photo-965989.jpeg" class="nav-thumb"> عطور
+    </div>
+    <div class="sidebar-item" onclick="loadCategory('ساعات')">
+        <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg" class="nav-thumb"> ساعات
+    </div>
+    <div class="sidebar-item" onclick="logout()" style="margin-top:30px; border:none; color:red;">🚪 تسجيل الخروج</div>
 </div>
 
 <div class="modal" id="cart-modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModals()">✕</span>
-        <h3 style="color:var(--gold); text-align:center; border-bottom:1px solid #222; padding-bottom:10px;">حقيبة المشتريات</h3>
-        <div id="cart-items-list" style="max-height:200px; overflow-y:auto; margin:15px 0;"></div>
-        <div style="text-align:center; margin-bottom:15px; font-size:12px; color:#888;">الدفع: كاش | زين كاش | بنك</div>
-        <input type="text" id="order-address" placeholder="عنوان التوصيل بالتفصيل">
-        <button class="btn-gold" onclick="sendWhatsApp()">تأكيد الطلب عبر واتساب</button>
+        <h3 style="color:var(--gold); text-align:center;">حقيبة المشتريات</h3>
+        <div id="cart-items" style="margin:20px 0; border-bottom:1px solid #333; padding-bottom:10px;"></div>
+        <button class="btn-gold" onclick="sendOrder()">تأكيد عبر واتساب</button>
+        <p onclick="closeModals()" style="text-align:center; margin-top:15px; cursor:pointer; font-size:12px;">إغلاق</p>
     </div>
 </div>
 
 <script>
-    const categoryQuotes = {
-        "ساعات": ["\"أنت لا تقتني ساعة لمعرفة الوقت، بل لتُخبر الوقت من أنت\"", "\"الفخامة على معصمك هي لغة تتحدث عن نجاحك\"", "\"الساعة الفاخرة ليست أداة، بل هي إرث يرافقك\""],
-        "عطور": ["\"العطر هو التوقيع الذي لا يُرى، والذكريات التي لا تُنسى\"", "\"عطرك هو أول ما يرحب بالحضور، وآخر ما يغادر\"", "\"اختر عطراً يروي قصتك الفاخرة لكل من يقترب منك\""],
-        "ملابس": ["\"الأناقة هي اللغة الوحيدة التي لا تندثر مع الزمن\"", "\"ما ترتديه هو الطريقة التي تقدم بها نفسك للعالم\"", "\"الملابس الفاخرة هي درعك في معارك الحياة\""],
-        "الكترونيات": ["\"التكنولوجيا في خدمتك، لتجعل حياتك لوحة رفاهية\"", "\"الذكاء في الاختيار هو ما يميز النخبة\"", "\"ابتكارات صُممت لتليق بمستقبلك المشرق\""]
-    };
-
     let storeData = [], cart = [];
+    const quotes = { "ساعات": ["أنت لا تقتني ساعة لمعرفة الوقت، بل لتُخبر الوقت من أنت"], "عطور": ["العطر هو التوقيع الذي لا يُرى، والذكريات التي لا تُنسى"] };
 
     function login() {
         const u = document.getElementById('user-field').value;
-        const p = document.getElementById('pass-field').value;
-        if((u === 'mrybra44' && p === 'qwe123qw12q1') || u.length > 2) {
-            localStorage.setItem('oara_user', u);
-            enterSite();
-        } else { alert("يرجى إدخال بياناتك"); }
+        if(u.length > 2) { localStorage.setItem('oara_user', u); enterSite(); }
     }
 
     function enterSite() {
@@ -135,54 +134,43 @@
     }
 
     async function fetchProducts() {
-        try {
-            const res = await fetch("https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json");
-            const text = await res.text();
-            const data = JSON.parse(text.substring(47).slice(0, -2));
-            storeData = data.table.rows.map(r => ({ name: r.c[0]?.v, price: r.c[1]?.v, img: r.c[2]?.v, cat: (r.c[3]?.v || '').trim() }));
-        } catch(e) { console.error("Data Load Error"); }
+        const res = await fetch("https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json");
+        const text = await res.text();
+        const data = JSON.parse(text.substring(47).slice(0, -2));
+        storeData = data.table.rows.map(r => ({ name: r.c[0]?.v, price: r.c[1]?.v, img: r.c[2]?.v, cat: (r.c[3]?.v || '').trim() }));
     }
 
     function loadCategory(cat) {
         document.getElementById('main-view').style.display = 'none';
         document.getElementById('category-view').style.display = 'block';
-        const list = categoryQuotes[cat] || ["فخامة تليق بك"];
-        document.getElementById('category-quote').innerText = list[Math.floor(Math.random() * list.length)];
-
+        document.getElementById('sidebar').classList.remove('active');
+        document.getElementById('category-quote').innerText = quotes[cat] ? quotes[cat][0] : "فخامة تليق بك";
+        
         document.getElementById('products-list').innerHTML = storeData.filter(p => p.cat === cat).map(p => `
             <div class="product-card">
-                <div class="img-container"><img src="${p.img}" onerror="this.src='https://i.ibb.co/cXJqDh6V/IMG-20260202-WA0003.jpg'"></div>
-                <p style="font-size:12px; padding:5px;">${p.name}</p>
-                <p style="color:var(--gold); font-weight:bold;">${p.price} ₪</p>
-                <button onclick="addToCart('${p.name}', ${p.price})" style="width:100%; border:none; background:var(--gold); padding:8px; font-weight:bold; cursor:pointer;">إضافة للسلة</button>
+                <div class="img-container"><img src="${p.img}"></div>
+                <div style="padding:10px;">
+                    <p style="font-size:13px; margin:5px 0;">${p.name}</p>
+                    <p style="color:var(--gold); font-weight:bold;">${p.price} ₪</p>
+                    <button onclick="addToCart('${p.name}', ${p.price})" style="width:100%; background:var(--gold); border:none; padding:8px; font-weight:bold; cursor:pointer;">إضافة</button>
+                </div>
             </div>`).join('');
-        window.scrollTo(0,0);
     }
 
     function addToCart(n, p) {
-        cart.push({name: n, price: p});
+        cart.push({n, p});
         document.getElementById('cart-count').innerText = cart.length;
-        const itemDiv = document.createElement('div');
-        itemDiv.style.cssText = "padding:8px; border-bottom:1px solid #1a1a1a; font-size:13px;";
-        itemDiv.innerHTML = `<span>● ${n}</span> <span style="float:left; color:var(--gold);">${p} ₪</span>`;
-        document.getElementById('cart-items-list').appendChild(itemDiv);
-        alert("تمت الإضافة لحقيبتك الملكية");
+        document.getElementById('cart-items').innerHTML += `<p>● ${n} - ${p} ₪</p>`;
+        alert("تمت الإضافة");
     }
 
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModals() { document.querySelectorAll('.modal').forEach(m => m.classList.remove('active')); }
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
     function logout() { localStorage.removeItem('oara_user'); location.reload(); }
-
-    function sendWhatsApp() {
-        if(!cart.length) return alert("السلة فارغة");
-        let total = cart.reduce((s, i) => s + i.price, 0);
-        let msg = `طلب جديد من OARA STORE:%0A` + cart.map(i => `- ${i.name}`).join('%0A') + `%0A%0Aالإجمالي: ${total} ₪%0Aالعنوان: ${document.getElementById('order-address').value}`;
-        window.open(`https://wa.me/972568486065?text=${msg}`);
-    }
+    function sendOrder() { window.open(`https://wa.me/972568486065?text=طلب جديد من المتجر`); }
 
     window.onload = () => { if(localStorage.getItem('oara_user')) enterSite(); };
 </script>
 </body>
-                                                                                                                                                                                             </html>
-    
+</html>
