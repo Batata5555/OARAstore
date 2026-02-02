@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OARA STORE | الفخامة</title>
+    <title>OARA STORE</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,13 +17,13 @@
     <section class="hero">
         <div class="hero-content">
             <h1>نخبة الفخامة</h1>
-            <p>اكتشف تشكيلة الساعات والعطور الفاخرة المصممة خصيصاً لذوقك الرفيع.</p>
+            <p>عنوانك الأول للساعات والعطور الراقية.</p>
             <a href="#main-menu" class="btn-explore">اكتشف الأقسام ↓</a>
         </div>
     </section>
 
     <div id="main-menu" class="main-menu">
-        <h2 class="section-title">الأقسام المختارة</h2>
+        <h2 class="section-title">الأقسام</h2>
         <div class="categories-grid">
             <div class="category-card" onclick="smoothOpen('watch')">
                 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
@@ -43,11 +43,19 @@
     <div class="products-grid">
         <div class="card" data-category="watch">
             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400">
-            <div class="p-info"><h3>ساعة رويال</h3><p class="price">150 ₪</p><button class="add-btn" onclick="addToCart('ساعة رويال', 150)">إضافة للسلة</button></div>
+            <div class="p-info">
+                <h3>ساعة رويال</h3>
+                <p class="price">150 ₪</p>
+                <button class="add-btn" onclick="addToCart('ساعة رويال', 150)">إضافة للسلة</button>
+            </div>
         </div>
         <div class="card" data-category="perfume">
             <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400">
-            <div class="p-info"><h3>عطر فخم</h3><p class="price">90 ₪</p><button class="add-btn" onclick="addToCart('عطر فخم', 90)">إضافة للسلة</button></div>
+            <div class="p-info">
+                <h3>عطر فخم</h3>
+                <p class="price">90 ₪</p>
+                <button class="add-btn" onclick="addToCart('عطر فخم', 90)">إضافة للسلة</button>
+            </div>
         </div>
     </div>
 </div>
@@ -55,13 +63,12 @@
 <div id="cart-modal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeCart()">&times;</span>
-        <h2>سلة المشتريات 🛒</h2>
+        <h2>سلتك 🛒</h2>
         <div id="cart-items-list"></div>
         <hr>
-        <div class="cart-total">المجموع: <span id="total-price">0</span> ₪</div>
-        <h3>اختر طريقة الدفع:</h3>
+        <div class="total-area">المجموع: <span id="total-price">0</span> ₪</div>
         <button class="pay-btn wa" onclick="checkout('whatsapp')">طلب عبر واتساب 💬</button>
-        <button class="pay-btn cod" onclick="checkout('cod')">الدفع عند الاستلام 🚚</button>
+        <button class="pay-btn cod" onclick="checkout('cod')">دفع عند الاستلام 🚚</button>
     </div>
 </div>
 
