@@ -3,178 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
+    <title>OARA STORE | Luxury Dark Edition</title>
     
-    <title>OARA | Luxury Dark Edition</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --premium-gold: #c5a059;
-            --deep-black: #050505; /* خلفية داكنة جداً */
-            --card-bg: #0f0f0f; /* لون الكروت */
-            --text-gray: #a0a0a0;
-            --white: #ffffff;
-        }
+        :root { --gold: #c5a059; --black: #050505; --card: #0f0f0f; }
+        body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--black); color: white; line-height: 1.6; overflow-x: hidden; }
+        
+        header { background: rgba(5,5,5,0.9); padding: 15px 5%; text-align: center; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(8px); }
+        .logo { font-family: 'Bodoni Moda', serif; font-size: 26px; letter-spacing: 4px; color: white; text-decoration: none; font-weight: 700; text-transform: uppercase; }
+        .logo span { color: var(--gold); }
 
-        body {
-            font-family: 'Tajawal', sans-serif;
-            margin: 0;
-            background-color: var(--deep-black);
-            color: var(--white);
-            line-height: 1.6;
-        }
+        .hero { padding: 40px 10% 20px; text-align: center; }
+        .hero h1 { font-family: 'Bodoni Moda', serif; font-size: 30px; color: var(--gold); margin: 0 0 10px; }
+        .hero p { font-size: 12px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
 
-        /* هيدر فاخر غامق */
-        header {
-            background: rgba(5, 5, 5, 0.95);
-            padding: 25px 5%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #1a1a1a;
-            backdrop-filter: blur(10px);
-        }
-
-        .logo { 
-            font-family: 'Bodoni Moda', serif; 
-            font-size: 35px; 
-            font-weight: 400; 
-            letter-spacing: 5px;
-            color: var(--white);
-        }
-        .logo span { color: var(--premium-gold); }
-
-        /* قسم الترحيب الملكي */
-        .hero {
-            padding: 80px 10%;
-            text-align: center;
-            background: linear-gradient(to bottom, #0a0a0a, var(--deep-black));
-        }
-
-        .hero h1 { 
-            font-family: 'Bodoni Moda', serif; 
-            font-size: 38px; 
-            font-weight: 300; 
-            margin-bottom: 20px; 
-            color: var(--premium-gold);
-            letter-spacing: 2px;
-        }
-
-        .hero p { 
-            font-size: 14px; 
-            color: var(--text-gray); 
-            max-width: 600px; 
-            margin: 0 auto; 
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        /* شبكة الفئات بالتغبيش والخلفية الداكنة */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            padding: 20px 5%;
-        }
-
-        @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); } }
+        .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 20px 5%; }
+        @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 
         .cat-card {
-            height: 320px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: 1px solid #1a1a1a;
-            transition: 0.5s;
+            height: 220px; position: relative; overflow: hidden; display: flex;
+            align-items: center; justify-content: center; cursor: pointer;
+            border: 1px solid #1a1a1a; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: #111;
         }
 
         .cat-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-size: cover;
-            background-position: center;
-            filter: blur(10px) brightness(0.4); /* تغبيش قوي لزيادة الفخامة */
-            transition: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            content: ""; position: absolute; inset: 0;
+            background-size: cover; background-position: center;
+            filter: blur(3px) brightness(0.4); transition: 0.4s;
+            will-change: filter;
         }
+        
+        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=60'); }
+        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&q=60'); }
+        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&q=60'); }
+        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=60'); }
 
-        .cat-card:hover::before { filter: blur(3px) brightness(0.6); transform: scale(1.1); }
-        .cat-card:hover { border-color: var(--premium-gold); }
+        .cat-card span { position: relative; z-index: 2; color: var(--gold); border: 1px solid var(--gold); padding: 6px 15px; font-size: 15px; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); }
+        .cat-card:hover { border-color: var(--gold); }
+        .cat-card:hover::before { filter: blur(1px) brightness(0.6); transform: scale(1.05); }
 
-        .cat-card span {
-            position: relative;
-            z-index: 2;
-            color: var(--premium-gold);
-            font-weight: 300;
-            font-size: 18px;
-            letter-spacing: 2px;
-            border: 1px solid var(--premium-gold);
-            padding: 10px 25px;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(5px);
-        }
+        #products-view { display: none; padding: 20px 5%; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* خلفيات فخمة */
-        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80'); }
-        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?q=80'); }
-        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80'); }
-        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80'); }
+        .product-card { background: var(--card); border: 1px solid #1a1a1a; text-align: center; padding-bottom: 12px; transition: 0.3s; }
+        .product-card:hover { border-color: var(--gold); }
+        .product-card img { width: 100%; height: 220px; object-fit: cover; background: #050505; }
+        .product-info h4 { font-weight: 300; font-size: 14px; margin: 10px 5px 5px; color: #eee; }
+        .product-price { color: var(--gold); font-family: 'Bodoni Moda'; font-size: 18px; font-weight: bold; }
 
-        /* عرض المنتجات */
-        #products-view { display: none; padding: 40px 5%; animation: fadeIn 0.8s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .product-card {
-            background: var(--card-bg);
-            border: 1px solid #1a1a1a;
-            transition: 0.4s;
-            text-align: center;
-            padding-bottom: 20px;
-        }
-
-        .product-card:hover { border-color: var(--premium-gold); transform: translateY(-5px); }
-        .product-card img { width: 100%; height: 300px; object-fit: cover; opacity: 0.9; }
-        .product-info h4 { font-weight: 400; color: var(--white); margin: 15px 0 5px; }
-        .product-price { color: var(--premium-gold); font-family: 'Bodoni Moda'; font-size: 22px; }
-
-        .back-nav { 
-            cursor: pointer; font-size: 11px; letter-spacing: 3px; 
-            text-transform: uppercase; margin-bottom: 30px; color: var(--premium-gold);
-        }
-
-        /* سلة المشتريات الذهبية */
-        .cart-trigger {
-            position: fixed; bottom: 30px; left: 30px;
-            background: var(--premium-gold); color: var(--deep-black);
-            padding: 15px 30px; font-weight: bold;
-            font-size: 12px; letter-spacing: 2px; cursor: pointer;
-            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.3);
-            z-index: 2000;
-        }
+        .back-nav { cursor: pointer; font-size: 11px; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 5px; }
+        .cart-trigger { position: fixed; bottom: 20px; left: 20px; background: var(--gold); color: black; padding: 10px 20px; font-weight: 700; font-size: 11px; letter-spacing: 1px; z-index: 2000; border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">OARA<span>.</span></div>
+    <a href="javascript:location.reload()" class="logo">OARA <span>STORE</span></a>
 </header>
 
 <div id="home-view">
     <section class="hero">
-        <p>Palestine Heritage • Luxury Modernity</p>
-        <h1>التجربة الذهبية للاقتناء</h1>
-        <p>أرقى الإكسسوارات والملابس في فلسطين</p>
+        <p>Palestine Exclusive</p>
+        <h1>التجربة الذهبية</h1>
     </section>
-
     <div class="categories-grid">
         <div class="cat-card cat-1" onclick="loadCategory('ملابس')"><span>ملابس</span></div>
         <div class="cat-card cat-2" onclick="loadCategory('عطور')"><span>عطور</span></div>
@@ -184,11 +80,11 @@
 </div>
 
 <section id="products-view">
-    <div class="back-nav" onclick="location.reload()">← العودة للمعرض الرئيسي</div>
+    <div class="back-nav" onclick="location.reload()">← العودة</div>
     <div id="products-container" class="categories-grid" style="padding:0;"></div>
 </section>
 
-<div class="cart-trigger">MY SELECTION (<span id="count">0</span>)</div>
+<button class="cart-trigger">SELECTION (<span id="count">0</span>)</button>
 
 <script>
     const SHEET_URL = "https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json";
@@ -196,42 +92,48 @@
 
     async function fetchStore() {
         try {
-            const res = await fetch(SHEET_URL);
-            const text = await res.text();
-            const json = JSON.parse(text.substr(47).slice(0, -2));
+            const response = await fetch(SHEET_URL);
+            const data = await response.text();
+            const json = JSON.parse(data.substring(data.indexOf("{"), data.lastIndexOf("}") + 1));
             storeData = json.table.rows.map(row => ({
                 name: row.c[0]?.v || '',
                 price: row.c[1]?.v || '',
                 img: row.c[2]?.v || '',
                 cat: row.c[3]?.v || ''
             }));
-        } catch (e) { console.error("Data Connection Error"); }
+        } catch (error) {
+            console.error("Connection Error");
+        }
     }
 
     function loadCategory(catName) {
+        window.scrollTo({top: 0, behavior: 'instant'});
         document.getElementById('home-view').style.display = 'none';
         document.getElementById('products-view').style.display = 'block';
+        
         const container = document.getElementById('products-container');
-        container.innerHTML = '';
+        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--gold);">جاري التحميل...</div>';
         
-        const filtered = storeData.filter(p => p.cat.toString().includes(catName));
+        const filtered = storeData.filter(p => p.cat && p.cat.toString().includes(catName));
         
-        filtered.forEach(p => {
-            container.innerHTML += `
+        setTimeout(() => {
+            if (!filtered.length) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px;">قريباً في هذا القسم...</div>';
+                return;
+            }
+            container.innerHTML = filtered.map(p => `
                 <div class="product-card">
-                    <img src="${p.img}" onerror="this.src='https://via.placeholder.com/400x500/0f0f0f/c5a059?text=OARA+GOLD'">
+                    <img src="${p.img}" loading="lazy">
                     <div class="product-info">
                         <h4>${p.name}</h4>
                         <div class="product-price">${p.price} ر.س</div>
                     </div>
                 </div>
-            `;
-        });
-        window.scrollTo(0,0);
+            `).join('');
+        }, 50);
     }
 
-    window.onload = fetchStore;
+    document.addEventListener('DOMContentLoaded', fetchStore);
 </script>
-
 </body>
 </html>
