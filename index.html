@@ -13,8 +13,16 @@
     <div class="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
 </header>
 
+<section id="hero-section" class="hero">
+    <div class="hero-content fade-in">
+        <h1>OARA STORE | عنوان الفخامة</h1>
+        <p>نحن لا نبيع مجرد منتجات، بل نقدم لك تجربة فريدة من الرقي والجمال عبر تشكيلة مختارة من أرقى الساعات والعطور العالمية.</p>
+        <a href="#main-menu" class="btn-shop">اكتشف مجموعتنا</a>
+    </div>
+</section>
+
 <div id="main-menu" class="main-menu">
-    <h2 class="welcome-text">أهلاً بك.. اختر القسم</h2>
+    <h2 class="section-title">تسوق حسب الفئة</h2>
     <div class="categories-grid">
         <div class="category-card" onclick="smoothOpen('watch')">
             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
@@ -24,22 +32,26 @@
             <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600">
             <span>عطور ملكية</span>
         </div>
-        </div>
+    </div>
 </div>
 
-<button id="backBtn" class="back-btn" onclick="smoothBack()">⬅ العودة للأقسام</button>
+<button id="backBtn" class="back-btn" onclick="smoothBack()">⬅ العودة للرئيسية</button>
 
-<div id="products-section" style="display: none; opacity: 0;">
-    <main class="products-grid">
+<div id="products-section">
+    <div class="products-grid">
         <div class="card" data-category="watch">
             <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400">
-            <div class="info"><h3>ساعة ملكية</h3><p class="price">150 ₪</p><button onclick="addToCart('ساعة ملكية', 150)">إضافة للسلة</button></div>
+            <h3>ساعة رويال الذهبية</h3>
+            <p class="price">150 ₪</p>
+            <button class="add-btn">إضافة للسلة</button>
         </div>
         <div class="card" data-category="perfume">
             <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400">
-            <div class="info"><h3>عطر فخم</h3><p class="price">90 ₪</p><button onclick="addToCart('عطر فخم', 90)">إضافة للسلة</button></div>
+            <h3>عطر العود الفاخر</h3>
+            <p class="price">90 ₪</p>
+            <button class="add-btn">إضافة للسلة</button>
         </div>
-    </main>
+    </div>
 </div>
 
 <script src="script.js"></script>
