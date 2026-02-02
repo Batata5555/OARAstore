@@ -1,5 +1,4 @@
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json';
-
 let allProducts = [];
 
 async function fetchProducts() {
@@ -7,69 +6,45 @@ async function fetchProducts() {
         const response = await fetch(SHEET_URL);
         const text = await response.text();
         const data = JSON.parse(text.substr(47).slice(0, -2));
-        
         allProducts = data.table.rows.map(row => ({
-            name: row.c[0] ? row.c[0].v : '',      
-            price: row.c[1] ? row.c[1].v : '',     
-            image: row.c[2] ? row.c[2].v : '',     
-            category: row.c[3] ? row.c[3].v : 'عام' 
+            name: row.c[0] ? row.c[0].v : 'منتج بدون اسم',
+            price: row.c[1] ? row.c[1].v : '0',
+            image: row.c[2] ? row.c[2].v : '',
+            category: row.c[3] ? row.c[3].v : 'عام'
         }));
-        
-        console.log("تم تحميل المنتجات");
-        renderCategories(); // تشغيل دالة إظهار الأقسام
-    } catch (error) {
-        console.error("خطأ:", error);
-    }
+        renderCategories();
+    } catch (e) { console.error("خطأ في جلب البيانات من الجدول"); }
 }
 
-// الدالة المسؤولة عن إظهار "ملابس أنيقة" وأي قسم جديد تلقائياً
 function renderCategories() {
     const container = document.getElementById('dynamic-categories');
-    if(!container) return;
-
-    // استخراج الأقسام الفريدة من الجدول
     const categories = [...new Set(allProducts.map(p => p.category))];
-    
     container.innerHTML = categories.map(cat => `
-        <div class="category-card" onclick="showCategoryProducts('${cat}')">
-            <div class="cat-icon">🛍️</div>
+        <div class="category-card" onclick="showCategory('${cat}')">
+            <div style="font-size:40px;">🛍️</div>
             <span>${cat}</span>
-        </div>
-    `).join('');
+        </div>`).join('');
 }
 
-function showCategoryProducts(category) {
-    const welcomeArea = document.getElementById('welcome-area');
-    const productsSection = document.getElementById('products-section');
-    const productsList = document.getElementById('products-list');
-    const backBtn = document.getElementById('backBtn');
-
+function showCategory(category) {
+    const list = document.getElementById('products-list');
     const filtered = allProducts.filter(p => p.category === category);
-
-    productsList.innerHTML = filtered.map(p => `
+    document.getElementById('welcome-area').style.display = 'none';
+    document.getElementById('products-section').style.display = 'block';
+    document.getElementById('backBtn').style.display = 'block';
+    list.innerHTML = filtered.map(p => `
         <div class="card">
             <img src="${p.image}">
-            <div class="p-info">
-                <h3>${p.name}</h3>
-                <p class="price">${p.price} ₪</p>
-                <button class="add-btn" onclick="sendWhatsApp('${p.name}', '${p.price}')">طلب عبر واتساب</button>
-            </div>
-        </div>
-    `).join('');
-
-    welcomeArea.style.display = 'none';
-    productsSection.style.display = 'block';
-    backBtn.style.display = 'block';
+            <h3>${p.name}</h3>
+            <p class="price">${p.price} ₪</p>
+            <button class="add-btn" onclick="sendOrder('${p.name}', '${p.price}')">طلب عبر واتساب 💬</button>
+        </div>`).join('');
 }
 
-function sendWhatsApp(name, price) {
+function sendOrder(name, price) {
     const phone = "970568486065"; // رقمك الصحيح
-    const msg = `مرحباً OARA STORE، أريد طلب: ${name} بسعر ${price} ₪`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-}
-
-function smoothBack() {
-    location.reload(); // أسهل طريقة للعودة للرئيسية وتحديث البيانات
+    const text = `مرحباً OARA STORE، أريد طلب: ${name} بسعر ${price} ₪`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
 }
 
 fetchProducts();
