@@ -3,154 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
-    <title>OARA Store | فخامة وأناقة</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <title>OARA | Luxury Collection</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@200;400;700&display=swap" rel="stylesheet">
     
     <style>
-        :root { --gold: #d4af37; --dark: #000; --white: #fff; }
-        body { font-family: 'Tajawal', sans-serif; margin: 0; background: #fafafa; direction: rtl; }
+        :root {
+            --premium-gold: #c5a059;
+            --pure-white: #ffffff;
+            --soft-gray: #fcfcfc;
+            --rich-black: #0a0a0a;
+            --border-color: #e5e5e5;
+        }
 
-        header { background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .logo { font-size: 24px; font-weight: 700; }
-        .logo span { color: var(--gold); }
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            background-color: var(--pure-white);
+            color: var(--rich-black);
+            line-height: 1.6;
+        }
 
-        .hero { padding: 60px 5% 30px; text-align: center; background: var(--white); }
-        .hero h1 { font-size: 28px; line-height: 1.5; color: var(--dark); }
-        .hero p { color: #666; font-size: 17px; max-width: 600px; margin: 10px auto; }
+        /* هيدر أرستقراطي */
+        header {
+            background: var(--pure-white);
+            padding: 30px 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 4px;
+        }
 
-        /* تصميم الفئات بالتغبيش */
-        .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 20px 5%; }
-        
+        .logo { font-family: 'Bodoni Moda', serif; font-size: 32px; font-weight: 400; text-transform: uppercase; }
+        .logo span { color: var(--premium-gold); }
+
+        /* قسم الترحيب الفاخر */
+        .hero {
+            padding: 100px 10%;
+            text-align: center;
+            background: var(--soft-gray);
+        }
+
+        .hero h1 { 
+            font-family: 'Bodoni Moda', serif; 
+            font-size: 42px; 
+            font-weight: 300; 
+            margin-bottom: 20px; 
+            letter-spacing: 1px;
+        }
+
+        .hero p { 
+            font-size: 16px; 
+            color: #888; 
+            max-width: 600px; 
+            margin: 0 auto; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 200;
+        }
+
+        /* شبكة الفئات بطراز الأغنياء (تغبيش سينمائي) */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 40px 5%;
+            background: var(--pure-white);
+        }
+
+        @media (min-width: 768px) { .categories-grid { grid-template-columns: repeat(4, 1fr); } }
+
         .cat-card {
-            height: 180px;
-            border-radius: 20px;
+            height: 300px;
+            border-radius: 0; /* الحواف الحادة توحي بالفخامة أكثر في البراندات العالمية */
             position: relative;
             overflow: hidden;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
             cursor: pointer;
-            transition: 0.4s;
+            transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* صورة الخلفية المغبشة */
         .cat-card::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background-size: cover;
             background-position: center;
-            filter: blur(4px) brightness(0.6); /* التغبيش */
-            transition: 0.4s;
-            z-index: 1;
+            filter: blur(8px) brightness(0.7); /* تغبيش عميق */
+            transition: 0.6s;
         }
 
-        .cat-card:hover::before { filter: blur(2px) brightness(0.7); transform: scale(1.1); }
-
-        /* تعيين صور الخلفية */
-        .cat-clothes::before { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400'); }
-        .cat-perfume::before { background-image: url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=400'); }
-        .cat-watches::before { background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400'); }
-        .cat-acc::before { background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400'); }
+        .cat-card:hover::before { filter: blur(2px) brightness(0.9); transform: scale(1.05); }
 
         .cat-card span {
             position: relative;
             z-index: 2;
             color: var(--white);
-            font-weight: 700;
-            font-size: 19px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.4);
-            padding: 8px 20px;
-            border-radius: 12px;
-            background: rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px);
+            font-weight: 300;
+            font-size: 18px;
+            letter-spacing: 2px;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
         }
 
-        /* سلة المشتريات */
-        .cart-float { position: fixed; bottom: 30px; left: 30px; background: var(--dark); color: white; padding: 15px 25px; border-radius: 50px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.2); z-index: 2000; }
+        /* خلفيات الفئات من Unsplash بجودة عالية */
+        .cat-1::before { background-image: url('https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1000'); } /* ملابس */
+        .cat-2::before { background-image: url('https://images.unsplash.com/photo-1583467875263-d50dec37a88c?q=80&w=1000'); } /* عطور */
+        .cat-3::before { background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000'); } /* ساعات */
+        .cat-4::before { background-image: url('https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=1000'); } /* اكسسوارات */
 
-        #products-view { display: none; padding: 30px 5%; }
-        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .product-card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #eee; }
-        .product-card img { width: 100%; height: 180px; object-fit: cover; }
-        .product-info { padding: 12px; text-align: center; }
-        .product-price { color: var(--gold); font-weight: 700; }
+        /* عرض المنتجات */
+        #products-view { display: none; padding: 60px 5%; animation: fadeIn 1s; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .product-card {
+            background: var(--pure-white);
+            border: 1px solid var(--border-color);
+            transition: 0.4s;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .product-card:hover { border-color: var(--premium-gold); }
+        .product-card img { width: 100%; height: 350px; object-fit: cover; filter: grayscale(20%); }
+        .product-info h4 { font-weight: 400; letter-spacing: 1px; margin: 20px 0 10px; }
+        .product-price { color: var(--premium-gold); font-family: 'Bodoni Moda'; font-size: 20px; }
+
+        .back-nav { 
+            cursor: pointer; font-size: 12px; letter-spacing: 3px; 
+            text-transform: uppercase; margin-bottom: 40px; color: #aaa;
+            transition: 0.3s;
+        }
+        .back-nav:hover { color: var(--rich-black); }
+
+        /* سلة المشتريات */
+        .cart-trigger {
+            position: fixed; bottom: 40px; left: 40px;
+            background: var(--rich-black); color: var(--premium-gold);
+            padding: 20px 40px; border-radius: 0;
+            font-size: 12px; letter-spacing: 3px; cursor: pointer;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">OARA<span>STORE</span></div>
+    <div class="logo">OARA<span>.</span></div>
 </header>
 
 <div id="home-view">
     <section class="hero">
-        <h1>أفخم وأرخص إكسسوارات وملابس وعطور وساعات في فلسطين</h1>
-        <p>الأناقة التي تستحقها، بالسعر الذي تتمناه.</p>
+        <p>Palestine Exclusive</p>
+        <h1>أفخم المقتنيات المختارة بعناية</h1>
+        <p>ملابس • عطور • ساعات • اكسسوارات</p>
     </section>
 
     <div class="categories-grid">
-        <div class="cat-card cat-clothes" onclick="loadCategory('ملابس')">
-            <span>ملابس أنيقة</span>
-        </div>
-        <div class="cat-card cat-perfume" onclick="loadCategory('عطور')">
-            <span>عطور فاخرة</span>
-        </div>
-        <div class="cat-card cat-watches" onclick="loadCategory('ساعات')">
-            <span>ساعات راقية</span>
-        </div>
-        <div class="cat-card cat-acc" onclick="loadCategory('اكسسوارات')">
-            <span>إكسسوارات ذهبية</span>
-        </div>
-    </div>
-</div>
-
-<section id="products-view">
-    <div onclick="location.reload()" style="cursor:pointer; margin-bottom:20px;">← عودة</div>
-    <div id="products-container" class="products-grid"></div>
-</section>
-
-<div class="cart-float">🛒 السلة (<span id="count">0</span>)</div>
-
-<script>
-    const SHEET_URL = "https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json";
-    let storeData = [];
-
-    async function init() {
-        try {
-            const res = await fetch(SHEET_URL);
-            const text = await res.text();
-            const json = JSON.parse(text.substr(47).slice(0, -2));
-            storeData = json.table.rows.map(row => ({
-                name: row.c[0] ? row.c[0].v : '',
-                price: row.c[1] ? row.c[1].v : '',
-                img: row.c[2] ? row.c[2].v : '',
-                cat: row.c[3] ? row.c[3].v : ''
-            }));
-        } catch(e) { console.error("Error loading data"); }
-    }
-
-    function loadCategory(cat) {
-        document.getElementById('home-view').style.display = 'none';
-        document.getElementById('products-view').style.display = 'block';
-        const container = document.getElementById('products-container');
-        container.innerHTML = '';
-        const filtered = storeData.filter(p => p.cat.toString().includes(cat));
-        filtered.forEach(p => {
-            container.innerHTML += `<div class="product-card">
-                <img src="${p.img}">
-                <div class="product-info">
-                    <h4>${p.name}</h4>
-                    <div class="product-price">${p.price} ر.س</div>
-                </div>
-            </div>`;
-        });
-    }
-
-    window.onload = init;
-</script>
-
-</body>
-</html>
+        <div class="cat-card cat-1" onclick="loadCategory('ملابس')"><span>ملابس أنيقة</span></div>
+        <div class="cat-card cat-2" onclick="loadCategory('عطور')"><span>عطور فا
