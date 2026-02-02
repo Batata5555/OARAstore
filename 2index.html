@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OARA Store - Optimized</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <style>
+        /* 2. Critical CSS: نضع التنسيقات الأساسية هنا لتظهر الصفحة فوراً */
+        body { margin: 0; font-family: sans-serif; background: #fff; }
+        .hero { height: 60vh; background: #f4f4f4; display: flex; align-items: center; justify-content: center; }
+        
+        /* تحسين أداء الصور */
+        img { max-width: 100%; height: auto; display: block; }
+        
+        /* Skeleton Screen: لإعطاء شعور بالسرعة أثناء التحميل */
+        .placeholder { background: #eee; border-radius: 8px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    </style>
+
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+</head>
+<body>
+
+    <header>
+        <nav><h1>OARA STORE</h1></nav>
+    </header>
+
+    <main>
+        <section class="products">
+            <div class="product-card">
+                <img src="your-image.jpg" fetchpriority="high" alt="Product Name">
+                
+                <img src="product2.jpg" loading="lazy" alt="Product 2">
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js" defer></script>
+
+    <script>
+        /* 5. تفعيل خدمة Service Worker لعمل الكاش (اختياري ولكن فعال جداً) */
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW error:', err));
+            });
+        }
+    </script>
+</body>
+</html>
