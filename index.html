@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OARA STORE</title>
+    
+    <title>OARA STORE | متجر الساعات والعطور الفاخرة</title>
+    <meta name="description" content="OARA STORE هو وجهتك الأولى للحصول على أفخم الساعات والعطور الملكية. جودة عالية وتوصيل سريع.">
+    <meta name="keywords" content="OARA STORE, oara store, متجر أورا, ساعات فاخرة, عطور ملكية">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,13 +21,13 @@
     <section class="hero">
         <div class="hero-content">
             <h1>نخبة الفخامة</h1>
-            <p>عنوانك الأول للساعات والعطور الراقية.</p>
+            <p>تجربة تسوق فريدة تجمع بين أصالة العطور ودقة الساعات العالمية.</p>
             <a href="#main-menu" class="btn-explore">اكتشف الأقسام ↓</a>
         </div>
     </section>
 
     <div id="main-menu" class="main-menu">
-        <h2 class="section-title">الأقسام</h2>
+        <h2 class="section-title">الأقسام المختارة</h2>
         <div class="categories-grid">
             <div class="category-card" onclick="smoothOpen('watch')">
                 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
@@ -63,12 +67,12 @@
 <div id="cart-modal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeCart()">&times;</span>
-        <h2>سلتك 🛒</h2>
+        <h2>سلة المشتريات 🛒</h2>
         <div id="cart-items-list"></div>
         <hr>
-        <div class="total-area">المجموع: <span id="total-price">0</span> ₪</div>
+        <div style="font-size: 20px; font-weight: bold; margin: 15px 0;">المجموع: <span id="total-price">0</span> ₪</div>
         <button class="pay-btn wa" onclick="checkout('whatsapp')">طلب عبر واتساب 💬</button>
-        <button class="pay-btn cod" onclick="checkout('cod')">دفع عند الاستلام 🚚</button>
+        <button class="pay-btn cod" onclick="checkout('cod')">الدفع عند الاستلام 🚚</button>
     </div>
 </div>
 
