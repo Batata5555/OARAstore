@@ -17,15 +17,15 @@
 </header>
 
 <nav class="categories">
-    <a href="#" class="active" onclick="filterProducts('all', event)">الكل</a>
-    <a href="#" onclick="filterProducts('watches', event)">ساعات</a>
-    <a href="#" onclick="filterProducts('perfumes', event)">عطور</a>
-    <a href="#" onclick="filterProducts('clothes', event)">ملابس</a>
-    <a href="#" onclick="filterProducts('accessories', event)">إكسسوارات</a>
+    <a href="javascript:void(0)" class="active" onclick="filterProducts('all', event)">الكل</a>
+    <a href="javascript:void(0)" onclick="filterProducts('watch', event)">ساعات</a>
+    <a href="javascript:void(0)" onclick="filterProducts('perfume', event)">عطور</a>
+    <a href="javascript:void(0)" onclick="filterProducts('clothes', event)">ملابس</a>
 </nav>
 
 <main class="products-grid" id="productsGrid">
-    <div class="card" data-category="watches">
+    
+    <div class="card" data-category="watch">
         <div class="badge">جديد</div>
         <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="ساعة">
         <div class="info">
@@ -35,23 +35,51 @@
         </div>
     </div>
 
-    <div class="card" data-category="perfumes">
+    <div class="card" data-category="watch">
+        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400" alt="ساعة">
+        <div class="info">
+            <h3>ساعة سبورت ذكية</h3>
+            <p class="price">200 ₪</p>
+            <button onclick="addToCart('ساعة سبورت', 200)">إضافة للسلة</button>
+        </div>
+    </div>
+
+    <div class="card" data-category="perfume">
         <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400" alt="عطر">
         <div class="info">
             <h3>عطر مسك فاخر</h3>
             <p class="price">90 ₪</p>
-            <button onclick="addToCart('عطر ملكي', 90)">إضافة للسلة</button>
+            <button onclick="addToCart('عطر مسك', 90)">إضافة للسلة</button>
+        </div>
+    </div>
+
+    <div class="card" data-category="perfume">
+        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400" alt="عطر">
+        <div class="info">
+            <h3>عطر عود أصلي</h3>
+            <p class="price">180 ₪</p>
+            <button onclick="addToCart('عطر عود', 180)">إضافة للسلة</button>
         </div>
     </div>
 
     <div class="card" data-category="clothes">
-        <img src="https://images.placeholder.com/400x400?text=Clothes" alt="ملابس">
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400" alt="ملابس">
         <div class="info">
-            <h3>قميص عصري</h3>
-            <p class="price">120 ₪</p>
-            <button onclick="addToCart('قميص عصري', 120)">إضافة للسلة</button>
+            <h3>تيشرت قطن نقي</h3>
+            <p class="price">70 ₪</p>
+            <button onclick="addToCart('تيشرت قطن', 70)">إضافة للسلة</button>
         </div>
     </div>
+
+    <div class="card" data-category="clothes">
+        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400" alt="جاكيت">
+        <div class="info">
+            <h3>جاكيت رسمي</h3>
+            <p class="price">250 ₪</p>
+            <button onclick="addToCart('جاكيت رسمي', 250)">إضافة للسلة</button>
+        </div>
+    </div>
+
 </main>
 
 <div class="overlay" id="overlay" onclick="closePanels()"></div>
@@ -70,7 +98,7 @@
             <option value="Binance">بينانس (Binance)</option>
             <option value="Cash">دفع عند الاستلام</option>
         </select>
-        <div class="total">المجموع الكلي: <span id="total-price">0</span> ₪</div>
+        <div class="total">المجموع: <span id="total-price">0</span> ₪</div>
         <button class="whatsapp-btn" onclick="sendToWhatsApp()">إتمام الطلب عبر واتساب</button>
     </div>
 </div>
