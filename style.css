@@ -33,3 +33,4 @@ header { background: var(--black); padding: 15px 20px; display: flex; justify-co
 .pay-btn { width: 100%; padding: 12px; margin-top: 10px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
 .wa { background: #25D366; color: white; }
 .cod { background: var(--black); color: var(--gold); border: 1px solid var(--gold); }
+
