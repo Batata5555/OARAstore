@@ -1,10 +1,7 @@
-// رابط جدول البيانات الخاص بك (تم تحويله لصيغة JSON للقراءة)
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json';
 
-let cart = [];
 let allProducts = [];
 
-// دالة جلب المنتجات من الجدول تلقائياً
 async function fetchProducts() {
     try {
         const response = await fetch(SHEET_URL);
@@ -12,36 +9,67 @@ async function fetchProducts() {
         const data = JSON.parse(text.substr(47).slice(0, -2));
         
         allProducts = data.table.rows.map(row => ({
-            name: row.c[0].v,
-            price: row.c[1].v,
-            image: row.c[2].v,
-            category: row.c[3] ? row.c[3].v : 'watch'
+            name: row.c[0] ? row.c[0].v : '',      
+            price: row.c[1] ? row.c[1].v : '',     
+            image: row.c[2] ? row.c[2].v : '',     
+            category: row.c[3] ? row.c[3].v : 'عام' 
         }));
         
-        console.log("تم تحميل المنتجات بنجاح من OARA STORE");
+        console.log("تم تحميل المنتجات");
+        renderCategories(); // تشغيل دالة إظهار الأقسام
     } catch (error) {
-        console.error("خطأ في جلب البيانات:", error);
+        console.error("خطأ:", error);
     }
 }
 
-// دالة إرسال الطلب عبر واتساب (تم تثبيت رقمك الصحيح هنا)
-function checkout(method) {
-    if (cart.length === 0) return alert("السلة فارغة!");
+// الدالة المسؤولة عن إظهار "ملابس أنيقة" وأي قسم جديد تلقائياً
+function renderCategories() {
+    const container = document.getElementById('dynamic-categories');
+    if(!container) return;
 
-    let message = "طلب جديد من OARA STORE:%0A";
-    cart.forEach(item => {
-        message += `- ${item.name} (${item.price} ₪)%0A`;
-    });
-    message += `%0Aالمجموع: ${document.getElementById('total-price').innerText} ₪`;
-
-    if (method === 'whatsapp') {
-        // الرقم الصحيح الخاص بك لضمان وصول الرسائل
-        const phone = "970568486065"; 
-        window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
-    } else {
-        alert("تم تسجيل طلبك (دفع عند الاستلام). سنتصل بك قريباً!");
-    }
+    // استخراج الأقسام الفريدة من الجدول
+    const categories = [...new Set(allProducts.map(p => p.category))];
+    
+    container.innerHTML = categories.map(cat => `
+        <div class="category-card" onclick="showCategoryProducts('${cat}')">
+            <div class="cat-icon">🛍️</div>
+            <span>${cat}</span>
+        </div>
+    `).join('');
 }
 
-// تشغيل جلب البيانات عند فتح الموقع
+function showCategoryProducts(category) {
+    const welcomeArea = document.getElementById('welcome-area');
+    const productsSection = document.getElementById('products-section');
+    const productsList = document.getElementById('products-list');
+    const backBtn = document.getElementById('backBtn');
+
+    const filtered = allProducts.filter(p => p.category === category);
+
+    productsList.innerHTML = filtered.map(p => `
+        <div class="card">
+            <img src="${p.image}">
+            <div class="p-info">
+                <h3>${p.name}</h3>
+                <p class="price">${p.price} ₪</p>
+                <button class="add-btn" onclick="sendWhatsApp('${p.name}', '${p.price}')">طلب عبر واتساب</button>
+            </div>
+        </div>
+    `).join('');
+
+    welcomeArea.style.display = 'none';
+    productsSection.style.display = 'block';
+    backBtn.style.display = 'block';
+}
+
+function sendWhatsApp(name, price) {
+    const phone = "970568486065"; // رقمك الصحيح
+    const msg = `مرحباً OARA STORE، أريد طلب: ${name} بسعر ${price} ₪`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function smoothBack() {
+    location.reload(); // أسهل طريقة للعودة للرئيسية وتحديث البيانات
+}
+
 fetchProducts();
