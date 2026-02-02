@@ -3,33 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
-    <title>OARA STORE | المتجر الرسمي</title>
+    
+    <title>OARA STORE | متجر الساعات والعطور الفاخرة</title>
+    <meta name="description" content="OARA STORE هو وجهتك الأولى للحصول على أفخم الساعات والعطور الملكية. جودة عالية وتوصيل سريع.">
+    <meta name="keywords" content="OARA STORE, oara store, متجر أورا, ساعات فاخرة, عطور ملكية">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="logo" onclick="location.reload()">OARA<span>STORE</span></div>
-    </header>
 
-    <div id="welcome-area">
-        <section class="hero">
+<header>
+    <div class="logo">OARA<span>STORE</span></div>
+    <div class="cart-icon" onclick="showCart()">🛒 <span id="cart-count">0</span></div>
+</header>
+
+<div id="welcome-area">
+    <section class="hero">
+        <div class="hero-content">
             <h1>نخبة الفخامة</h1>
-            <p>الساعات، العطور، والملابس الأنيقة في مكان واحد.</p>
-        </section>
-        
-        <div class="main-menu">
-            <h2 class="section-title">اكتشف مجموعتنا</h2>
-            <div id="dynamic-categories" class="categories-grid"></div>
+            <p>عنوانك الأول للساعات والعطور الراقية.</p>
+            <a href="#main-menu" class="btn-explore">اكتشف الأقسام ↓</a>
+        </div>
+    </section>
+
+    <div id="main-menu" class="main-menu">
+        <h2 class="section-title">الأقسام المختارة</h2>
+        <div class="categories-grid">
+            <div class="category-card" onclick="smoothOpen('watch')">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
+                <span>ساعات فاخرة</span>
+            </div>
+            <div class="category-card" onclick="smoothOpen('perfume')">
+                <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600">
+                <span>عطور ملكية</span>
+            </div>
         </div>
     </div>
+</div>
 
-    <button id="backBtn" class="back-btn" onclick="location.reload()" style="display:none;">⬅ العودة للرئيسية</button>
+<button id="backBtn" class="back-btn" onclick="smoothBack()">⬅ العودة للرئيسية</button>
 
-    <div id="products-section" style="display: none;">
-        <div id="products-list" class="products-grid"></div>
+<div id="products-section" style="display: none; opacity: 0;">
+    <div class="products-grid">
+        <div class="card" data-category="watch">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400">
+            <div class="p-info">
+                <h3>ساعة رويال</h3>
+                <p class="price">150 ₪</p>
+                <button class="add-btn" onclick="addToCart('ساعة رويال', 150)">إضافة للسلة</button>
+            </div>
+        </div>
+        <div class="card" data-category="perfume">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400">
+            <div class="p-info">
+                <h3>عطر فخم</h3>
+                <p class="price">90 ₪</p>
+                <button class="add-btn" onclick="addToCart('عطر فخم', 90)">إضافة للسلة</button>
+            </div>
+        </div>
     </div>
+</div>
 
-    <script src="script.js"></script>
+<div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCart()">&times;</span>
+        <h2>سلة المشتريات 🛒</h2>
+        <div id="cart-items-list"></div>
+        <hr>
+        <div style="font-size: 20px; font-weight: bold; margin: 15px 0;">المجموع: <span id="total-price">0</span> ₪</div>
+        <button class="pay-btn wa" onclick="checkout('whatsapp')">طلب عبر واتساب 💬</button>
+        <button class="pay-btn cod" onclick="checkout('cod')">الدفع عند الاستلام 🚚</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
