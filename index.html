@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>OARA STORE | طريقك نحو القمة</title>
-    <meta property="og:image" content="https://files.catbox.moe/p9o48p.png">
-    <link rel="icon" type="image/png" href="https://files.catbox.moe/p9o48p.png">
+    <meta name="description" content="فخامة تليق بمكانتك - طريقك نحو القمة">
+    
+    <link rel="icon" type="image/png" href="https://i.ibb.co/m56Yp9X/1770013749718.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/m56Yp9X/1770013749718.png">
+
+    <meta property="og:title" content="OARA STORE">
+    <meta property="og:description" content="التسجيل في متجر OARA طريقك نحو القمة">
+    <meta property="og:image" content="https://i.ibb.co/m56Yp9X/1770013749718.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:type" content="website">
 
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,700;1,400&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     
@@ -35,9 +43,14 @@
             position: sticky; top: 0; z-index: 1000; 
         }
 
-        .logo-img { height: 50px; cursor: pointer; }
+        /* الشعار الملكي في الهيدر */
+        .logo-img { 
+            height: 55px; 
+            cursor: pointer; 
+            transition: transform 0.3s;
+        }
+        .logo-img:hover { transform: scale(1.05); }
 
-        /* تعديل الكلمات التحفيزية لتصبح ذهبية ملكية */
         .hero-statement { 
             padding: 60px 10%; 
             text-align: center; 
@@ -48,8 +61,8 @@
             font-family: 'Bodoni Moda', serif; 
             font-size: 26px; 
             line-height: 1.6; 
-            color: var(--gold); /* تحويل اللون للأبيض إلى ذهبي */
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); /* توهج ملكي */
+            color: var(--gold); 
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); 
             font-style: italic;
             margin: 0 auto;
             max-width: 800px;
@@ -86,19 +99,6 @@
             font-weight: bold; 
             cursor: pointer; 
             font-size: 14px;
-            letter-spacing: 1px;
-        }
-
-        /* تنسيق النصوص داخل المودالات */
-        .modal h2, .modal p {
-            color: var(--gold) !important;
-            text-align: center;
-        }
-
-        input { 
-            width: 100%; padding: 12px; margin: 10px 0; 
-            background: #000; border: 1px solid #333; 
-            color: var(--gold); box-sizing: border-box; 
         }
 
         .modal { 
@@ -106,13 +106,20 @@
             background: rgba(0,0,0,0.98); z-index: 2000; display: none; padding: 40px 20px; box-sizing: border-box; 
         }
         .modal.active { display: block; }
+        .modal h2, .modal p { color: var(--gold) !important; text-align: center; }
+        
+        input { 
+            width: 100%; padding: 12px; margin: 10px 0; 
+            background: #000; border: 1px solid #333; 
+            color: var(--gold); box-sizing: border-box; 
+        }
     </style>
 </head>
 <body>
 
 <header>
     <div onclick="location.reload()" style="color:var(--gold); cursor:pointer; font-size:24px;">☰</div>
-    <img src="https://files.catbox.moe/p9o48p.png" alt="OARA" class="logo-img" onclick="location.reload()">
+    <img src="https://i.ibb.co/m56Yp9X/1770013749718.png" alt="OARA" class="logo-img" onclick="location.reload()">
     <div class="nav-icons">
         <div class="user-icon" onclick="openLoginModal()">👤 <span id="user-display">النخبة</span></div>
         <div class="cart-trigger" onclick="openCheckout()">🛒 <span class="cart-badge" id="cart-count">0</span></div>
