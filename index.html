@@ -1,53 +1,75 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json';
+
+let allProducts = [];
+
+async function fetchProducts() {
+    try {
+        const response = await fetch(SHEET_URL);
+        const text = await response.text();
+        const data = JSON.parse(text.substr(47).slice(0, -2));
+        
+        allProducts = data.table.rows.map(row => ({
+            name: row.c[0] ? row.c[0].v : '',      
+            price: row.c[1] ? row.c[1].v : '',     
+            image: row.c[2] ? row.c[2].v : '',     
+            category: row.c[3] ? row.c[3].v : 'عام' 
+        }));
+        
+        console.log("تم تحميل المنتجات");
+        renderCategories(); // تشغيل دالة إظهار الأقسام
+    } catch (error) {
+        console.error("خطأ:", error);
+    }
+}
+
+// الدالة المسؤولة عن إظهار "ملابس أنيقة" وأي قسم جديد تلقائياً
+function renderCategories() {
+    const container = document.getElementById('dynamic-categories');
+    if(!container) return;
+
+    // استخراج الأقسام الفريدة من الجدول
+    const categories = [...new Set(allProducts.map(p => p.category))];
     
-    <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
-    
-    <title>OARA STORE | متجر الساعات والعطور</title>
-    <meta name="description" content="تسوق أفخم الساعات والعطور في OARA STORE.">
-    
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header>
-    <div class="logo">OARA<span>STORE</span></div>
-    <div class="cart-icon" onclick="showCart()">🛒 <span id="cart-count">0</span></div>
-</header>
-
-<div id="welcome-area">
-    <section class="hero">
-        <h1>نخبة الفخامة</h1>
-        <p>اكتشف مجموعتنا المختارة من العطور والساعات.</p>
-    </section>
-
-    <div id="main-menu" class="main-menu">
-        <h2 class="section-title">الأقسام</h2>
-        <div id="dynamic-categories" class="categories-grid">
-            </div>
-    </div>
-</div>
-
-<button id="backBtn" class="back-btn" onclick="smoothBack()" style="display:none;">⬅ العودة</button>
-
-<div id="products-section" style="display: none;">
-    <div id="products-list" class="products-grid">
+    container.innerHTML = categories.map(cat => `
+        <div class="category-card" onclick="showCategoryProducts('${cat}')">
+            <div class="cat-icon">🛍️</div>
+            <span>${cat}</span>
         </div>
-</div>
+    `).join('');
+}
 
-<div id="cart-modal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeCart()">&times;</span>
-        <h2>سلتك 🛒</h2>
-        <div id="cart-items-list"></div>
-        <div class="total">المجموع: <span id="total-price">0</span> ₪</div>
-        <button class="pay-btn" onclick="checkout('whatsapp')">طلب عبر واتساب 💬</button>
-    </div>
-</div>
+function showCategoryProducts(category) {
+    const welcomeArea = document.getElementById('welcome-area');
+    const productsSection = document.getElementById('products-section');
+    const productsList = document.getElementById('products-list');
+    const backBtn = document.getElementById('backBtn');
 
-<script src="script.js"></script>
-</body>
-</html>
+    const filtered = allProducts.filter(p => p.category === category);
+
+    productsList.innerHTML = filtered.map(p => `
+        <div class="card">
+            <img src="${p.image}">
+            <div class="p-info">
+                <h3>${p.name}</h3>
+                <p class="price">${p.price} ₪</p>
+                <button class="add-btn" onclick="sendWhatsApp('${p.name}', '${p.price}')">طلب عبر واتساب</button>
+            </div>
+        </div>
+    `).join('');
+
+    welcomeArea.style.display = 'none';
+    productsSection.style.display = 'block';
+    backBtn.style.display = 'block';
+}
+
+function sendWhatsApp(name, price) {
+    const phone = "970568486065"; // رقمك الصحيح
+    const msg = `مرحباً OARA STORE، أريد طلب: ${name} بسعر ${price} ₪`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function smoothBack() {
+    location.reload(); // أسهل طريقة للعودة للرئيسية وتحديث البيانات
+}
+
+fetchProducts();
