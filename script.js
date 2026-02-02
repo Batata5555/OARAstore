@@ -1,59 +1,47 @@
+// رابط جدول البيانات الخاص بك (تم تحويله لصيغة JSON للقراءة)
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json';
+
 let cart = [];
+let allProducts = [];
 
-// دالة إضافة المنتج وتحديث العداد
-function addToCart(name, price) {
-    cart.push({ name: name, price: price });
-    document.getElementById('cart-count').innerText = cart.length;
-    alert("تمت إضافة " + name + " بنجاح! 🛒");
-}
-
-// دالة فتح السلة
-function showCart() {
-    const list = document.getElementById('cart-items-list');
-    const totalDisp = document.getElementById('total-price');
-    list.innerHTML = "";
-    let total = 0;
-    cart.forEach(item => {
-        total += item.price;
-        list.innerHTML += `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f5f5f5;">
-            <span>${item.name}</span>
-            <span>${item.price} ₪</span>
-        </div>`;
-    });
-    totalDisp.innerText = total;
-    document.getElementById('cart-modal').style.display = "block";
-}
-
-function closeCart() {
-    document.getElementById('cart-modal').style.display = "none";
-}
-
-// دالة الدفع - تم وضع رقمك 970568486065 هنا
-function checkout(method) {
-    if (cart.length === 0) return alert("السلة فارغة!");
-    let msg = "طلب جديد من OARA STORE:%0A";
-    cart.forEach(i => msg += "- " + i.name + " (" + i.price + " ₪)%0A");
-    let total = cart.reduce((s, i) => s + i.price, 0);
-    msg += "%0Aالإجمالي: " + total + " ₪";
-
-    if (method === 'whatsapp') {
-        // الرقم الجديد المعتمد
-        window.open("https://wa.me/970568486065?text=" + msg); 
-    } else {
-        alert("تم استلام طلبك (دفع عند الاستلام).");
-        cart = []; document.getElementById('cart-count').innerText = "0";
-        closeCart();
+// دالة جلب المنتجات من الجدول تلقائياً
+async function fetchProducts() {
+    try {
+        const response = await fetch(SHEET_URL);
+        const text = await response.text();
+        const data = JSON.parse(text.substr(47).slice(0, -2));
+        
+        allProducts = data.table.rows.map(row => ({
+            name: row.c[0].v,
+            price: row.c[1].v,
+            image: row.c[2].v,
+            category: row.c[3] ? row.c[3].v : 'watch'
+        }));
+        
+        console.log("تم تحميل المنتجات بنجاح من OARA STORE");
+    } catch (error) {
+        console.error("خطأ في جلب البيانات:", error);
     }
 }
 
-function smoothOpen(cat) {
-    document.getElementById('welcome-area').style.display = 'none';
-    document.getElementById('products-section').style.display = 'block';
-    document.getElementById('backBtn').style.display = 'block';
-    document.querySelectorAll('.card').forEach(c => {
-        c.style.display = (c.getAttribute('data-category') === cat) ? 'block' : 'none';
+// دالة إرسال الطلب عبر واتساب (تم تثبيت رقمك الصحيح هنا)
+function checkout(method) {
+    if (cart.length === 0) return alert("السلة فارغة!");
+
+    let message = "طلب جديد من OARA STORE:%0A";
+    cart.forEach(item => {
+        message += `- ${item.name} (${item.price} ₪)%0A`;
     });
-    setTimeout(() => { document.getElementById('products-section').style.opacity = '1'; }, 50);
+    message += `%0Aالمجموع: ${document.getElementById('total-price').innerText} ₪`;
+
+    if (method === 'whatsapp') {
+        // الرقم الصحيح الخاص بك لضمان وصول الرسائل
+        const phone = "970568486065"; 
+        window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+    } else {
+        alert("تم تسجيل طلبك (دفع عند الاستلام). سنتصل بك قريباً!");
+    }
 }
 
-function smoothBack() { location.reload(); }
+// تشغيل جلب البيانات عند فتح الموقع
+fetchProducts();
