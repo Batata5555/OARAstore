@@ -3,51 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
-    
-    <title>OARA STORE | متجر الساعات والعطور</title>
-    <meta name="description" content="تسوق أفخم الساعات والعطور في OARA STORE.">
-    
+    <title>OARA STORE | المتجر الرسمي</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <div class="logo" onclick="location.reload()">OARA<span>STORE</span></div>
+    </header>
 
-<header>
-    <div class="logo">OARA<span>STORE</span></div>
-    <div class="cart-icon" onclick="showCart()">🛒 <span id="cart-count">0</span></div>
-</header>
-
-<div id="welcome-area">
-    <section class="hero">
-        <h1>نخبة الفخامة</h1>
-        <p>اكتشف مجموعتنا المختارة من العطور والساعات.</p>
-    </section>
-
-    <div id="main-menu" class="main-menu">
-        <h2 class="section-title">الأقسام</h2>
-        <div id="dynamic-categories" class="categories-grid">
-            </div>
-    </div>
-</div>
-
-<button id="backBtn" class="back-btn" onclick="smoothBack()" style="display:none;">⬅ العودة</button>
-
-<div id="products-section" style="display: none;">
-    <div id="products-list" class="products-grid">
+    <div id="welcome-area">
+        <section class="hero">
+            <h1>نخبة الفخامة</h1>
+            <p>الساعات، العطور، والملابس الأنيقة في مكان واحد.</p>
+        </section>
+        
+        <div class="main-menu">
+            <h2 class="section-title">اكتشف مجموعتنا</h2>
+            <div id="dynamic-categories" class="categories-grid"></div>
         </div>
-</div>
-
-<div id="cart-modal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeCart()">&times;</span>
-        <h2>سلتك 🛒</h2>
-        <div id="cart-items-list"></div>
-        <div class="total">المجموع: <span id="total-price">0</span> ₪</div>
-        <button class="pay-btn" onclick="checkout('whatsapp')">طلب عبر واتساب 💬</button>
     </div>
-</div>
 
-<script src="script.js"></script>
+    <button id="backBtn" class="back-btn" onclick="location.reload()" style="display:none;">⬅ العودة للرئيسية</button>
+
+    <div id="products-section" style="display: none;">
+        <div id="products-list" class="products-grid"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
