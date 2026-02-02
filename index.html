@@ -3,81 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
     
-    <title>OARA STORE | متجر الساعات والعطور الفاخرة</title>
-    <meta name="description" content="OARA STORE هو وجهتك الأولى للحصول على أفخم الساعات والعطور الملكية. جودة عالية وتوصيل سريع.">
-    <meta name="keywords" content="OARA STORE, oara store, متجر أورا, ساعات فاخرة, عطور ملكية">
+    <title>OARA Store | المتجر الرسمي</title>
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --gold: #c5a059; --black: #121212; --white: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background: #fff; direction: rtl; }
+
+        /* الهيدر */
+        header { background: var(--black); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .logo { color: white; font-weight: bold; font-size: 22px; text-decoration: none; }
+        .logo span { color: var(--gold); }
+        .cart-icon { color: white; cursor: pointer; position: relative; font-size: 22px; }
+        #cart-count { background: var(--gold); color: black; font-size: 11px; padding: 2px 6px; border-radius: 50%; position: absolute; top: -8px; left: -10px; font-weight: bold; }
+
+        /* الصفحة الرئيسية - الأقسام */
+        .main-menu { padding: 30px 15px; }
+        .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .category-card { height: 180px; border-radius: 15px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid var(--gold); }
+        .category-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; filter: brightness(0.4); transition: 0.4s; }
+        .category-card:hover img { transform: scale(1.1); filter: brightness(0.6); }
+        .category-card span { position: relative; z-index: 2; color: white; font-weight: bold; font-size: 18px; border: 1px solid var(--gold); padding: 8px 15px; border-radius: 10px; background: rgba(0,0,0,0.5); text-align: center; }
+
+        /* شبكة المنتجات - حل مشكلة التداخل */
+        #products-section { padding: 20px 15px; display: none; min-height: 80vh; }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; align-items: stretch; }
+        @media (min-width: 768px) { .products-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .card { 
+            background: white; border-radius: 12px; overflow: hidden; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05); border: 1px solid #eee;
+            display: flex; flex-direction: column; height: 100%; transition: 0.3s;
+        }
+        .card img { width: 100%; height: 160px; object-fit: cover; background: #f9f9f9; }
+        .card-info { padding: 12px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-info h3 { font-size: 14px; margin: 5px 0; color: #333; height: 40px; overflow: hidden; }
+        .price { color: var(--gold); font-weight: bold; font-size: 17px; margin-bottom: 10px; }
+        .add-btn { background: var(--black); color: var(--gold); border: 1px solid var(--gold); padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.3s; }
+        .add-btn:active { transform: scale(0.95); }
+
+        /* السلة */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+        .modal-content { background: white; margin: 10% auto; padding: 25px; width: 85%; max-width: 400px; border-radius: 20px; position: relative; }
+        .close { position: absolute; left: 15px; top: 10px; font-size: 28px; cursor: pointer; color: #888; }
+        .wa-btn { display: block; background: #25D366; color: white; text-align: center; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+
+        .back-btn { margin-bottom: 20px; background: var(--black); color: var(--gold); border: 1px solid var(--gold); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        #loading { text-align: center; padding: 50px; font-weight: bold; color: var(--gold); }
+    </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">OARA<span>STORE</span></div>
-    <div class="cart-icon" onclick="showCart()">🛒 <span id="cart-count">0</span></div>
+    <a href="javascript:location.reload()" class="logo">OARA<span>STORE</span></a>
+    <div class="cart-icon" onclick="toggleCart()">
+        🛒 <span id="cart-count">0</span>
+    </div>
 </header>
 
-<div id="welcome-area">
-    <section class="hero">
-        <div class="hero-content">
-            <h1>نخبة الفخامة</h1>
-            <p>عنوانك الأول للساعات والعطور الراقية.</p>
-            <a href="#main-menu" class="btn-explore">اكتشف الأقسام ↓</a>
+<main id="home-page" class="main-menu">
+    <div class="categories-grid">
+        <div class="category-card" onclick="showCategory('عطور')">
+            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400" alt="عطور">
+            <span>عطور ملكية</span>
         </div>
-    </section>
-
-    <div id="main-menu" class="main-menu">
-        <h2 class="section-title">الأقسام المختارة</h2>
-        <div class="categories-grid">
-            <div class="category-card" onclick="smoothOpen('watch')">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600">
-                <span>ساعات فاخرة</span>
-            </div>
-            <div class="category-card" onclick="smoothOpen('perfume')">
-                <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=600">
-                <span>عطور ملكية</span>
-            </div>
+        <div class="category-card" onclick="showCategory('بخور')">
+            <img src="https://images.unsplash.com/photo-1595111022340-9799645264b3?w=400" alt="بخور">
+            <span>بخور وعود</span>
         </div>
     </div>
-</div>
-
-<button id="backBtn" class="back-btn" onclick="smoothBack()">⬅ العودة للرئيسية</button>
-
-<div id="products-section" style="display: none; opacity: 0;">
-    <div class="products-grid">
-        <div class="card" data-category="watch">
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400">
-            <div class="p-info">
-                <h3>ساعة رويال</h3>
-                <p class="price">150 ₪</p>
-                <button class="add-btn" onclick="addToCart('ساعة رويال', 150)">إضافة للسلة</button>
-            </div>
-        </div>
-        <div class="card" data-category="perfume">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=400">
-            <div class="p-info">
-                <h3>عطر فخم</h3>
-                <p class="price">90 ₪</p>
-                <button class="add-btn" onclick="addToCart('عطر فخم', 90)">إضافة للسلة</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="cart-modal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeCart()">&times;</span>
-        <h2>سلة المشتريات 🛒</h2>
-        <div id="cart-items-list"></div>
-        <hr>
-        <div style="font-size: 20px; font-weight: bold; margin: 15px 0;">المجموع: <span id="total-price">0</span> ₪</div>
-        <button class="pay-btn wa" onclick="checkout('whatsapp')">طلب عبر واتساب 💬</button>
-        <button class="pay-btn cod" onclick="checkout('cod')">الدفع عند الاستلام 🚚</button>
-    </div>
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
