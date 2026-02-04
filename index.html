@@ -97,7 +97,7 @@
 </div>
 
 <div class="brand-story">
-    <h3 style="color:var(--gold); font-family:'Bodoni Moda'">OUR STORY</h3>
+    <h3 style="color:var(--gold); font-family:'Bodoni Moda'; font-size: 24px; text-shadow: 0 0 10px rgba(197,160,89,0.3);">OARA STORE</h3>
     <p style="color:#666; font-size:13px; line-height:1.8">بدأت OARA STORE كحلم لتقديم مفهوم جديد للفخامة في فلسطين، نجمع لك بين الحداثة والجذور الأصيلة.</p>
 </div>
 
@@ -111,12 +111,12 @@
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg" loading="lazy">
             <p>قميص OARA LUXE</p>
-            <button class="btn-gold" onclick="addToCart('قميص OARA', 280)">280 SAR</button>
+            <button class="btn-gold" onclick="addToCart('قميص OARA', 280)">280 ILS</button>
         </div>
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/4439425/pexels-photo-4439425.jpeg" loading="lazy">
             <p>بنطال كلاسيك</p>
-            <button class="btn-gold" onclick="addToCart('بنطال كلاسيك', 310)">310 SAR</button>
+            <button class="btn-gold" onclick="addToCart('بنطال كلاسيك', 310)">310 ILS</button>
         </div>
     </div>
 </div>
@@ -131,12 +131,12 @@
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg" loading="lazy">
             <p>سماعة Pro</p>
-            <button class="btn-gold" onclick="addToCart('سماعة Pro', 950)">950 SAR</button>
+            <button class="btn-gold" onclick="addToCart('سماعة Pro', 950)">950 ILS</button>
         </div>
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/5081431/pexels-photo-5081431.jpeg" loading="lazy">
             <p>شاحن سريع OARA</p>
-            <button class="btn-gold" onclick="addToCart('شاحن سريع', 120)">120 SAR</button>
+            <button class="btn-gold" onclick="addToCart('شاحن سريع', 120)">120 ILS</button>
         </div>
     </div>
 </div>
@@ -151,12 +151,12 @@
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg" loading="lazy">
             <p>عطر OARA Royal</p>
-            <button class="btn-gold" onclick="addToCart('عطر Royal', 450)">450 SAR</button>
+            <button class="btn-gold" onclick="addToCart('عطر Royal', 450)">450 ILS</button>
         </div>
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg" loading="lazy">
             <p>زيت مسك النخبة</p>
-            <button class="btn-gold" onclick="addToCart('مسك النخبة', 180)">180 SAR</button>
+            <button class="btn-gold" onclick="addToCart('مسك النخبة', 180)">180 ILS</button>
         </div>
     </div>
 </div>
@@ -171,12 +171,12 @@
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg" loading="lazy">
             <p>ساعة Gold</p>
-            <button class="btn-gold" onclick="addToCart('ساعة Gold', 1200)">1200 SAR</button>
+            <button class="btn-gold" onclick="addToCart('ساعة Gold', 1200)">1200 ILS</button>
         </div>
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg" loading="lazy">
             <p>ساعة OARA Black</p>
-            <button class="btn-gold" onclick="addToCart('ساعة Black', 1100)">1100 SAR</button>
+            <button class="btn-gold" onclick="addToCart('ساعة Black', 1100)">1100 ILS</button>
         </div>
     </div>
 </div>
@@ -191,12 +191,12 @@
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg" loading="lazy">
             <p>خاتم ملكي</p>
-            <button class="btn-gold" onclick="addToCart('خاتم ملكي', 350)">350 SAR</button>
+            <button class="btn-gold" onclick="addToCart('خاتم ملكي', 350)">350 ILS</button>
         </div>
         <div class="card-luxury">
             <img src="https://images.pexels.com/photos/2850500/pexels-photo-2850500.jpeg" loading="lazy">
             <p>قلادة النخبة</p>
-            <button class="btn-gold" onclick="addToCart('قلادة النخبة', 420)">420 SAR</button>
+            <button class="btn-gold" onclick="addToCart('قلادة النخبة', 420)">420 ILS</button>
         </div>
     </div>
 </div>
@@ -271,18 +271,18 @@
     function openCart() {
         document.getElementById('cart-modal').classList.add('active');
         const list = document.getElementById('cart-items');
-        list.innerHTML = cart.map(i=> `<div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #111"><span>${i.n}</span><span>${i.p} SAR</span></div>`).join('') || "حقيبتك لا تزال فارغة";
+        list.innerHTML = cart.map(i=> `<div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #111"><span>${i.n}</span><span>${i.p} ILS</span></div>`).join('') || "حقيبتك لا تزال فارغة";
     }
 
     function closeModal() { document.querySelectorAll('.modal').forEach(m=>m.classList.remove('active')); }
 
     function confirmOrder() {
         let text = "طلب جديد من متجر OARA:\n";
-        cart.forEach(i=> text += `- ${i.n} (${i.p} SAR)\n`);
+        cart.forEach(i=> text += `- ${i.n} (${i.p} ILS)\n`);
         text += `\nالاسم: ${document.getElementById('c-name').value}\nالعنوان: ${document.getElementById('c-city').value}`;
         window.open(`https://wa.me/972568486065?text=${encodeURIComponent(text)}`);
     }
 </script>
 </body>
-    </html>
-    
+            </html>
+                                                                                      
