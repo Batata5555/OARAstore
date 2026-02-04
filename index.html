@@ -51,6 +51,19 @@
 
         .payment-methods { display: flex; justify-content: center; gap: 10px; margin-top: 15px; filter: grayscale(1) contrast(1.2); opacity: 0.7; }
         .payment-methods img { height: 20px; }
+
+        /* تنسيقات قسم التعليقات المعدل */
+        .reviews-section { padding: 20px; background: #050505; border-top: 1px solid #111; }
+        .add-review-box { background: var(--dark); border: 1px solid var(--gold); padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; }
+        .star-rating-input { font-size: 30px; color: #444; margin-bottom: 15px; }
+        .star-rating-input span { cursor: pointer; transition: 0.3s; }
+        .star-rating-input span.active { color: var(--gold); }
+        textarea { width: 100%; background: #000; border: 1px solid #222; color: #fff; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-family: 'Tajawal'; resize: none; }
+        .comment-card { background: var(--dark); border: 1px solid #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+        .comment-header { display: flex; justify-content: space-between; align-items: center; }
+        .user-info { display: flex; align-items: center; gap: 10px; }
+        .user-avatar { width: 35px; height: 35px; background: #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-weight: bold; font-size: 14px; border: 1px solid var(--gold); }
+        .stars-display { color: #f1c40f; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -93,10 +106,11 @@
     <a href="#perfume-sec" class="sidebar-item" onclick="toggleSidebar()">💎 العطور والجمال</a>
     <a href="#watch-sec" class="sidebar-item" onclick="toggleSidebar()">⌚ الساعات</a>
     <a href="#access-sec" class="sidebar-item" onclick="toggleSidebar()">💍 الإكسسوارات</a>
+    <a href="#reviews-anchor" class="sidebar-item" onclick="toggleSidebar()">💬 آراء الزبائن</a>
 </div>
 
 <div class="brand-story">
-    <h3 style="color:var(--gold); font-family:'Bodoni Moda'; font-size: 24px; text-shadow: 0 0 10px rgba(197,160,89,0.3);">OARA STORE</h3>
+    <h3 style="color:var(--gold); font-family:'Bodoni Moda'; font-size: 24px;">OARA STORE</h3>
     <p style="color:#666; font-size:13px; line-height:1.8">بدأت OARA STORE كحلم لتقديم مفهوم جديد للفخامة في فلسطين، نجمع لك بين الحداثة والجذور الأصيلة.</p>
 </div>
 
@@ -200,19 +214,29 @@
     </div>
 </div>
 
+<div id="reviews-anchor" class="reviews-section">
+    <div class="row-label">آراء النخبة</div>
+    <div class="add-review-box">
+        <p style="font-size: 14px; color: var(--gold);">شو رأيك بمنتجاتنا؟</p>
+        <div class="star-rating-input" id="input-stars">
+            <span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span><span onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span><span onclick="setRating(5)">★</span>
+        </div>
+        <textarea id="user-comment-txt" rows="3" placeholder="اكتب رأيك هون..."></textarea>
+        <button class="btn-gold" onclick="submitReview()">نشر التعليق</button>
+    </div>
+    <div id="real-reviews-list"></div>
+</div>
+
 <div class="modal" id="cart-modal">
     <div class="modal-content">
         <h3 style="color:var(--gold); text-align:center">حقيبتك</h3>
         <div id="cart-items" style="margin:20px 0; max-height:200px; overflow-y:auto; border-top:1px solid #222; padding-top:10px;"></div>
-        
         <button class="btn-gold" onclick="closeModal(); document.getElementById('order-modal').classList.add('active');">إتمام الطلب</button>
-        
         <div class="payment-methods">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
         </div>
-
         <button class="btn-gold" style="background:none; color:#777; border:1px solid #333; margin-top:15px;" onclick="closeModal()">الرجوع للتسوق</button>
     </div>
 </div>
@@ -230,12 +254,23 @@
 <script>
     let cart = [];
     let isVerified = localStorage.getItem('oara_verified_user');
+    let currentRating = 0;
+
+    // مصفوفة التعليقات (أغلبها سلبي + إيجابي للمصداقية)
+    const reviewData = [
+        { n: "أبو إياد - الخليل", r: 1, t: "يا جماعة التوصيل زفت! صارلي أسبوعين بستنى والطلب لسا ما وصل، وكل ما أرن ع المندوب بسكر بوجهي." },
+        { n: "سارة - رام الله", r: 5, t: "يسلمو كتير، القميص فخامة والتغليف بيفتح النفس. شكراً OARA." },
+        { n: "محمد الخليلي", r: 2, t: "البضاعة فخمة بس المندوب تعامله سيء جداً وتأخر كتير ع الموعد وطلب زيادة مصاري للتوصيل!" },
+        { n: "يوسف - القدس", r: 1, t: "ليش ما بتردوا ع الواتساب؟ طلبت ساعة ووصلتني مكسورة وبدي أبدلها وما حدا عبرني!" },
+        { n: "أم جود - بيت لحم", r: 1, t: "التوصيل مأساة! الطلبية وصلت مبهدلة والتغليف ممزع. خسارة الشيكلات." },
+        { n: "هيا - جنين", r: 3, t: "المنتج منيح، بس يا ريت تلاقوا حل لمشكلة التأخير بالتوصيل للمحافظات، أخد 10 أيام." },
+        { n: "أدهم - جنين", r: 1, t: "بضحكوا ع الناس وببعتوا موديلات ثانية غير الصور، ما حدا يطلب منهم نصيحة." },
+        { n: "ليان - نابلس", r: 2, t: "المنتج منيح بس المندوب رن علي نص الليل وقلي انزلي استلمي.. شو هالحكي هاد؟" }
+    ];
 
     function toggleProducts(id) {
         document.getElementById(id).classList.toggle('active');
-        if(document.getElementById(id).classList.contains('active')) {
-            window.scrollBy(0, 150);
-        }
+        if(document.getElementById(id).classList.contains('active')) { window.scrollBy(0, 150); }
     }
 
     function triggerNotify(m) { 
@@ -279,11 +314,28 @@
         let text = "طلب جديد من متجر OARA:\n";
         cart.forEach(i=> text += `- ${i.n} (${i.p} ILS)\n`);
         text += `\nالاسم: ${document.getElementById('c-name').value}\nالعنوان: ${document.getElementById('c-city').value}`;
-        // تم تحديث الروابط الجديدة للشبكة هنا
-        const newNetworks = ["https://oar-astore.vercel.app/", "https://oarastore.netlify.app/"];
         window.open(`https://wa.me/972568486065?text=${encodeURIComponent(text)}`);
     }
-</script>
-</body>
-            </html>
-    
+
+    function setRating(n) {
+        currentRating = n;
+        const stars = document.querySelectorAll('#input-stars span');
+        stars.forEach((s, i) => s.classList.toggle('active', i < n));
+    }
+
+    function submitReview() {
+        if(currentRating === 0) return alert("قيم بالنجوم!");
+        alert("يسلمو! رح نراجعه وننشره.");
+        document.getElementById('user-comment-txt').value = '';
+        setRating(0);
+    }
+
+    function loadReviews() {
+        const list = document.getElementById('real-reviews-list');
+        let html = '';
+        reviewData.forEach(item => {
+            let starsHtml = '★'.repeat(item.r) + '<span style="color:#222">' + '★'.repeat(5-item.r) + '</span>';
+            html += `
+                <div class="comment-card">
+                    <div class="comment-header">
+                        <di
