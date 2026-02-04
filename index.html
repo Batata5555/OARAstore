@@ -3,7 +3,6 @@
 <head>
     <link rel="preconnect" href="https://images.pexels.com">
     <link rel="dns-prefetch" href="https://images.pexels.com">
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
@@ -20,10 +19,11 @@
         
         .sidebar { position: fixed; right: -320px; top: 0; width: 300px; height: 100%; background: var(--dark); border-left: 1px solid var(--gold); z-index: 3000; transition: 0.3s; padding: 30px; }
         .sidebar.active { right: 0; }
-        .sidebar-item { padding: 18px 0; border-bottom: 1px solid #1a1a1a; color: #eee; text-decoration: none; display: block; }
+        .sidebar-item { padding: 18px 0; border-bottom: 1px solid #1a1a1a; color: #eee; text-decoration: none; display: block; font-size: 15px; }
 
         .section-box { padding: 20px 0; margin-bottom: 30px; scroll-margin-top: 80px; }
         .row-label { text-align: center; color: var(--gold); font-weight: 700; margin: 10px 0; font-size: 28px; }
+        .section-moto { text-align: center; font-size: 13px; color: #777; margin-bottom: 15px; padding: 0 20px; font-style: italic; }
         
         .category-gate { position: relative; width: 90%; margin: 0 auto 20px; border-radius: 15px; overflow: hidden; cursor: pointer; border: 1px solid #1a1a1a; }
         .category-gate img { width: 100%; height: 250px; object-fit: cover; transition: 0.5s; background: #111; }
@@ -34,35 +34,32 @@
         .product-grid.active { display: grid; }
 
         .card-luxury { background: var(--dark); border: 1px solid #1a1a1a; border-radius: 12px; text-align: center; padding-bottom: 15px; overflow: hidden; }
-        .card-luxury img { width: 100%; height: 140px; object-fit: cover; background: #111; }
+        .card-luxury img { width: 100%; height: 140px; object-fit: cover; background: #111; cursor: pointer; }
         .btn-gold { background: var(--gold); color: #000; border: none; padding: 12px; width: 85%; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; }
 
         #auth-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 9999; display: none; align-items: center; justify-content: center; }
         #auth-overlay.active { display: flex; }
-        .auth-card { width: 90%; max-width: 350px; text-align: center; padding: 30px; border: 1px solid var(--gold); background: var(--dark); border-radius: 20px; }
+        .auth-card { width: 90%; max-width: 350px; text-align: center; padding: 30px; border: 1px solid var(--gold); background: var(--dark); border-radius: 20px; position: relative; }
 
-        input { width: 100%; padding: 14px; margin: 10px 0; background: #000; border: 1px solid #222; color: var(--gold); border-radius: 8px; text-align: center; }
+        input, select { width: 100%; padding: 14px; margin: 10px 0; background: #000; border: 1px solid #222; color: var(--gold); border-radius: 8px; text-align: center; font-family: 'Tajawal'; }
 
-        .brand-story { padding: 40px 30px; text-align: center; background: #080808; border-bottom: 1px solid #111; }
+        .brand-story { padding: 50px 30px; text-align: center; background: linear-gradient(to bottom, #080808, #050505); border-bottom: 1px solid #111; }
+        .brand-story p { color: #aaa; font-size: 14px; line-height: 1.8; max-width: 600px; margin: 0 auto; }
         
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 4000; display: none; align-items: center; justify-content: center; }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 4000; display: none; align-items: center; justify-content: center; overflow-y: auto; }
         .modal.active { display: flex; }
-        .modal-content { background: var(--dark); border: 1px solid var(--gold); padding: 25px; border-radius: 15px; width: 90%; max-width: 360px; }
+        .modal-content { background: var(--dark); border: 1px solid var(--gold); padding: 25px; border-radius: 15px; width: 90%; max-width: 360px; margin: auto; }
 
-        .payment-methods { display: flex; justify-content: center; gap: 10px; margin-top: 15px; filter: grayscale(1) contrast(1.2); opacity: 0.7; }
-        .payment-methods img { height: 20px; }
+        .payment-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; text-align: center; }
+        .payment-methods div { font-size: 10px; color: #777; border: 1px solid #222; padding: 5px; border-radius: 5px; }
+        .payment-methods img { height: 25px; display: block; margin: 0 auto 5px; }
 
         .reviews-section { padding: 20px; background: #050505; border-top: 1px solid #111; }
-        .add-review-box { background: var(--dark); border: 1px solid var(--gold); padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; }
-        .star-rating-input { font-size: 30px; color: #444; margin-bottom: 15px; }
-        .star-rating-input span { cursor: pointer; transition: 0.3s; }
-        .star-rating-input span.active { color: var(--gold); }
-        textarea { width: 100%; background: #000; border: 1px solid #222; color: #fff; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-family: 'Tajawal'; resize: none; }
-        .comment-card { background: var(--dark); border: 1px solid #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
-        .comment-header { display: flex; justify-content: space-between; align-items: center; }
-        .user-info { display: flex; align-items: center; gap: 10px; }
-        .user-avatar { width: 35px; height: 35px; background: #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-weight: bold; font-size: 14px; border: 1px solid var(--gold); }
-        .stars-display { color: #f1c40f; font-size: 12px; }
+        #real-reviews-list .comment-card:nth-child(n+4) { display: none; }
+        #real-reviews-list.show-all .comment-card { display: block; }
+        
+        .product-detail-modal { position: fixed; inset: 0; background: var(--black); z-index: 5000; display: none; flex-direction: column; padding: 20px; overflow-y: auto; }
+        .product-detail-modal.active { display: flex; }
     </style>
 </head>
 <body>
@@ -71,20 +68,32 @@
     <b style="color:var(--gold)">OARA STORE</b><br><span id="notif-text"></span>
 </div>
 
+<div id="detail-modal" class="product-detail-modal">
+    <div onclick="closeDetail()" style="font-size: 30px; color: var(--gold); cursor: pointer; margin-bottom: 20px;">✕</div>
+    <img id="detail-img" src="" style="width: 100%; border-radius: 15px; height: 300px; object-fit: cover; border: 1px solid var(--gold);">
+    <h2 id="detail-title" style="color: var(--gold); margin-top: 20px;"></h2>
+    <p id="detail-desc" style="color: #aaa; line-height: 1.8; margin-bottom: 20px;"></p>
+    <div id="detail-price" style="font-size: 24px; font-weight: bold; margin-bottom: 20px;"></div>
+    <button class="btn-gold" id="detail-add-btn">إضافة للحقيبة</button>
+</div>
+
 <div id="auth-overlay">
-    <div class="auth-card" id="reg-form">
-        <h2 style="color:var(--gold); font-family:'Bodoni Moda'">انضم لنخبة OARA</h2>
-        <input type="text" id="r-user" placeholder="اسم المستخدم">
-        <input type="password" id="r-pass" placeholder="كلمة المرور">
-        <button class="btn-gold" onclick="handleAuth('register')">إنشاء حسابي</button>
-        <p onclick="toggleAuth()" style="font-size:11px; color:#555; cursor:pointer; margin-top:20px;">لديك حساب؟ سجل دخولك</p>
-    </div>
-    <div class="auth-card" id="login-form" style="display:none">
-        <h2 style="color:var(--gold)">تسجيل الدخول</h2>
-        <input type="text" id="l-user" placeholder="اسم المستخدم">
-        <input type="password" id="l-pass" placeholder="كلمة المرور">
-        <button class="btn-gold" onclick="handleAuth('login')">دخول</button>
-        <p onclick="toggleAuth()" style="font-size:11px; color:#555; cursor:pointer; margin-top:20px;">مستخدم جديد؟ أنشئ حسابك</p>
+    <div class="auth-card">
+        <div onclick="document.getElementById('auth-overlay').classList.remove('active')" style="position: absolute; left: 15px; top: 15px; color: var(--gold); cursor: pointer; font-size: 20px;">✕</div>
+        <div id="reg-form">
+            <h2 style="color:var(--gold); font-family:'Bodoni Moda'">انضم لنخبة OARA</h2>
+            <input type="text" id="r-user" placeholder="اسم المستخدم">
+            <input type="password" id="r-pass" placeholder="كلمة المرور">
+            <button class="btn-gold" onclick="handleAuth('register')">إنشاء حسابي</button>
+            <p onclick="toggleAuth()" style="font-size:11px; color:#555; cursor:pointer; margin-top:20px;">لديك حساب؟ سجل دخولك</p>
+        </div>
+        <div id="login-form" style="display:none">
+            <h2 style="color:var(--gold)">تسجيل الدخول</h2>
+            <input type="text" id="l-user" placeholder="اسم المستخدم">
+            <input type="password" id="l-pass" placeholder="كلمة المرور">
+            <button class="btn-gold" onclick="handleAuth('login')">دخول</button>
+            <p onclick="toggleAuth()" style="font-size:11px; color:#555; cursor:pointer; margin-top:20px;">مستخدم جديد؟ أنشئ حسابك</p>
+        </div>
     </div>
 </div>
 
@@ -98,34 +107,38 @@
 </header>
 
 <div class="sidebar" id="sidebar">
-    <div style="display:flex; justify-content:space-between; color:var(--gold); margin-bottom:30px;"><b>القائمة</b> <span onclick="toggleSidebar()">✕</span></div>
-    <a href="#clothing-sec" class="sidebar-item" onclick="toggleSidebar()">👕 الملابس</a>
-    <a href="#tech-sec" class="sidebar-item" onclick="toggleSidebar()">💻 الإلكترونيات</a>
-    <a href="#perfume-sec" class="sidebar-item" onclick="toggleSidebar()">💎 العطور والجمال</a>
-    <a href="#watch-sec" class="sidebar-item" onclick="toggleSidebar()">⌚ الساعات</a>
-    <a href="#access-sec" class="sidebar-item" onclick="toggleSidebar()">💍 الإكسسوارات</a>
-    <a href="#reviews-anchor" class="sidebar-item" onclick="toggleSidebar()">💬 آراء الزبائن</a>
-</div>
-
-<div class="brand-story">
-    <h3 style="color:var(--gold); font-family:'Bodoni Moda'; font-size: 24px;">OARA STORE</h3>
-    <p style="color:#666; font-size:13px; line-height:1.8">الفخامة بلمسة فلسطينية أصيلة.</p>
+    <div style="display:flex; justify-content:space-between; color:var(--gold); margin-bottom:30px;"><b>القائمة الملكية</b> <span onclick="toggleSidebar()">✕</span></div>
+    <a href="#clothing-sec" class="sidebar-item" onclick="toggleSidebar()">👕 خزانة النخبة</a>
+    <a href="#tech-sec" class="sidebar-item" onclick="toggleSidebar()">💻 تكنولوجيا المستقبل</a>
+    <a href="#perfume-sec" class="sidebar-item" onclick="toggleSidebar()">✨ عالم العطور</a>
+    <a href="#watch-sec" class="sidebar-item" onclick="toggleSidebar()">⌚ نبض الوقت</a>
+    <a href="#access-sec" class="sidebar-item" onclick="toggleSidebar()">💍 بريق الإكسسوار</a>
+    <a href="#reviews-anchor" class="sidebar-item" onclick="toggleSidebar()">💬 شهادات نعتز بها</a>
+    <a href="https://wa.me/972568486065" class="sidebar-item" style="color: var(--gold);">📞 خدمة العملاء (واتساب)</a>
+    <a href="#" class="sidebar-item" style="color: #ff4444; border-top: 1px solid #222; margin-top: 20px;" onclick="logout()">⚠️ خروج من الحساب</a>
+                                                                                                                                </div>
+            <div class="brand-story">
+    <h3 style="color:var(--gold); font-family:'Bodoni Moda'; font-size: 26px;">حكاية OARA: من شغف بسيط إلى صرح للفخامة</h3>
+    <p>
+        بدأت رحلة OARA STORE في أزقة فلسطين العريقة، لم نكن مجرد متجر يبيع السلع، بل كنا نحلم بنقل ثقافة الرقي الفلسطيني إلى كل بيت. بدأت الفكرة بقطعة قماش واحدة وعطر فريد، ومع الوقت، وبفضل ثقتكم، كبر الحلم ليصبح وجهة النخبة الباحثين عن التفرد. نحن نؤمن أن الفخامة ليست مجرد سعر، بل هي تفاصيل دقيقة وتجربة تليق بمقامكم. في OARA، كل قطعة نختارها لها قصة، وكل زبون هو شريك في هذا النجاح المستمر.
+    </p>
 </div>
 
 <div id="clothing-sec" class="section-box">
-    <div class="row-label">الملابس</div>
+    <div class="row-label">خزانة النخبة</div>
+    <p class="section-moto">"ارتدِ الثقة، فالأناقة هي اللغة التي يفهمها الجميع دون عناء."</p>
     <div class="category-gate" onclick="toggleProducts('clothing-grid')">
         <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg" loading="lazy">
-        <div class="gate-overlay">تصفح الملابس</div>
+        <div class="gate-overlay">اكتشف الأناقة</div>
     </div>
     <div id="clothing-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg">
+            <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg" onclick="showProduct('قميص OARA LUXE', 'قطن طبيعي 100% بتصميم عصري يناسب المناسبات الرسمية والكاجوال، ملمس ناعم وجودة تدوم لسنوات.', 280, this.src)">
             <p>قميص OARA LUXE</p>
-            <button class="btn-gold" onclick="addToCart('قميص OARA', 280)">280 ILS</button>
+            <button class="btn-gold" onclick="addToCart('قميص OARA LUXE', 280)">280 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/4439425/pexels-photo-4439425.jpeg">
+            <img src="https://images.pexels.com/photos/4439425/pexels-photo-4439425.jpeg" onclick="showProduct('بنطال كلاسيك سبورت', 'تصميم إيطالي مريح بخصر مرن، مثالي للعمل والرحلات الطويلة، قماش مضاد للتجعد.', 310, this.src)">
             <p>بنطال كلاسيك</p>
             <button class="btn-gold" onclick="addToCart('بنطال كلاسيك', 310)">310 ILS</button>
         </div>
@@ -133,38 +146,41 @@
 </div>
 
 <div id="tech-sec" class="section-box">
-    <div class="row-label">الإلكترونيات</div>
+    <div class="row-label">تكنولوجيا المستقبل</div>
+    <p class="section-moto">"التكنولوجيا لا تسهل حياتك فقط، بل تمنحك القوة لتكون في المقدمة دائماً."</p>
     <div class="category-gate" onclick="toggleProducts('tech-grid')">
         <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg" loading="lazy">
-        <div class="gate-overlay">تصفح الإلكترونيات</div>
+        <div class="gate-overlay">عالم الذكاء</div>
     </div>
     <div id="tech-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg">
+            <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg" onclick="showProduct('سماعة OARA Pro', 'عزل ضوضاء فائق، بطارية تدوم 40 ساعة، وصوت محيطي نقي جداً يجعلك في قلب الحدث.', 950, this.src)">
             <p>سماعة Pro</p>
             <button class="btn-gold" onclick="addToCart('سماعة Pro', 950)">950 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/5081431/pexels-photo-5081431.jpeg">
+            <img src="https://images.pexels.com/photos/5081431/pexels-photo-5081431.jpeg" onclick="showProduct('شاحن فائق السرعة', 'بقوة 65 واط، يحمي جهازك من الحرارة الزائدة ويشحن هاتفك بالكامل في 30 دقيقة فقط.', 120, this.src)">
             <p>شاحن سريع</p>
             <button class="btn-gold" onclick="addToCart('شاحن سريع', 120)">120 ILS</button>
         </div>
     </div>
-    </div>
-           <div id="perfume-sec" class="section-box">
-    <div class="row-label">العطور والجمال</div>
+</div>
+
+<div id="perfume-sec" class="section-box">
+    <div class="row-label">عطور</div>
+    <p class="section-moto">"العطر هو التوقيع الذي تتركه وراءك، فاجعل حضورك لا يُنسى."</p>
     <div class="category-gate" onclick="toggleProducts('perfume-grid')">
         <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg" loading="lazy">
-        <div class="gate-overlay">تصفح العطور</div>
+        <div class="gate-overlay">سحر الروائح</div>
     </div>
     <div id="perfume-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg">
+            <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg" onclick="showProduct('عطر OARA Royal', 'مزيج من العود الملكي واللافندر الفرنسي، ثبات يدوم لـ 48 ساعة، لمحبي الفخامة.', 450, this.src)">
             <p>عطر OARA Royal</p>
             <button class="btn-gold" onclick="addToCart('عطر Royal', 450)">450 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg">
+            <img src="https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg" onclick="showProduct('زيت مسك النخبة', 'مسك أصلي بتركيز عالٍ جداً، نقي وخالي من الكحول، رائحة النظافة والرقي في زجاجة.', 180, this.src)">
             <p>زيت مسك النخبة</p>
             <button class="btn-gold" onclick="addToCart('مسك النخبة', 180)">180 ILS</button>
         </div>
@@ -172,39 +188,40 @@
 </div>
 
 <div id="watch-sec" class="section-box">
-    <div class="row-label">الساعات</div>
+    <div class="row-label">نبض الوقت</div>
+    <p class="section-moto">"الوقت هو أغلى ما تملك، فاجعل كل ثانية تعبر عن مكانتك."</p>
     <div class="category-gate" onclick="toggleProducts('watch-grid')">
         <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg" loading="lazy">
-        <div class="gate-overlay">تصفح الساعات</div>
+        <div class="gate-overlay">ساعات الفخامة</div>
     </div>
     <div id="watch-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg">
+            <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg" onclick="showProduct('ساعة Gold Luxury', 'مطلي بماء الذهب عيار 18، ماكينة سويسرية دقيقة، ومقاومة للماء حتى 50 متراً.', 1200, this.src)">
             <p>ساعة Gold Luxury</p>
             <button class="btn-gold" onclick="addToCart('ساعة Gold', 1200)">1200 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg">
+            <img src="https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg" onclick="showProduct('ساعة Black Edition', 'تصميم رياضي فخم بإطار من الكربون الصلب، سوار من الجلد الطبيعي الأسود.', 1100, this.src)">
             <p>ساعة Black Edition</p>
             <button class="btn-gold" onclick="addToCart('ساعة Black', 1100)">1100 ILS</button>
         </div>
     </div>
-</div>
-
-<div id="access-sec" class="section-box">
-    <div class="row-label">الإكسسوارات</div>
+    </div>
+    <div id="access-sec" class="section-box">
+    <div class="row-label">بريق الإكسسوار</div>
+    <p class="section-moto">"التفاصيل الصغيرة هي التي تصنع الفارق الكبير في إطلالتك."</p>
     <div class="category-gate" onclick="toggleProducts('access-grid')">
         <img src="https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg" loading="lazy">
-        <div class="gate-overlay">تصفح الإكسسوارات</div>
+        <div class="gate-overlay">تصفح القطع</div>
     </div>
     <div id="access-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg">
+            <img src="https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg" onclick="showProduct('خاتم ملكي', 'خاتم من الفضة الإسترلينية عيار 925 مرصع بحجر الزركون اللامع، تصميم يعكس الفخامة.', 350, this.src)">
             <p>خاتم ملكي</p>
             <button class="btn-gold" onclick="addToCart('خاتم ملكي', 350)">350 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/2850500/pexels-photo-2850500.jpeg">
+            <img src="https://images.pexels.com/photos/2850500/pexels-photo-2850500.jpeg" onclick="showProduct('قلادة النخبة', 'قلادة مطلية بالذهب الوردي بتصميم فريد يبرز جمال العنق، قطعة نادرة.', 420, this.src)">
             <p>قلادة النخبة</p>
             <button class="btn-gold" onclick="addToCart('قلادة النخبة', 420)">420 ILS</button>
         </div>
@@ -214,36 +231,44 @@
 <div id="reviews-anchor" class="reviews-section">
     <div class="row-label">آراء النخبة</div>
     <div class="add-review-box">
-        <p style="font-size: 14px; color: var(--gold);">شو رأيك بمنتجاتنا؟</p>
+        <p style="font-size: 14px; color: var(--gold);">شاركنا تجربتك الملكية</p>
         <div class="star-rating-input" id="input-stars">
             <span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span><span onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span><span onclick="setRating(5)">★</span>
         </div>
-        <textarea id="user-comment-txt" rows="3" placeholder="اكتب رأيك هون..."></textarea>
+        <textarea id="user-comment-txt" rows="3" placeholder="اكتب رأيك هنا..."></textarea>
         <button class="btn-gold" onclick="submitReview()">نشر التعليق</button>
     </div>
     <div id="real-reviews-list"></div>
+    <button id="show-more-btn" class="btn-gold" style="background:none; color:var(--gold); border:1px solid var(--gold); margin-top:10px; width:100%; display:none;" onclick="showAllComments()">عرض المزيد من الآراء</button>
 </div>
 
 <div class="modal" id="cart-modal">
     <div class="modal-content">
-        <h3 style="color:var(--gold); text-align:center">حقيبتك</h3>
-        <div id="cart-items" style="margin:20px 0; max-height:200px; overflow-y:auto; border-top:1px solid #222; padding-top:10px;"></div>
-        <button class="btn-gold" onclick="closeModal(); document.getElementById('order-modal').classList.add('active');">إتمام الطلب</button>
-        <div class="payment-methods">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+        <h3 style="color:var(--gold); text-align:center">حقيبتك المختارة</h3>
+        <div id="cart-items" style="margin:20px 0; max-height:150px; overflow-y:auto; border-top:1px solid #222; padding-top:10px;"></div>
+        
+        <div id="checkout-fields" style="display:none">
+            <input id="c-name" placeholder="الاسم الكامل">
+            <input id="c-city" placeholder="المدينة / المحافظة">
+            <input id="c-town" placeholder="البلدة / القرية">
+            <input id="c-mark" placeholder="أقرب مكان مشهور (معلم معروف)">
+            <select id="c-pay">
+                <option value="" disabled selected>اختر طريقة الدفع</option>
+                <option value="جوال باي (Jawwal Pay)">جوال باي (Jawwal Pay)</option>
+                <option value="فيزا / ماستر كارد">فيزا / ماستر كارد</option>
+                <option value="بينانس (USDT)">بينانس (Binance)</option>
+                <option value="دفع عند الاستلام">دفع عند الاستلام</option>
+            </select>
         </div>
-        <button class="btn-gold" style="background:none; color:#777; border:1px solid #333; margin-top:15px;" onclick="closeModal()">رجوع</button>
-    </div>
-</div>
 
-<div class="modal" id="order-modal">
-    <div class="modal-content">
-        <h3 style="color:var(--gold)">تأكيد الطلب</h3>
-        <input id="c-name" placeholder="الاسم الكامل">
-        <input id="c-city" placeholder="المدينة / العنوان">
-        <button class="btn-gold" onclick="confirmOrder()">طلب عبر واتساب</button>
-        <button class="btn-gold" style="background:none; color:#777;" onclick="closeModal()">رجوع</button>
+        <button class="btn-gold" id="cart-action-btn" onclick="proceedToCheckout()">إتمام الطلب</button>
+        
+        <div class="payment-methods">
+            <div><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg">Visa</div>
+            <div><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg">Master</div>
+            <div><img src="https://cryptologos.cc/logos/tether-usdt-logo.svg">USDT</div>
+        </div>
+        <button class="btn-gold" style="background:none; color:#777; border:1px solid #333; margin-top:10px;" onclick="closeModal()">رجوع للمتجر</button>
     </div>
 </div>
 
@@ -262,10 +287,10 @@
 
     function toggleProducts(id) { document.getElementById(id).classList.toggle('active'); }
     function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-    function closeModal() { document.querySelectorAll('.modal').forEach(m=>m.classList.remove('active')); }
-    function toggleAuth() {
-        document.getElementById('reg-form').style.display = document.getElementById('reg-form').style.display==='none'?'block':'none';
-        document.getElementById('login-form').style.display = document.getElementById('login-form').style.display==='none'?'block':'none';
+    function closeModal() { 
+        document.querySelectorAll('.modal').forEach(m=>m.classList.remove('active'));
+        document.getElementById('checkout-fields').style.display = 'none';
+        document.getElementById('cart-action-btn').innerText = 'إتمام الطلب';
     }
 
     function triggerNotify(m) { 
@@ -280,14 +305,27 @@
         localStorage.setItem('oara_verified_user', u);
         isVerified = true;
         document.getElementById('auth-overlay').classList.remove('active');
-        triggerNotify("أهلاً بك");
+        triggerNotify("أهلاً بك في عالمنا");
     }
+
+    function logout() { localStorage.removeItem('oara_verified_user'); location.reload(); }
+
+    function showProduct(title, desc, price, img) {
+        document.getElementById('detail-title').innerText = title;
+        document.getElementById('detail-desc').innerText = desc;
+        document.getElementById('detail-price').innerText = price + " ILS";
+        document.getElementById('detail-img').src = img;
+        document.getElementById('detail-add-btn').onclick = function() { addToCart(title, price); closeDetail(); };
+        document.getElementById('detail-modal').classList.add('active');
+    }
+
+    function closeDetail() { document.getElementById('detail-modal').classList.remove('active'); }
 
     function addToCart(n, p) {
         if(!isVerified) { document.getElementById('auth-overlay').classList.add('active'); return; }
         cart.push({n, p});
         document.getElementById('cart-count').innerText = cart.length;
-        triggerNotify("تمت الإضافة");
+        triggerNotify("أضيف إلى حقيبتك");
     }
 
     function openCart() {
@@ -296,10 +334,33 @@
         list.innerHTML = cart.map(i=> `<div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #111"><span>${i.n}</span><span>${i.p} ILS</span></div>`).join('') || "الحقيبة فارغة";
     }
 
+    function proceedToCheckout() {
+        if(cart.length === 0) return alert("الحقيبة فارغة!");
+        const fields = document.getElementById('checkout-fields');
+        if(fields.style.display === 'none') {
+            fields.style.display = 'block';
+            document.getElementById('cart-action-btn').innerText = 'تأكيد الطلب عبر واتساب';
+        } else {
+            confirmOrder();
+        }
+    }
+
     function confirmOrder() {
-        let text = "طلب جديد من متجر OARA:\n";
-        cart.forEach(i=> text += `- ${i.n} (${i.p} ILS)\n`);
-        text += `\nالاسم: ${document.getElementById('c-name').value}\nالعنوان: ${document.getElementById('c-city').value}`;
+        const name = document.getElementById('c-name').value;
+        const city = document.getElementById('c-city').value;
+        const town = document.getElementById('c-town').value;
+        const mark = document.getElementById('c-mark').value;
+        const pay = document.getElementById('c-pay').value;
+
+        if(!name || !city || !town || !pay) return alert("يرجى إكمال بيانات الشحن والدفع");
+
+        let text = "✨ *طلب جديد من متجر OARA* ✨\n\n";
+        text += "*المشتريات:*\n";
+        let total = 0;
+        cart.forEach(i=> { text += `- ${i.n} (${i.p} ILS)\n`; total += i.p; });
+        text += `\n*المجموع الكلي:* ${total} ILS`;
+        text += `\n\n*بيانات الزبون:*\n👤 الاسم: ${name}\n📍 المدينة: ${city}\n🏡 البلدة: ${town}\n🏛️ معلم معروف: ${mark}\n💳 طريقة الدفع: ${pay}`;
+        
         window.open(`https://wa.me/972568486065?text=${encodeURIComponent(text)}`);
     }
 
@@ -310,26 +371,30 @@
 
     function submitReview() {
         if(currentRating === 0) return alert("قيم بالنجوم أولاً!");
-        alert("يسلمو على رأيك! رح نراجعه وننشره.");
+        alert("يسلمو على رأيك! سيتم المراجعة والنشر.");
         document.getElementById('user-comment-txt').value = '';
         setRating(0);
     }
 
     function loadReviews() {
         const list = document.getElementById('real-reviews-list');
-        let html = '';
-        reviewData.forEach(item => {
+        list.innerHTML = reviewData.map(item => {
             let stars = '★'.repeat(item.r) + '<span style="color:#222">' + '★'.repeat(5-item.r) + '</span>';
-            html += `<div class="comment-card">
+            return `<div class="comment-card">
                         <div class="comment-header"><div class="user-info"><div class="user-avatar">${item.n.charAt(0)}</div><b>${item.n}</b></div><div class="stars-display">${stars}</div></div>
                         <p style="font-size:13px; color:#aaa; margin-top:10px;">${item.t}</p>
                     </div>`;
-        });
-        list.innerHTML = html;
+        }).join('');
+        if(reviewData.length > 3) document.getElementById('show-more-btn').style.display = 'block';
+    }
+
+    function showAllComments() {
+        document.getElementById('real-reviews-list').classList.add('show-all');
+        document.getElementById('show-more-btn').style.display = 'none';
     }
 
     window.onload = loadReviews;
 </script>
 </body>
             </html>
-    
+            
