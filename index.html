@@ -221,8 +221,8 @@
     <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('clothing'); toggleSidebar()">APPAREL</a>
     <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('access'); toggleSidebar()">ACCESSORIES</a>
     <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('tech'); toggleSidebar()">ELECTRONICS</a>
-                                                                                                                                             </div>
-        <div id="main-home">
+</div>
+<div id="main-home">
     <div id="watch-sec" class="section-box">
         <div class="row-label">ساعات</div>
         <p class="section-moto">"إرث من الأناقة يلتف حول معصمك"</p>
@@ -336,8 +336,8 @@
     }
 
     window.addEventListener('DOMContentLoaded', preloadProducts);
-            </script>
-            <div id="detail-modal" style="position:fixed; inset:0; background:var(--black); z-index:9000; display:none; flex-direction:column; padding:20px; overflow-y:auto;">
+</script>
+<div id="detail-modal" style="position:fixed; inset:0; background:var(--black); z-index:9000; display:none; flex-direction:column; padding:20px; overflow-y:auto;">
     <div onclick="closeDetail()" style="font-size: 30px; color: var(--gold); cursor: pointer; align-self: flex-start; padding: 10px;">✕</div>
     
     <div style="max-width: 600px; margin: 0 auto; width: 100%;">
@@ -352,129 +352,106 @@
 <div class="modal" id="cart-modal" style="position:fixed; inset:0; background:rgba(0,0,0,0.95); display:none; z-index:8000; align-items:center; justify-content:center; padding:20px;">
     <div style="background:var(--black); border:1px solid var(--gold); width:100%; max-width:450px; padding:30px; position:relative;">
         <h3 style="color:var(--gold); text-align:center; font-size: 18px; font-weight: 300; letter-spacing: 3px; margin-top:0; text-transform: uppercase;">YOUR BAG</h3>
-        
         <div id="cart-items" style="margin:25px 0; max-height:300px; overflow-y:auto; border-top:1px solid #111; padding-top:15px;"></div>
         
         <div id="checkout-fields" style="display:none;">
-            <input id="c-name" placeholder="FULL NAME" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; font-size:12px; letter-spacing:1px;">
-            <input id="c-city" placeholder="CITY / GOVERNORATE" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; font-size:12px; letter-spacing:1px;">
-            <input id="c-town" placeholder="TOWN / VILLAGE" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; font-size:12px; letter-spacing:1px;">
-            <select id="c-pay" style="width:100%; background:black; border:1px solid #222; color:var(--gold); padding:12px; margin-bottom:12px; font-size:11px; letter-spacing:1px;">
+            <input id="c-name" placeholder="FULL NAME" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; font-size:12px;">
+            <input id="c-city" placeholder="CITY / GOVERNORATE" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; font-size:12px;">
+            <input id="c-town" placeholder="TOWN / VILLAGE" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; font-size:12px;">
+            <select id="c-pay" style="width:100%; background:black; border:1px solid #222; color:var(--gold); padding:12px; margin-bottom:12px; font-size:11px;">
                 <option value="" disabled selected>PAYMENT METHOD</option>
                 <option value="Cash on Delivery">Cash on Delivery</option>
                 <option value="Jawwal Pay">Jawwal Pay</option>
-                <option value="Binance (USDT)">Binance (USDT)</option>
             </select>
         </div>
         
         <button class="btn-gold" id="cart-action-btn" onclick="proceedToCheckout()" style="width:100%; height: 50px;">PROCEED TO CHECKOUT</button>
-        <button onclick="closeCart()" style="width:100%; background:none; border:none; color:#555; margin-top:15px; cursor:pointer; font-size:11px; letter-spacing:1px;">CLOSE</button>
+        <button onclick="closeCart()" style="width:100%; background:none; border:none; color:#555; margin-top:15px; cursor:pointer; font-size:11px;">CLOSE</button>
     </div>
 </div>
 
-<div id="reviews-anchor" style="padding: 60px 20px; border-top: 1px solid #111;">
-    <div class="row-label">REVIEWS</div>
-    <div style="max-width: 500px; margin: 0 auto; text-align: center;">
-        <div id="input-stars" style="font-size: 25px; color: #222; margin-bottom: 20px;">
-            <span onclick="setRating(1)" style="cursor:pointer;">★</span>
-            <span onclick="setRating(2)" style="cursor:pointer;">★</span>
-            <span onclick="setRating(3)" style="cursor:pointer;">★</span>
-            <span onclick="setRating(4)" style="cursor:pointer;">★</span>
-            <span onclick="setRating(5)" style="cursor:pointer;">★</span>
+<div id="reviews-anchor" style="padding: 60px 20px; border-top: 1px solid #111; background: #080808;">
+    <div class="row-label">آراء الزبائن</div>
+    <div id="reviews-display" style="max-width: 600px; margin: 0 auto 40px;">
+        <div style="border-bottom: 1px solid #1a1a1a; padding: 15px 0;">
+            <div style="color: var(--gold); font-size: 12px;">★★★★★</div>
+            <div style="font-size: 14px; margin: 5px 0;">"يسلمو إيديكم، الساعة فخمة عالاخر وبتبيض الوجه، وصلتني لرام الله بيومين بس."</div>
+            <div style="color: #555; font-size: 11px;">أبو العبد - رام الله</div>
         </div>
-        <textarea id="user-comment-txt" placeholder="SHARE YOUR EXPERIENCE..." style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:15px; font-family:'Tajawal'; font-size:13px; text-align:center; resize:none;"></textarea>
-        <button class="btn-gold" onclick="submitReview()" style="margin-top: 20px; width: 180px;">POST REVIEW</button>
+        <div style="border-bottom: 1px solid #1a1a1a; padding: 15px 0;">
+            <div style="color: var(--gold); font-size: 12px;">★★★☆☆</div>
+            <div style="font-size: 14px; margin: 5px 0;">"الريحة بتجنن بس الصراحة السعر شوي غالي، يعني لو تراعونا بكون أحسن."</div>
+            <div style="color: #555; font-size: 11px;">أميرة - نابلس</div>
+        </div>
+        <div style="border-bottom: 1px solid #1a1a1a; padding: 15px 0;">
+            <div style="color: var(--gold); font-size: 12px;">★★☆☆☆</div>
+            <div style="font-size: 14px; margin: 5px 0;">"المنتج منيح بس التوصيل للخليل غلبني وتأخر الشوفير لندل عالبيت، انقهرت."</div>
+            <div style="color: #555; font-size: 11px;">محمد - الخليل</div>
+        </div>
+        <div id="real-time-reviews"></div>
+    </div>
+
+    <div style="max-width: 500px; margin: 0 auto; text-align: center; background: #0a0a0a; padding: 25px; border: 1px solid #111;">
+        <input id="rev-name" placeholder="الاسم الكريم" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:10px; margin-bottom:10px; font-size:12px;">
+        <select id="rev-city" style="width:100%; background:#000; border:1px solid #222; color:#ccc; padding:10px; margin-bottom:10px; font-size:12px;">
+            <option value="" disabled selected>اختر المدينة</option>
+            <option value="القدس">القدس</option><option value="رام الله">رام الله</option><option value="نابلس">نابلس</option><option value="الخليل">الخليل</option><option value="جنين">جنين</option><option value="بيت لحم">بيت لحم</option><option value="غزة">غزة</option>
+        </select>
+        <div id="input-stars" style="font-size: 25px; color: #222; margin-bottom: 15px;">
+            <span onclick="setRating(1)" style="cursor:pointer;">★</span><span onclick="setRating(2)" style="cursor:pointer;">★</span><span onclick="setRating(3)" style="cursor:pointer;">★</span><span onclick="setRating(4)" style="cursor:pointer;">★</span><span onclick="setRating(5)" style="cursor:pointer;">★</span>
+        </div>
+        <textarea id="user-comment-txt" placeholder="شو رأيك بالمنتج؟" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; font-size:13px; height:80px;"></textarea>
+        <button class="btn-gold" onclick="submitReview()" style="margin-top: 20px; width: 100%;">نشر التعليق</button>
     </div>
 </div>
 
 <script>
-    let cart = [];
-    let currentRating = 0;
+    let cart = []; let currentRating = 0;
+    const forbiddenWords = ["سبة1", "خرا"]; 
 
     function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-
-    function showProduct(title, desc, price, img) {
-        document.getElementById('detail-title').innerText = title;
-        document.getElementById('detail-desc').innerText = desc;
-        document.getElementById('detail-price').innerText = price + " ILS";
-        document.getElementById('detail-img').src = img;
-        document.getElementById('detail-add-btn').onclick = function() { addToCart(title, price); closeDetail(); };
+    function showProduct(t, d, p, i) {
+        document.getElementById('detail-title').innerText = t;
+        document.getElementById('detail-desc').innerText = d;
+        document.getElementById('detail-price').innerText = p + " ILS";
+        document.getElementById('detail-img').src = i;
+        document.getElementById('detail-add-btn').onclick = function() { addToCart(t, p); closeDetail(); };
         document.getElementById('detail-modal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
-
-    function closeDetail() { 
-        document.getElementById('detail-modal').style.display = 'none'; 
-        if(document.getElementById('category-page').style.display !== 'block') {
-            document.body.style.overflow = 'auto';
-        }
-    }
-
-    function addToCart(n, p) {
-        cart.push({name: n, price: p});
-        document.getElementById('cart-count').innerText = cart.length;
-        alert("ADDED TO YOUR BAG");
-    }
-
+    function closeDetail() { document.getElementById('detail-modal').style.display = 'none'; if(document.getElementById('category-page').style.display !== 'block') document.body.style.overflow = 'auto'; }
+    function addToCart(n, p) { cart.push({name: n, price: p}); document.getElementById('cart-count').innerText = cart.length; alert("تمت الإضافة للحقيبة"); }
     function openCart() {
-        const modal = document.getElementById('cart-modal');
-        const list = document.getElementById('cart-items');
+        const modal = document.getElementById('cart-modal'); const list = document.getElementById('cart-items');
         modal.style.display = 'flex';
-        list.innerHTML = cart.length === 0 ? 
-            "<p style='text-align:center; font-size:12px; color:#444; letter-spacing:1px;'>YOUR BAG IS EMPTY</p>" :
-            cart.map((item) => `
-                <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #111; font-size:13px;">
-                    <span style="color:#eee;">${item.name}</span>
-                    <span style="color:var(--gold);">${item.price} ILS</span>
-                </div>
-            `).join('');
+        list.innerHTML = cart.length === 0 ? "<p style='text-align:center; color:#444;'>الحقيبة فارغة</p>" :
+            cart.map((item) => `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #111;"><span>${item.name}</span><span style="color:var(--gold);">${item.price} ILS</span></div>`).join('');
     }
-
-    function closeCart() {
-        document.getElementById('cart-modal').style.display = 'none';
-        document.getElementById('checkout-fields').style.display = 'none';
-        document.getElementById('cart-action-btn').innerText = 'PROCEED TO CHECKOUT';
-    }
-
+    function closeCart() { document.getElementById('cart-modal').style.display = 'none'; document.getElementById('checkout-fields').style.display = 'none'; }
     function proceedToCheckout() {
         if(cart.length === 0) return;
         const fields = document.getElementById('checkout-fields');
-        if(fields.style.display === 'none') {
-            fields.style.display = 'block';
-            document.getElementById('cart-action-btn').innerText = 'CONFIRM VIA WHATSAPP';
-        } else {
-            const name = document.getElementById('c-name').value;
-            const city = document.getElementById('c-city').value;
-            const pay = document.getElementById('c-pay').value;
-
-            if(!name || !city || !pay) return alert("PLEASE FILL ALL FIELDS");
-
-            let text = `🌟 *NEW ORDER - OARA STORE* 🌟\n\n*Customer:* ${name}\n*Location:* ${city}\n*Payment:* ${pay}\n\n*Items:*\n`;
-            let total = 0;
-            cart.forEach(item => { text += `- ${item.name} (${item.price} ILS)\n`; total += parseInt(item.price); });
-            text += `\n*TOTAL:* ${total} ILS`;
-
+        if(fields.style.display === 'none') { fields.style.display = 'block'; document.getElementById('cart-action-btn').innerText = 'تأكيد الطلب عبر واتساب'; }
+        else {
+            const n = document.getElementById('c-name').value; const c = document.getElementById('c-city').value;
+            if(!n || !c) return alert("يرجى تعبئة البيانات");
+            let text = `🌟 *طلب جديد - OARA STORE* 🌟\n\n*الزبون:* ${n}\n*المدينة:* ${c}\n\n*المنتجات:*\n`;
+            let total = 0; cart.forEach(i => { text += `- ${i.name} (${i.price} ILS)\n`; total += parseInt(i.price); });
+            text += `\n*الإجمالي:* ${total} ILS`;
             window.open(`https://wa.me/972568486065?text=${encodeURIComponent(text)}`);
-            cart = [];
-            document.getElementById('cart-count').innerText = "0";
-            closeCart();
+            cart = []; document.getElementById('cart-count').innerText = "0"; closeCart();
         }
     }
-
-    function setRating(n) {
-        currentRating = n;
-        document.querySelectorAll('#input-stars span').forEach((s, i) => {
-            s.style.color = i < n ? 'var(--gold)' : '#222';
-        });
-    }
-
+    function setRating(n) { currentRating = n; document.querySelectorAll('#input-stars span').forEach((s, i) => { s.style.color = i < n ? 'var(--gold)' : '#222'; }); }
     function submitReview() {
-        if(currentRating === 0) return alert("SELECT RATING");
-        alert("THANK YOU. YOUR REVIEW IS UNDER MODERATION.");
-        document.getElementById('user-comment-txt').value = '';
-        setRating(0);
+        const n = document.getElementById('rev-name').value; const c = document.getElementById('rev-city').value; const t = document.getElementById('user-comment-txt').value;
+        if (!n || !c || currentRating === 0 || !t) return alert("عبّي البيانات وحط نجوم!");
+        if (forbiddenWords.some(w => t.includes(w))) return alert("التعليق يحتوي كلمات غير لائقة");
+        const container = document.getElementById('real-time-reviews');
+        const stars = "★".repeat(currentRating) + "☆".repeat(5 - currentRating);
+        container.innerHTML = `<div style="border-bottom: 1px solid #1a1a1a; padding: 15px 0;"><div style="color:var(--gold); font-size:12px;">${stars}</div><div style="font-size:14px; margin:5px 0;">${t}</div><div style="color:#555; font-size:11px;">${n} - ${c}</div></div>` + container.innerHTML;
+        alert("يسلمو على تعليقك!"); document.getElementById('user-comment-txt').value = ''; setRating(0);
     }
 </script>
 </body>
-                </html>
-    
+</html>
