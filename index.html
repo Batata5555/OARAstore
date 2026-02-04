@@ -52,7 +52,6 @@
         .payment-methods { display: flex; justify-content: center; gap: 10px; margin-top: 15px; filter: grayscale(1) contrast(1.2); opacity: 0.7; }
         .payment-methods img { height: 20px; }
 
-        /* تنسيقات قسم التعليقات المعدل */
         .reviews-section { padding: 20px; background: #050505; border-top: 1px solid #111; }
         .add-review-box { background: var(--dark); border: 1px solid var(--gold); padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; }
         .star-rating-input { font-size: 30px; color: #444; margin-bottom: 15px; }
@@ -75,11 +74,10 @@
 <div id="auth-overlay">
     <div class="auth-card" id="reg-form">
         <h2 style="color:var(--gold); font-family:'Bodoni Moda'">انضم لنخبة OARA</h2>
-        <p style="font-size:12px; color:#888;">أهلاً بك، يرجى إنشاء حسابك للبدء</p>
         <input type="text" id="r-user" placeholder="اسم المستخدم">
         <input type="password" id="r-pass" placeholder="كلمة المرور">
-        <button class="btn-gold" onclick="handleAuth('register')">إنشاء حسابي الآن</button>
-        <p onclick="toggleAuth()" style="font-size:11px; color:#555; cursor:pointer; margin-top:20px;">لديك حساب بالفعل؟ سجل دخولك</p>
+        <button class="btn-gold" onclick="handleAuth('register')">إنشاء حسابي</button>
+        <p onclick="toggleAuth()" style="font-size:11px; color:#555; cursor:pointer; margin-top:20px;">لديك حساب؟ سجل دخولك</p>
     </div>
     <div class="auth-card" id="login-form" style="display:none">
         <h2 style="color:var(--gold)">تسجيل الدخول</h2>
@@ -111,7 +109,7 @@
 
 <div class="brand-story">
     <h3 style="color:var(--gold); font-family:'Bodoni Moda'; font-size: 24px;">OARA STORE</h3>
-    <p style="color:#666; font-size:13px; line-height:1.8">بدأت OARA STORE كحلم لتقديم مفهوم جديد للفخامة في فلسطين، نجمع لك بين الحداثة والجذور الأصيلة.</p>
+    <p style="color:#666; font-size:13px; line-height:1.8">الفخامة بلمسة فلسطينية أصيلة.</p>
 </div>
 
 <div id="clothing-sec" class="section-box">
@@ -122,12 +120,12 @@
     </div>
     <div id="clothing-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg" loading="lazy">
+            <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg">
             <p>قميص OARA LUXE</p>
             <button class="btn-gold" onclick="addToCart('قميص OARA', 280)">280 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/4439425/pexels-photo-4439425.jpeg" loading="lazy">
+            <img src="https://images.pexels.com/photos/4439425/pexels-photo-4439425.jpeg">
             <p>بنطال كلاسيك</p>
             <button class="btn-gold" onclick="addToCart('بنطال كلاسيك', 310)">310 ILS</button>
         </div>
@@ -142,19 +140,18 @@
     </div>
     <div id="tech-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg" loading="lazy">
+            <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg">
             <p>سماعة Pro</p>
             <button class="btn-gold" onclick="addToCart('سماعة Pro', 950)">950 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/5081431/pexels-photo-5081431.jpeg" loading="lazy">
-            <p>شاحن سريع OARA</p>
+            <img src="https://images.pexels.com/photos/5081431/pexels-photo-5081431.jpeg">
+            <p>شاحن سريع</p>
             <button class="btn-gold" onclick="addToCart('شاحن سريع', 120)">120 ILS</button>
         </div>
     </div>
-</div>
-
-<div id="perfume-sec" class="section-box">
+    </div>
+           <div id="perfume-sec" class="section-box">
     <div class="row-label">العطور والجمال</div>
     <div class="category-gate" onclick="toggleProducts('perfume-grid')">
         <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg" loading="lazy">
@@ -162,12 +159,12 @@
     </div>
     <div id="perfume-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg" loading="lazy">
+            <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg">
             <p>عطر OARA Royal</p>
             <button class="btn-gold" onclick="addToCart('عطر Royal', 450)">450 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg" loading="lazy">
+            <img src="https://images.pexels.com/photos/3059609/pexels-photo-3059609.jpeg">
             <p>زيت مسك النخبة</p>
             <button class="btn-gold" onclick="addToCart('مسك النخبة', 180)">180 ILS</button>
         </div>
@@ -182,13 +179,13 @@
     </div>
     <div id="watch-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg" loading="lazy">
-            <p>ساعة Gold</p>
+            <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg">
+            <p>ساعة Gold Luxury</p>
             <button class="btn-gold" onclick="addToCart('ساعة Gold', 1200)">1200 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg" loading="lazy">
-            <p>ساعة OARA Black</p>
+            <img src="https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg">
+            <p>ساعة Black Edition</p>
             <button class="btn-gold" onclick="addToCart('ساعة Black', 1100)">1100 ILS</button>
         </div>
     </div>
@@ -202,12 +199,12 @@
     </div>
     <div id="access-grid" class="product-grid">
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg" loading="lazy">
+            <img src="https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg">
             <p>خاتم ملكي</p>
             <button class="btn-gold" onclick="addToCart('خاتم ملكي', 350)">350 ILS</button>
         </div>
         <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/2850500/pexels-photo-2850500.jpeg" loading="lazy">
+            <img src="https://images.pexels.com/photos/2850500/pexels-photo-2850500.jpeg">
             <p>قلادة النخبة</p>
             <button class="btn-gold" onclick="addToCart('قلادة النخبة', 420)">420 ILS</button>
         </div>
@@ -235,9 +232,8 @@
         <div class="payment-methods">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
         </div>
-        <button class="btn-gold" style="background:none; color:#777; border:1px solid #333; margin-top:15px;" onclick="closeModal()">الرجوع للتسوق</button>
+        <button class="btn-gold" style="background:none; color:#777; border:1px solid #333; margin-top:15px;" onclick="closeModal()">رجوع</button>
     </div>
 </div>
 
@@ -256,21 +252,20 @@
     let isVerified = localStorage.getItem('oara_verified_user');
     let currentRating = 0;
 
-    // مصفوفة التعليقات (أغلبها سلبي + إيجابي للمصداقية)
     const reviewData = [
-        { n: "أبو إياد - الخليل", r: 1, t: "يا جماعة التوصيل زفت! صارلي أسبوعين بستنى والطلب لسا ما وصل، وكل ما أرن ع المندوب بسكر بوجهي." },
-        { n: "سارة - رام الله", r: 5, t: "يسلمو كتير، القميص فخامة والتغليف بيفتح النفس. شكراً OARA." },
-        { n: "محمد الخليلي", r: 2, t: "البضاعة فخمة بس المندوب تعامله سيء جداً وتأخر كتير ع الموعد وطلب زيادة مصاري للتوصيل!" },
-        { n: "يوسف - القدس", r: 1, t: "ليش ما بتردوا ع الواتساب؟ طلبت ساعة ووصلتني مكسورة وبدي أبدلها وما حدا عبرني!" },
-        { n: "أم جود - بيت لحم", r: 1, t: "التوصيل مأساة! الطلبية وصلت مبهدلة والتغليف ممزع. خسارة الشيكلات." },
-        { n: "هيا - جنين", r: 3, t: "المنتج منيح، بس يا ريت تلاقوا حل لمشكلة التأخير بالتوصيل للمحافظات، أخد 10 أيام." },
-        { n: "أدهم - جنين", r: 1, t: "بضحكوا ع الناس وببعتوا موديلات ثانية غير الصور، ما حدا يطلب منهم نصيحة." },
-        { n: "ليان - نابلس", r: 2, t: "المنتج منيح بس المندوب رن علي نص الليل وقلي انزلي استلمي.. شو هالحكي هاد؟" }
+        { n: "أبو إياد - الخليل", r: 1, t: "يا جماعة التوصيل زفت! صارلي أسبوعين بستنى." },
+        { n: "سارة - رام الله", r: 5, t: "يسلمو كتير، القميص فخامة والتغليف بيفتح النفس." },
+        { n: "محمد الخليلي", r: 2, t: "المندوب تعامله سيء جداً وتأخر كتير ع الموعد!" },
+        { n: "يوسف - القدس", r: 1, t: "ليش ما بتردوا ع الواتساب؟ الساعة وصلت مكسورة!" },
+        { n: "ليان - نابلس", r: 5, t: "تجربة رائعة والبضاعة أصلية، شكراً OARA." }
     ];
 
-    function toggleProducts(id) {
-        document.getElementById(id).classList.toggle('active');
-        if(document.getElementById(id).classList.contains('active')) { window.scrollBy(0, 150); }
+    function toggleProducts(id) { document.getElementById(id).classList.toggle('active'); }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+    function closeModal() { document.querySelectorAll('.modal').forEach(m=>m.classList.remove('active')); }
+    function toggleAuth() {
+        document.getElementById('reg-form').style.display = document.getElementById('reg-form').style.display==='none'?'block':'none';
+        document.getElementById('login-form').style.display = document.getElementById('login-form').style.display==='none'?'block':'none';
     }
 
     function triggerNotify(m) { 
@@ -279,36 +274,27 @@
         setTimeout(()=> document.getElementById('oara-notification').style.transform = 'translateX(-50%) translateY(-150px)', 3000);
     }
 
-    function toggleAuth() {
-        document.getElementById('reg-form').style.display = document.getElementById('reg-form').style.display==='none'?'block':'none';
-        document.getElementById('login-form').style.display = document.getElementById('login-form').style.display==='none'?'block':'none';
-    }
-
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
-
     function handleAuth(type) {
         const u = type==='login'? document.getElementById('l-user').value : document.getElementById('r-user').value;
         if(!u) return alert("يرجى ملء الحقول");
         localStorage.setItem('oara_verified_user', u);
         isVerified = true;
         document.getElementById('auth-overlay').classList.remove('active');
-        triggerNotify("أهلاً بك في عالم OARA");
+        triggerNotify("أهلاً بك");
     }
 
     function addToCart(n, p) {
         if(!isVerified) { document.getElementById('auth-overlay').classList.add('active'); return; }
         cart.push({n, p});
         document.getElementById('cart-count').innerText = cart.length;
-        triggerNotify("تمت الإضافة بنجاح");
+        triggerNotify("تمت الإضافة");
     }
 
     function openCart() {
         document.getElementById('cart-modal').classList.add('active');
         const list = document.getElementById('cart-items');
-        list.innerHTML = cart.map(i=> `<div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #111"><span>${i.n}</span><span>${i.p} ILS</span></div>`).join('') || "حقيبتك لا تزال فارغة";
+        list.innerHTML = cart.map(i=> `<div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #111"><span>${i.n}</span><span>${i.p} ILS</span></div>`).join('') || "الحقيبة فارغة";
     }
-
-    function closeModal() { document.querySelectorAll('.modal').forEach(m=>m.classList.remove('active')); }
 
     function confirmOrder() {
         let text = "طلب جديد من متجر OARA:\n";
@@ -319,13 +305,12 @@
 
     function setRating(n) {
         currentRating = n;
-        const stars = document.querySelectorAll('#input-stars span');
-        stars.forEach((s, i) => s.classList.toggle('active', i < n));
+        document.querySelectorAll('#input-stars span').forEach((s, i) => s.classList.toggle('active', i < n));
     }
 
     function submitReview() {
-        if(currentRating === 0) return alert("قيم بالنجوم!");
-        alert("يسلمو! رح نراجعه وننشره.");
+        if(currentRating === 0) return alert("قيم بالنجوم أولاً!");
+        alert("يسلمو على رأيك! رح نراجعه وننشره.");
         document.getElementById('user-comment-txt').value = '';
         setRating(0);
     }
@@ -334,8 +319,17 @@
         const list = document.getElementById('real-reviews-list');
         let html = '';
         reviewData.forEach(item => {
-            let starsHtml = '★'.repeat(item.r) + '<span style="color:#222">' + '★'.repeat(5-item.r) + '</span>';
-            html += `
-                <div class="comment-card">
-                    <div class="comment-header">
-                        <di
+            let stars = '★'.repeat(item.r) + '<span style="color:#222">' + '★'.repeat(5-item.r) + '</span>';
+            html += `<div class="comment-card">
+                        <div class="comment-header"><div class="user-info"><div class="user-avatar">${item.n.charAt(0)}</div><b>${item.n}</b></div><div class="stars-display">${stars}</div></div>
+                        <p style="font-size:13px; color:#aaa; margin-top:10px;">${item.t}</p>
+                    </div>`;
+        });
+        list.innerHTML = html;
+    }
+
+    window.onload = loadReviews;
+</script>
+</body>
+            </html>
+    
