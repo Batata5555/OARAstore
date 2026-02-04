@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
+    
     <title>OARA STORE | Luxury</title>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@700&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
     
@@ -41,6 +43,9 @@
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 4000; display: none; align-items: center; justify-content: center; }
         .modal.active { display: flex; }
         .modal-content { background: var(--dark); border: 2px solid var(--gold); padding: 25px; border-radius: 15px; width: 90%; max-width: 400px; color: var(--gold); }
+        
+        /* الحقول داخل السلة */
+        #checkout-fields input, #checkout-fields select { width: 100%; padding: 10px; margin-top: 10px; background: #000; color: #fff; border: 1px solid var(--gold); border-radius: 5px; }
 
         .product-detail-modal { position: fixed; inset: 0; background: var(--black); z-index: 5000; display: none; flex-direction: column; padding: 25px; overflow-y: auto; }
         .product-detail-modal.active { display: flex; }
@@ -71,6 +76,7 @@
     <h3>حكاية OARA</h3>
     <p>بدأت رحلة OARA STORE في أزقة فلسطين العريقة، لننقل ثقافة الرقي إلى كل بيت. نحن نؤمن أن الفخامة تفاصيل دقيقة وتجربة تليق بمقامكم.</p>
 </div>
+
 <div id="watch-sec" class="section-box">
     <div class="row-label" style="color: var(--gold); font-weight: 900; font-size: 35px;">ساعات</div>
     <p class="section-moto" style="color: var(--gold); font-weight: 900; font-size: 18px;">"الوقت هو أغلى ما تملك، فاجعل كل ثانية تعبر عن مكانتك."</p>
@@ -174,8 +180,8 @@
             <button class="btn-gold" onclick="addToCart('شاحن سريع', 120)">120 ILS</button>
         </div>
     </div>
-      </div>
-          <div id="reviews-anchor" class="reviews-section" style="padding: 30px 20px;">
+        </div>
+        <div id="reviews-anchor" class="reviews-section" style="padding: 30px 20px;">
     <div class="row-label" style="color: var(--gold); font-weight: 900; font-size: 35px; text-align: center;">آراء الزبائن</div>
     <div class="add-review-box" style="background: var(--dark); border: 2px solid var(--gold); padding: 20px; border-radius: 15px; margin-top: 20px;">
         <p style="font-size: 20px; color: var(--gold); font-weight: 900; text-align: center;">شاركونا فخامة تجربتكم</p>
@@ -331,4 +337,5 @@
     window.onload = loadReviews;
 </script>
 </body>
-</html>
+                </html>
+                    
