@@ -4,166 +4,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
-    
-    <title>OARA STORE | Luxury Palestine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@700&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+    <title>OARA LUXURY STORE | متجر أورا الملكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@700&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        :root { --gold: #c5a059; --black: #050505; --dark: #0d0d0d; --red: #ff4d4d; --gray: #1a1a1a; }
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
-        body { background: var(--black); color: #fff; font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+        :root { --gold: #c5a059; --black: #050505; --dark: #0d0d0d; --red: #ff4d4d; --gray: #1a1a1a; --white: #ffffff; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; outline: none; }
+        body { background: var(--black); color: var(--white); font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
 
-        /* الهيدر الأصلي مع تعديلات بسيطة */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: rgba(5,5,5,0.95); border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); }
-        
-        .sidebar { position: fixed; right: -320px; top: 0; width: 300px; height: 100%; background: var(--dark); border-left: 2px solid var(--gold); z-index: 3000; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 30px; box-shadow: -10px 0 30px rgba(0,0,0,0.8); }
+        /* الهيدر بنظام المواقع العالمية */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: rgba(5,5,5,0.98); border-bottom: 1px solid rgba(197, 160, 89, 0.3); position: sticky; top: 0; z-index: 2000; backdrop-filter: blur(15px); height: 70px; }
+        .nav-icons { display: flex; gap: 20px; align-items: center; }
+        .nav-icon-btn { font-size: 24px; color: var(--gold); cursor: pointer; position: relative; transition: 0.3s; }
+
+        /* نظام السلة الجانبي Slide-out Cart */
+        .cart-sidebar { position: fixed; left: -100%; top: 0; width: 100%; max-width: 400px; height: 100%; background: var(--dark); z-index: 5000; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); border-right: 1px solid var(--gold); display: flex; flex-direction: column; }
+        .cart-sidebar.active { left: 0; }
+        .cart-header { padding: 20px; border-bottom: 1px solid var(--gray); display: flex; justify-content: space-between; align-items: center; background: var(--black); }
+        .cart-items-container { flex: 1; overflow-y: auto; padding: 20px; }
+        .cart-footer { padding: 25px; background: var(--black); border-top: 1px solid var(--gray); }
+
+        /* القائمة الجانبية الأصلية */
+        .sidebar { position: fixed; right: -100%; top: 0; width: 320px; height: 100%; background: var(--dark); border-left: 2px solid var(--gold); z-index: 4000; transition: 0.4s; padding: 40px 25px; box-shadow: -15px 0 40px rgba(0,0,0,0.9); }
         .sidebar.active { right: 0; }
-        .sidebar-item { padding: 18px 0; border-bottom: 1px solid var(--gray); color: var(--gold); text-decoration: none; display: block; font-size: 18px; font-weight: 900; transition: 0.3s; }
-        .sidebar-item:active { background: var(--gray); padding-right: 10px; }
+        .sidebar-item { padding: 20px 0; border-bottom: 1px solid var(--gray); color: var(--gold); text-decoration: none; display: block; font-size: 19px; font-weight: 700; }
 
-        .section-box { padding: 20px 0; margin-bottom: 30px; }
-        .row-label { text-align: center; color: var(--gold); font-weight: 900; margin: 10px 0; font-size: 38px; text-shadow: 2px 2px 5px #000; letter-spacing: 1px; }
-        .section-moto { text-align: center; font-size: 18px; color: var(--gold); font-weight: 700; margin-bottom: 20px; padding: 0 25px; line-height: 1.4; }
-        
-        /* بوابة الأقسام كما في الكود الأول */
-        .category-gate { position: relative; width: 92%; margin: 0 auto 20px; border-radius: 20px; overflow: hidden; border: 2px solid var(--gold); cursor: pointer; transform: translateZ(0); }
-        .category-gate img { width: 100%; height: 260px; object-fit: cover; transition: 0.5s; }
-        .category-gate:active img { transform: scale(1.05); }
-        .gate-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 900; color: var(--gold); text-shadow: 2px 2px 15px #000; }
-
-        .product-grid { display: none; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; animation: fadeIn 0.5s ease; }
+        /* شبكة المنتجات الاحترافية */
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 15px; display: none; }
         .product-grid.active { display: grid; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card-luxury { background: #111; border: 1px solid rgba(197, 160, 89, 0.2); border-radius: 12px; overflow: hidden; transition: 0.4s; position: relative; }
+        .card-luxury:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .card-img-wrapper { position: relative; width: 100%; height: 200px; overflow: hidden; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .badge-new { position: absolute; top: 10px; right: 10px; background: var(--gold); color: #000; padding: 4px 10px; font-size: 10px; font-weight: 900; border-radius: 4px; }
 
-        .card-luxury { background: var(--dark); border: 1px solid var(--gold); border-radius: 15px; text-align: center; padding-bottom: 15px; overflow: hidden; position: relative; }
-        .card-luxury img { width: 100%; height: 170px; object-fit: cover; }
-        .card-luxury p { color: var(--gold); font-weight: 900; font-size: 17px; margin: 12px 0; padding: 0 5px; }
+        /* أزرار الإضافة للسلة */
+        .price-tag { font-size: 18px; font-weight: 900; color: var(--gold); margin: 10px 0; }
+        .btn-add-cart { width: 100%; background: var(--gold); color: #000; border: none; padding: 12px; font-weight: 900; cursor: pointer; border-radius: 0 0 12px 12px; }
+
+        /* نظام الإشعارات Toast */
+        #toast-container { position: fixed; top: 85px; left: 50%; transform: translateX(-50%); z-index: 6000; width: 90%; max-width: 350px; }
+        .toast { background: var(--white); color: #000; padding: 15px; border-radius: 8px; margin-bottom: 10px; font-weight: 700; border-right: 5px solid var(--gold); display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; transform: translateY(-20px); transition: 0.4s; }
+        .toast.show { opacity: 1; transform: translateY(0); }
+
+        /* البحث والفلاتر */
+        .search-box { padding: 15px 20px; background: var(--black); }
+        #main-search { width: 100%; background: var(--gray); border: 1px solid var(--gold); padding: 15px; border-radius: 30px; color: var(--white); font-size: 16px; }
+
+        /* التقييمات */
+        .rev-card { background: #151515; padding: 20px; border-radius: 15px; margin-bottom: 15px; border-right: 4px solid var(--gold); }
         
-        .btn-gold { background: var(--gold); color: #000; border: none; padding: 12px; width: 88%; font-weight: 900; font-size: 16px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .btn-gold:active { transform: scale(0.92); background: #b08d4a; }
-
-        /* نظام الإشعارات Toast المطور بدلاً من Alert */
-        #toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 12px; pointer-events: none; }
-        .toast { background: var(--gold); color: #000; padding: 16px 28px; border-radius: 50px; font-weight: 900; box-shadow: 0 8px 25px rgba(0,0,0,0.6); transform: translateY(100px); opacity: 0; transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: all; border: 2px solid #fff; text-align: center; min-width: 280px; font-size: 16px; }
-        .toast.show { transform: translateY(0); opacity: 1; }
-
-        /* مودالات التفاصيل والحساب */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 4000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 9000; display: none; align-items: center; justify-content: center; }
         .modal.active { display: flex; }
-        .modal-content { background: var(--dark); border: 2px solid var(--gold); padding: 30px; border-radius: 20px; width: 92%; max-width: 420px; color: var(--gold); position: relative; }
-        
-        input, select, textarea { width: 100%; padding: 14px; margin-top: 12px; background: #000; color: #fff; border: 1px solid var(--gold); border-radius: 10px; font-family: 'Tajawal'; font-weight: 700; font-size: 16px; }
-        
-        .rev-card { background: #111; padding: 18px; border-radius: 12px; margin-bottom: 12px; transition: 0.3s; }
     </style>
 </head>
 <body>
 <div id="toast-container"></div>
 
+<div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+        <span style="font-size: 20px; font-weight: 900; color: var(--gold);">حقيبة المشتريات</span>
+        <span onclick="toggleCart()" style="font-size: 30px; cursor: pointer; color: var(--white);">✕</span>
+    </div>
+    <div class="cart-items-container" id="cart-items-list">
+        <div style="text-align: center; padding-top: 50px; color: #666;">
+            <div style="font-size: 50px; margin-bottom: 20px;">🛒</div>
+            <p>سلتك فارغة حالياً يا غالي</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: 700;">
+            <span>المجموع الفرعي:</span>
+            <span id="cart-subtotal">0 ILS</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: 700; color: var(--gold); font-size: 20px; border-top: 1px solid var(--gray); padding-top: 15px;">
+            <span>الإجمالي الكلي:</span>
+            <span id="cart-total">0 ILS</span>
+        </div>
+        <button class="btn-gold" style="width: 100%; height: 55px; border-radius: 30px;" onclick="checkAuth('checkout')">إتمام الطلب الآن</button>
+        <p style="font-size: 11px; color: #555; text-align: center; margin-top: 10px;">* التوصيل متاح لكافة مناطق الضفة، القدس، والداخل</p>
+    </div>
+</div>
+
 <header>
-    <div onclick="toggleSidebar()" style="color:var(--gold); font-size:38px; cursor:pointer;">☰</div>
-    <div style="color:var(--gold); font-weight:900; font-size:24px; letter-spacing:2px; font-family:'Bodoni Moda'">OARA STORE</div>
-    <div onclick="checkAuth('cart')" style="color:var(--gold); cursor:pointer; font-size:26px; position:relative;">
-        🛒 <span id="cart-count" style="position:absolute; top:-5px; right:-10px; background:var(--red); color:#fff; font-size:12px; padding:2px 6px; border-radius:50%; font-weight:900;">0</span>
+    <div onclick="toggleSidebar()" style="color:var(--gold); font-size:35px; cursor:pointer;">☰</div>
+    <div style="color:var(--gold); font-weight:900; font-size:24px; letter-spacing:2px; font-family:'Bodoni Moda'">OARA LUXURY</div>
+    <div class="nav-icons">
+        <div class="nav-icon-btn" onclick="toggleCart()">
+            🛒<span id="cart-count" style="position:absolute; top:-8px; right:-12px; background:var(--red); color:#fff; font-size:11px; padding:2px 7px; border-radius:50%; border:2px solid var(--black);">0</span>
+        </div>
     </div>
 </header>
 
 <div class="sidebar" id="sidebar">
-    <div style="display:flex; justify-content:space-between; align-items:center; color:var(--gold); font-weight:900; margin-bottom:35px;">
-        <span style="font-size:22px;">القائمة الملكية</span>
-        <span onclick="toggleSidebar()" style="font-size:30px; cursor:pointer;">✕</span>
+    <div style="display:flex; justify-content:space-between; align-items:center; color:var(--gold); font-weight:900; margin-bottom:30px;">
+        <span style="font-size:22px;">اكتشف مجموعتنا</span>
+        <span onclick="toggleSidebar()" style="font-size:28px; cursor:pointer;">✕</span>
     </div>
-    <a href="#watch-sec" class="sidebar-item" onclick="toggleSidebar()">⌚ الساعات الفاخرة</a>
-    <a href="#perfume-sec" class="sidebar-item" onclick="toggleSidebar()">✨ العطور الملكية</a>
-    <a href="#clothing-sec" class="sidebar-item" onclick="toggleSidebar()">👕 الملابس الراقية</a>
-    <a href="#access-sec" class="sidebar-item" onclick="toggleSidebar()">💍 الإكسسوارات الفخمة</a>
-    <a href="#tech-sec" class="sidebar-item" onclick="toggleSidebar()">💻 الإلكترونيات الذكية</a>
-    <a href="#reviews-anchor" class="sidebar-item" onclick="toggleSidebar()">💬 آراء الزبائن</a>
+    <a href="#watch-sec" class="sidebar-item" onclick="toggleSidebar()">⌚ الساعات العالمية</a>
+    <a href="#perfume-sec" class="sidebar-item" onclick="toggleSidebar()">✨ عطور النيش الفاخرة</a>
+    <a href="#clothing-sec" class="sidebar-item" onclick="toggleSidebar()">👕 أزياء OARA الراقية</a>
+    <a href="#access-sec" class="sidebar-item" onclick="toggleSidebar()">💍 إكسسوارات ملكية</a>
+    <a href="#tech-sec" class="sidebar-item" onclick="toggleSidebar()">💻 تكنولوجيا حديثة</a>
+    <a href="#reviews-anchor" class="sidebar-item" onclick="toggleSidebar()">💬 ماذا يقول زبائننا؟</a>
     
-    <div style="margin-top:40px;">
-        <button class="btn-gold" style="width:100%; background:none; color:var(--gold); border:2px solid var(--gold); margin-bottom:10px;" onclick="window.history.back() || location.reload()">🔙 رجوع / تحديث</button>
-        <a href="https://wa.me/972568486065" style="text-decoration:none;">
-            <button class="btn-gold" style="width:100%; background:#25d366; color:#fff; border:none;">📱 تواصل واتساب</button>
-        </a>
+    <div style="margin-top:50px;">
+        <button class="btn-gold" style="width:100%; background:none; color:var(--gold); border:1px solid var(--gold); margin-bottom:12px; border-radius:8px;" onclick="window.history.back()">🔙 العودة للخلف</button>
+        <button class="btn-gold" style="width:100%; background:none; color:#888; border:1px solid #333; border-radius:8px;" onclick="location.reload()">🔄 تحديث المتجر</button>
     </div>
 </div>
 
-<div class="brand-story" style="padding: 45px 25px; text-align: center; border-bottom: 1px solid var(--gold);">
-    <h3 style="color:var(--gold); font-size:32px; font-weight:900; margin-bottom:15px;">حكاية OARA</h3>
-    <p style="color:#ddd; font-size:17px; line-height:1.8; font-weight:700; max-width:600px; margin:0 auto;">من قلب فلسطين، نقدم لكم تجربة تسوق ملوكية تجمع بين الأصالة والحداثة. كل قطعة نختارها لكم بعناية فائقة لتليق بمستوى تطلعاتكم.</p>
+<div class="search-box">
+    <input type="text" id="main-search" placeholder="ابحث عن ساعة، عطر، أو منتج..." onkeyup="filterProducts()">
 </div>
+
+<section style="padding: 60px 25px; text-align: center; background: linear-gradient(to bottom, #0a0a0a, #050505);">
+    <h1 style="color:var(--gold); font-size:35px; font-family:'Bodoni Moda'; margin-bottom:15px;">EXPERIENCE LUXURY</h1>
+    <p style="color:#888; font-size:16px; line-height:1.6; max-width:500px; margin: 0 auto;">متجر OARA هو وجهتكم الأولى في فلسطين للحصول على أرقى المنتجات العالمية بضمان الجودة والأصالة.</p>
+</section>
 
 <div id="watch-sec" class="section-box">
-    <div class="row-label">ساعات</div>
-    <p class="section-moto">"الوقت هو أغلى ما تملك، فاجعل كل ثانية تعبر عن مكانتك الرفيعة."</p>
+    <div class="row-label">WATCHES</div>
+    <p class="section-moto">"أناقة معصمك تبدأ من هنا"</p>
     <div class="category-gate" onclick="toggleProducts('watch-grid')">
-        <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg" loading="lazy">
-        <div class="gate-overlay">تصفح الساعات</div>
+        <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg" alt="S01">
+        <div class="gate-overlay">ساعات رجالية ونسائية</div>
     </div>
     <div id="watch-grid" class="product-grid">
-        <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg">
-            <p>ساعة Gold Edition</p>
-            <button class="btn-gold" onclick="addToCart('ساعة Gold', 1200)">1200 ILS</button>
         </div>
-        <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg">
-            <p>ساعة Black Carbon</p>
-            <button class="btn-gold" onclick="addToCart('ساعة Carbon', 1150)">1150 ILS</button>
-        </div>
-    </div>
 </div>
 
 <div id="perfume-sec" class="section-box">
-    <div class="row-label">عطور</div>
+    <div class="row-label">PERFUMES</div>
     <div class="category-gate" onclick="toggleProducts('perfume-grid')">
-        <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg" loading="lazy">
-        <div class="gate-overlay">تصفح العطور</div>
+        <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg" alt="P01">
+        <div class="gate-overlay">عطور شرقية وغربية</div>
     </div>
-    <div id="perfume-grid" class="product-grid">
-        <div class="card-luxury">
-            <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg">
-            <p>عطر OARA Royal</p>
-            <button class="btn-gold" onclick="addToCart('عطر Royal', 450)">450 ILS</button>
-        </div>
-    </div>
+    <div id="perfume-grid" class="product-grid"></div>
 </div>
 
-<div id="reviews-anchor" style="padding: 40px 20px; background: #080808;">
-    <div class="row-label">آراء الزبائن</div>
-    <div class="add-review-box" style="background: var(--dark); border: 2px solid var(--gold); padding: 25px; border-radius: 20px; margin-top: 25px;">
-        <p style="font-size: 22px; color: var(--gold); font-weight: 900; text-align: center; margin-bottom:10px;">شو رأيك فينا؟</p>
-        <div id="input-stars" style="text-align: center; font-size: 35px; color: var(--gold); margin-bottom: 20px; cursor:pointer;">
-            <span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span><span onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span><span onclick="setRating(5)">★</span>
-        </div>
-        <textarea id="user-comment-txt" rows="3" placeholder="احكي تجربتك بصدق يا طيب..."></textarea>
-        <button class="btn-gold" onclick="checkAuth('review')" style="width: 100%; margin-top: 20px; font-size: 19px; height:55px;">نشر رأيك</button>
-    </div>
+<div id="reviews-anchor" style="padding: 50px 20px; background: #080808; border-top: 1px solid #1a1a1a;">
+    <h2 style="text-align: center; color: var(--gold); font-size: 30px; margin-bottom: 30px;">آراء ومراجعات الزبائن</h2>
     
-    <div id="real-reviews-list" style="margin-top: 40px;">
+    <div style="background: #111; padding: 25px; border-radius: 15px; border: 1px solid #222; margin-bottom: 40px;">
+        <p style="text-align: center; color: var(--gold); font-weight: 700;">شاركنا تجربتك يا غالي</p>
+        <div id="input-stars" style="text-align: center; font-size: 30px; color: #333; margin: 15px 0;">
+            <span onclick="setRating(1)" style="cursor:pointer">★</span><span onclick="setRating(2)" style="cursor:pointer">★</span><span onclick="setRating(3)" style="cursor:pointer">★</span><span onclick="setRating(4)" style="cursor:pointer">★</span><span onclick="setRating(5)" style="cursor:pointer">★</span>
         </div>
-    <button id="show-more-btn" class="btn-gold" style="background:none; color:var(--gold); border:2px solid var(--gold); margin:25px auto; width:100%; display:none;" onclick="showAllComments()">عرض كافة الآراء (40 تعليق)</button>
+        <textarea id="user-comment-txt" rows="3" placeholder="اكتب تعليقك هنا..."></textarea>
+        <button class="btn-gold" style="width: 100%; margin-top: 15px; border-radius: 8px;" onclick="checkAuth('review')">نشر المراجعة</button>
+    </div>
+
+    <div id="real-reviews-list">
+        </div>
+    <button id="show-more-btn" class="btn-gold" style="display:none; background:none; color:var(--gold); border:1px solid var(--gold); margin: 30px auto; width: 100%;" onclick="showAllComments()">قراءة كافة التعليقات</button>
 </div>
 
 <div class="modal" id="auth-modal">
     <div class="modal-content">
-        <h3 style="text-align:center; font-size: 28px; margin-bottom:10px;">توثيق الحساب الملكي</h3>
-        <p style="text-align:center; color:#ccc; font-size:15px; margin-bottom:20px;">عشان نقدر نخدمك ونحفظ بياناتك للطلبات الجاية</p>
-        <input id="u-name" placeholder="اسمك الكامل">
-        <input id="u-phone" placeholder="رقم الواتساب">
-        <input id="u-city" placeholder="المدينة">
-        <button class="btn-gold" style="margin-top:25px; height:50px;" onclick="saveAccount()">تأكيد ودخول</button>
-        <button class="btn-gold" style="background:none; color:#666; border:none; margin-top:10px;" onclick="closeAuth()">إغلاق</button>
+        <h3 style="text-align:center; font-size: 24px; color: var(--gold);">تسجيل الدخول للمتجر</h3>
+        <p style="text-align:center; color:#777; font-size:14px; margin-bottom:20px;">يرجى تزويدنا ببياناتك لتسهيل عملية الشحن والتوصيل</p>
+        <input id="u-name" type="text" placeholder="الاسم الشخصي">
+        <input id="u-phone" type="tel" placeholder="رقم الهاتف (واتساب)">
+        <input id="u-city" type="text" placeholder="المدينة والعنوان">
+        <button class="btn-gold" style="margin-top:20px; height:50px; border-radius:10px;" onclick="saveAccount()">تأكيد الهوية</button>
+        <button style="background:none; border:none; color:#555; width:100%; margin-top:15px; cursor:pointer;" onclick="closeAuth()">إلغاء</button>
     </div>
-        </div>
-                <script>
-    let cart = [];
-    let userLoggedIn = false;
-    let currentUser = null;
+    </div>
+    <script>
+    /* نظام إدارة الحالة - State Management */
+    let cart = JSON.parse(localStorage.getItem('oara_cart')) || [];
+    let userLoggedIn = localStorage.getItem('oara_user') ? true : false;
+    let currentUser = JSON.parse(localStorage.getItem('oara_user')) || null;
     let pendingAction = null;
     let currentRating = 0;
 
-    // مصفوفة الـ 40 تعليق فلسطيني كاملة - (لهجة أصلية: مدح، ذم، تأخير)
+    /* قاعدة بيانات المنتجات - يتم عرضها في الشبكة */
+    const products = [
+        { id: 1, cat: 'watch', name: 'ساعة رولكس كلاسيك - ذهب', price: 1500, img: 'https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg' },
+        { id: 2, cat: 'watch', name: 'ساعة باتيك فيليب - أسود الملك', price: 2200, img: 'https://images.pexels.com/photos/277390/pexels-photo-277390.jpeg' },
+        { id: 3, cat: 'perfume', name: 'عطر عود ملكي - خاص OARA', price: 450, img: 'https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg' },
+        { id: 4, cat: 'perfume', name: 'عطر مسك الليل - فاخر', price: 380, img: 'https://images.pexels.com/photos/196178/pexels-photo-196178.jpeg' }
+    ];
+
+    /* مصفوفة الـ 40 تعليق فلسطيني بلهجة أصلية - لا حذف ولا اختصار */
     const reviewData = [
         { n: "أبو العبد - غزة", r: 5, t: "والله القطعة بتجنن، اشي فاخر على الآخر، يسلمو دياتكم يا وحوش، بضاعة بتبيض الوجه." },
         { n: "أمير - نابلس", r: 1, t: "يا جماعة التوصيل زفت! قعدت اسبوع استنى وكنت بدي ألغي الطلب عشان التأخير المستفز، حسنوا حالكم." },
@@ -207,125 +231,149 @@
         { n: "سعد - دير استيا", r: 5, t: "جودة وسعر وسرعة، الله يوفقكم ويرزقكم من واسع فضله، أنتم عنوان الفخامة." }
     ];
 
-    // نظام الإشعارات Toast
-    function showToast(msg) {
-        const container = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        toast.className = 'toast';
-        toast.innerText = msg;
-        container.appendChild(toast);
-        setTimeout(() => toast.classList.add('show'), 100);
-        setTimeout(() => {
-            toast.classList.remove('show');
-            setTimeout(() => toast.remove(), 600);
-        }, 3500);
+    /* وظائف السلة المتكاملة */
+    function addToCart(pId) {
+        const prod = products.find(p => p.id === pId);
+        cart.push(prod);
+        updateCartUI();
+        showToast(`أضفنا ${prod.name} لسلتك يا فخم ✅`);
     }
 
-    // الربط مع غوغل شيتس (جلب المنتجات)
-    async function fetchFromSheets() {
-        const url = "https://docs.google.com/spreadsheets/d/1RvIYAjv7-UEqYyZaNRNN6uY2vdwQAygdng5aPAI870M/gviz/tq?tqx=out:json";
-        try {
-            const res = await fetch(url);
-            const text = await res.text();
-            const json = JSON.parse(text.substr(47).slice(0, -2));
-            showToast("تم تحديث المتجر من السحابة بنجاح ✅");
-        } catch(e) {
-            console.error("Cloud Connection Failed");
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCartUI();
+        showToast("تم إزالة المنتج من السلة");
+    }
+
+    function updateCartUI() {
+        localStorage.setItem('oara_cart', JSON.stringify(cart));
+        document.getElementById('cart-count').innerText = cart.length;
+        const list = document.getElementById('cart-items-list');
+        let total = 0;
+        
+        if (cart.length === 0) {
+            list.innerHTML = '<p style="text-align:center; color:#666; margin-top:50px;">سلتك فاضية يا طيب</p>';
+        } else {
+            list.innerHTML = cart.map((item, i) => {
+                total += item.price;
+                return `
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px; background:#1a1a1a; padding:10px; border-radius:10px;">
+                    <img src="${item.img}" style="width:60px; height:60px; object-fit:cover; border-radius:5px;">
+                    <div style="flex:1">
+                        <div style="font-size:14px; font-weight:700;">${item.name}</div>
+                        <div style="color:var(--gold); font-weight:900;">${item.price} ILS</div>
+                    </div>
+                    <span onclick="removeFromCart(${i})" style="color:var(--red); cursor:pointer; font-weight:900;">✕</span>
+                </div>`;
+            }).join('');
         }
+        document.getElementById('cart-subtotal').innerText = total + " ILS";
+        document.getElementById('cart-total').innerText = total + " ILS";
     }
 
-    // نظام الحساب والتحقق
+    /* نظام البحث والفلترة */
+    function filterProducts() {
+        const val = document.getElementById('main-search').value.toLowerCase();
+        document.querySelectorAll('.card-luxury').forEach(card => {
+            const name = card.querySelector('p').innerText.toLowerCase();
+            card.style.display = name.includes(val) ? 'block' : 'none';
+        });
+    }
+
+    /* نظام التحقق من الهوية وتسجيل الحساب */
     function checkAuth(action) {
         pendingAction = action;
         if (!userLoggedIn) {
             document.getElementById('auth-modal').classList.add('active');
         } else {
-            executeAction();
+            if(action === 'checkout') checkoutWhatsApp();
+            if(action === 'review') submitReview();
         }
     }
 
     function saveAccount() {
-        const name = document.getElementById('u-name').value;
-        const phone = document.getElementById('u-phone').value;
-        const city = document.getElementById('u-city').value;
-        if(!name || !phone || !city) return showToast("يا غالي عبّي بياناتك كاملة عشان نقدر نخدمك");
-        
+        const n = document.getElementById('u-name').value;
+        const p = document.getElementById('u-phone').value;
+        const c = document.getElementById('u-city').value;
+        if(!n || !p || !c) return showToast("عبّي بياناتك كاملة يا غالي");
+        currentUser = { name: n, phone: p, city: c };
         userLoggedIn = true;
-        currentUser = { name, phone, city };
+        localStorage.setItem('oara_user', JSON.stringify(currentUser));
         document.getElementById('auth-modal').classList.remove('active');
-        showToast("أهلاً بك يا " + name + "، نورت عيلة OARA");
-        executeAction();
+        showToast("أهلاً بك في عيلة OARA");
+        if(pendingAction) checkAuth(pendingAction);
     }
 
-    function executeAction() {
-        if(pendingAction === 'cart') openCart();
-        if(pendingAction === 'review') {
-            const txt = document.getElementById('user-comment-txt').value;
-            if(!txt) return showToast("اكتب رأيك قبل ما تنشر يا طيب");
-            showToast("يسلمو على رأيك، راح يراجعه الطاقم وينشره فوراً");
-            document.getElementById('user-comment-txt').value = "";
-        }
+    /* نظام إتمام الطلب عبر واتساب الاحترافي */
+    function checkoutWhatsApp() {
+        if(cart.length === 0) return showToast("سلتك فارغة!");
+        let msg = `طلب جديد من متجر OARA LUXURY:%0A----------------------%0A`;
+        let total = 0;
+        cart.forEach((item, i) => {
+            msg += `${i+1}. ${item.name} - ${item.price} ILS%0A`;
+            total += item.price;
+        });
+        msg += `%0A----------------------%0Aإجمالي الطلب: ${total} ILS%0Aالاسم: ${currentUser.name}%0Aالعنوان: ${currentUser.city}%0Aالهاتف: ${currentUser.phone}`;
+        window.open(`https://wa.me/972568486065?text=${msg}`, '_blank');
+        cart = [];
+        updateCartUI();
+        toggleCart();
     }
 
-    function addToCart(n, p) {
-        cart.push({name: n, price: p});
-        document.getElementById('cart-count').innerText = cart.length;
-        showToast("أبشر، أضفنا " + n + " لسلتك الملكية ✨");
+    /* وظائف الواجهة (Sidebar & Toast) */
+    function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('active'); }
+    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+    function closeAuth() { document.getElementById('auth-modal').classList.remove('active'); }
+
+    function showToast(msg) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = 'toast show';
+        toast.innerHTML = `<span>✨</span> <span>${msg}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
     }
 
-    function openCart() {
-        showToast("جاري تحضير حقيبة مشترياتك الفخمة...");
-    }
+    /* جلب المنتجات والتعليقات عند التشغيل */
+    function loadInitialData() {
+        // ملء الساعات
+        const watchGrid = document.getElementById('watch-grid');
+        watchGrid.innerHTML = products.filter(p => p.cat === 'watch').map(p => `
+            <div class="card-luxury">
+                <div class="card-img-wrapper"><img src="${p.img}"><div class="badge-new">NEW</div></div>
+                <div style="padding:10px;">
+                    <p style="font-size:14px; font-weight:700; height:40px; overflow:hidden;">${p.name}</p>
+                    <div class="price-tag">${p.price} ILS</div>
+                </div>
+                <button class="btn-add-cart" onclick="addToCart(${p.id})">أضف للسلة 🛒</button>
+            </div>`).join('');
 
-    function loadReviews() {
-        const list = document.getElementById('real-reviews-list');
-        list.innerHTML = reviewData.map((item, index) => {
-            let stars = '★'.repeat(item.r) + '<span style="color:#222">' + '★'.repeat(5-item.r) + '</span>';
-            let borderStyle = item.r < 3 ? 'border: 1px solid var(--red)' : 'border: 1px solid var(--gold)';
-            return `<div class="rev-card" style="${borderStyle}; ${index >= 5 ? 'display:none;' : ''}">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <b style="color:var(--gold); font-size:17px;">${item.n}</b>
-                            <div style="color:var(--gold); font-size:12px;">${stars}</div>
-                        </div>
-                        <p style="color:#ccc; margin-top:10px; font-size:15px; line-height:1.6; font-weight:700;">${item.t}</p>
-                    </div>`;
-        }).join('');
+        // ملء التعليقات
+        const revList = document.getElementById('real-reviews-list');
+        revList.innerHTML = reviewData.map((rev, i) => `
+            <div class="rev-card" style="${i >= 5 ? 'display:none' : ''}">
+                <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                    <strong style="color:var(--gold)">${rev.n}</strong>
+                    <div style="color:var(--gold)">${'★'.repeat(rev.r)}</div>
+                </div>
+                <p style="font-size:14px; color:#ccc; line-height:1.5">${rev.t}</p>
+            </div>`).join('');
         if(reviewData.length > 5) document.getElementById('show-more-btn').style.display = 'block';
+        updateCartUI();
     }
 
     function showAllComments() {
         document.querySelectorAll('.rev-card').forEach(c => c.style.display = 'block');
         document.getElementById('show-more-btn').style.display = 'none';
-        showToast("تم عرض كافة آراء زبائننا الـ 40");
-    }
-
-    function setRating(n) {
-        currentRating = n;
-        document.querySelectorAll('#input-stars span').forEach((s, i) => {
-            s.style.color = i < n ? 'var(--gold)' : '#333';
-        });
     }
 
     function toggleProducts(id) {
-        const  grid = document.getElementById(id);
-        const isActive = grid.classList.contains('active');
         document.querySelectorAll('.product-grid').forEach(g => g.classList.remove('active'));
-        if(!isActive) grid.classList.add('active');
-        showToast(isActive ? "تم إغلاق القسم" : "جاري عرض المنتجات الملكية...");
+        document.getElementById(id).classList.add('active');
+        window.location.hash = id;
     }
 
-    function toggleSidebar() {
-        document.getElementById('sidebar').classList.toggle('active');
-    }
-
-    function closeAuth() {
-        document.getElementById('auth-modal').classList.remove('active');
-    }
-
-    window.onload = () => {
-        fetchFromSheets();
-        loadReviews();
-    };
+    window.onload = loadInitialData;
 </script>
 </body>
 </html>
