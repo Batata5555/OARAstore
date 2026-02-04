@@ -1,184 +1,71 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OARA Store - Optimized</title>
+<section id="reviews-section" style="padding: 40px 20px; background: #050505; border-top: 1px solid #1a1a1a;">
+    <h3 style="color: var(--gold); text-align: center; font-family: 'Bodoni Moda'; font-size: 26px;">آراء النخبة</h3>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <style>
-        /* 2. Critical CSS: نضع التنسيقات الأساسية هنا لتظهر الصفحة فوراً */
-        body { margin: 0; font-family: sans-serif; background: #fff; }
-        .hero { height: 60vh; background: #f4f4f4; display: flex; align-items: center; justify-content: center; }
+    <div style="max-width: 500px; margin: 20px auto; background: #0d0d0d; padding: 20px; border-radius: 15px; border: 1px solid rgba(197,160,89,0.2);">
+        <input type="text" id="rev-name" placeholder="اسمك الكريم" style="margin-bottom: 10px;">
+        <textarea id="rev-text" placeholder="اكتب تجربتك مع OARA..." style="width: 100%; background: #000; border: 1px solid #222; color: var(--gold); border-radius: 8px; padding: 10px; font-family: 'Tajawal'; min-height: 80px; outline: none;"></textarea>
         
-        /* تحسين أداء الصور */
-        img { max-width: 100%; height: auto; display: block; }
+        <div style="margin: 15px 0; text-align: center;">
+            <span style="color: #666; font-size: 14px; margin-left: 10px;">التقييم:</span>
+            <select id="rev-stars" style="background: #000; color: var(--gold); border: 1px solid var(--gold); padding: 5px; border-radius: 5px;">
+                <option value="⭐⭐⭐⭐⭐">5 نجوم (مثالي)</option>
+                <option value="⭐⭐⭐⭐">4 نجوم (رائع)</option>
+                <option value="⭐⭐⭐">3 نجوم (جيد)</option>
+            </select>
+        </div>
         
-        /* Skeleton Screen: لإعطاء شعور بالسرعة أثناء التحميل */
-        .placeholder { background: #eee; border-radius: 8px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-    </style>
-
-    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
-</head>
-<body>
-
-    <header>
-        <nav><h1>OARA STORE</h1></nav>
-    </header>
-
-    <main>
-        <section class="products">
-            <div class="product-card">
-                <img src="your-image.jpg" fetchpriority="high" alt="Product Name">
-                
-                <img src="product2.jpg" loading="lazy" alt="Product 2">
-            </div>
-        </section>
-    </main>
-
-    <script src="script.js" defer></script>
-
-    <script>
-        /* 5. تفعيل خدمة Service Worker لعمل الكاش (اختياري ولكن فعال جداً) */
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW error:', err));
-            });
-        }
-    </script>
-</body>
-</html>
-<section id="luxury-sec" style="padding: 50px 20px; background-color: #fafafa;">
-    <div style="text-align: center; margin-bottom: 40px;">
-        <h2 style="font-size: 2rem; color: #222; margin-bottom: 10px;">المجموعة الفاخرة</h2>
-        <p style="color: #666;">اخترنا لك بعناية أجمل العطور وأرقى الساعات</p>
+        <button class="btn-gold" onclick="addReview()" style="width: 100%;">نشر التعليق</button>
     </div>
 
-    <div class="luxury-grid">
-        <div class="luxury-card">
-            <div class="image-container">
-                <img src="perfume.webp" loading="lazy" alt="عطور">
-                <div class="badge">الأكثر مبيعاً</div>
+    <div id="reviews-display" style="max-width: 600px; margin: 30px auto; display: flex; flex-direction: column; gap: 15px;">
+        <div style="background: #0d0d0d; padding: 15px; border-radius: 10px; border-right: 4px solid var(--gold);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <b style="color: var(--gold);">أحمد محمد</b>
+                <small style="color: #c5a059;">⭐⭐⭐⭐⭐</small>
             </div>
-            <div class="card-info">
-                <h3>قسم العطور</h3>
-                <p>روائح تأسر الحواس وتدوم طويلاً</p>
-                <button class="shop-btn">تسوق الآن</button>
-            </div>
-        </div>
-
-        <div class="luxury-card">
-            <div class="image-container">
-                <img src="watch.webp" loading="lazy" alt="ساعات">
-            </div>
-            <div class="card-info">
-                <h3>الساعات الملكية</h3>
-                <p>دقة متناهية وتصميم يناسب معصمك</p>
-                <button class="shop-btn">تسوق الآن</button>
-            </div>
-        </div>
-
-        <div class="luxury-card">
-            <div class="image-container">
-                <img src="accessory.webp" loading="lazy" alt="إكسسوارات">
-            </div>
-            <div class="card-info">
-                <h3>الإكسسوارات</h3>
-                <p>اللمسات الصغيرة التي تصنع الفارق</p>
-                <button class="shop-btn">تسوق الآن</button>
-            </div>
+            <p style="margin: 0; font-size: 14px; color: #bbb;">تجربة تسوق رائعة، العطور أصلية والتوصيل سريع جداً. شكراً OARA!</p>
         </div>
     </div>
 </section>
 
-<style>
-    /* تنسيقات الشبكة (Grid) */
-    .luxury-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
+<script>
+    function addReview() {
+        const name = document.getElementById('rev-name').value;
+        const text = document.getElementById('rev-text').value;
+        const stars = document.getElementById('rev-stars').value;
 
-    /* تصميم الكارت */
-    .luxury-card {
-        background: #fff;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        transition: transform 0.3s ease;
-        text-align: center;
-    }
+        if (!name || !text) {
+            alert("يرجى كتابة الاسم والتعليق");
+            return;
+        }
 
-    .luxury-card:hover {
-        transform: translateY(-10px);
-    }
+        const container = document.getElementById('reviews-display');
+        const newReview = document.createElement('div');
+        newReview.style.cssText = "background: #0d0d0d; padding: 15px; border-radius: 10px; border-right: 4px solid var(--gold); animation: fadeIn 0.5s ease;";
+        
+        newReview.innerHTML = `
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <b style="color: var(--gold);">${name}</b>
+                <small style="color: #c5a059;">${stars}</small>
+            </div>
+            <p style="margin: 0; font-size: 14px; color: #bbb;">${text}</p>
+        `;
 
-    /* حاوي الصور */
-    .image-container {
-        position: relative;
-        height: 250px;
-        background: #eee;
-    }
-
-    .image-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* الشارة (Badge) */
-    .badge {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: #b08d57; /* لون ذهبي خافت */
-        color: white;
-        padding: 5px 12px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-    }
-
-    /* معلومات المنتج */
-    .card-info {
-        padding: 20px;
-    }
-
-    .card-info h3 {
-        margin: 0 0 10px;
-        color: #333;
-    }
-
-    .card-info p {
-        font-size: 0.9rem;
-        color: #777;
-        margin-bottom: 20px;
-    }
-
-    /* زر التسوق */
-    .shop-btn {
-        background: #222;
-        color: #fff;
-        border: none;
-        padding: 10px 25px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-
-    .shop-btn:hover {
-        background: #b08d57;
-    }
-
-    /* التجاوب مع الجوال */
-    @media (max-width: 768px) {
-        .luxury-grid {
-            grid-template-columns: 1fr;
+        container.prepend(newReview);
+        
+        // مسح الحقول بعد الإضافة
+        document.getElementById('rev-name').value = '';
+        document.getElementById('rev-text').value = '';
+        
+        if(typeof triggerNotify === "function") {
+            triggerNotify("شكراً لتقييمك الراقي");
         }
     }
-    </style>
-    
+</script>
+
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
