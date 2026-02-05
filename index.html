@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* تعريف المتغيرات الأساسية */
+        /* تعريف الألوان والهوية البصرية */
         :root { 
             --gold: #c5a059; 
             --black: #050505; 
@@ -23,7 +23,7 @@
             --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* الإعدادات العامة للموقع */
+        /* تصفير الإعدادات الافتراضية */
         * { 
             box-sizing: border-box; 
             margin: 0;
@@ -41,7 +41,7 @@
             text-align: right;
         }
 
-        /* تنسيق الهيدر (Header) */
+        /* تصميم الهيدر (Header) */
         header { 
             display: flex; 
             justify-content: space-between; 
@@ -95,7 +95,7 @@
             right: -10px;
         }
 
-        /* نظام الإشعار المنبثق الراقي */
+        /* نظام الإشعار العلوي (Luxury Toast) */
         #luxury-toast {
             position: fixed;
             top: -100px;
@@ -117,7 +117,7 @@
             top: 20px;
         }
 
-        /* تنسيق القائمة الجانبية (Sidebar) */
+        /* القائمة الجانبية (Sidebar) */
         .sidebar { 
             position: fixed; 
             right: -320px; 
@@ -161,7 +161,7 @@
             padding-right: 10px; 
         }
 
-        /* تنسيقات العناوين والزخارف */
+        /* تصميم بوابات الأقسام */
         .row-label { 
             text-align: center; 
             color: var(--gold); 
@@ -224,7 +224,7 @@
             pointer-events: none;
         }
 
-        /* شبكة المنتجات وتصميم الكروت */
+        /* تصميم كروت المنتجات */
         .product-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -306,8 +306,8 @@
     <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('clothing'); toggleSidebar()">الملابس الراقية</a>
     <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('access'); toggleSidebar()">الإكسسوارات</a>
     <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('tech'); toggleSidebar()">الإلكترونيات</a>
-    </div>
-        <div id="main-home">
+</div>
+<div id="main-home">
     <div class="section-box">
         <div class="row-label">ساعات</div>
         <p class="section-moto">"إرث من الأناقة يلتف حول معصمك"</p>
@@ -364,7 +364,7 @@
 </div>
 
 <script>
-    // رابط جلب البيانات من جوجل شيت (TZ70)
+    // رابط جلب البيانات من جوجل شيت الخاص بك
     const PRODUCTS_SHEET_URL = "https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json";
     let allProducts = [];
 
@@ -376,20 +376,20 @@
         setTimeout(() => { toast.classList.remove('show'); }, 3000);
     }
 
-    // جلب البيانات عند تحميل الموقع
+    // جلب البيانات من الشيت عند تحميل الصفحة
     async function preloadProducts() {
         try {
             const response = await fetch(PRODUCTS_SHEET_URL);
             const text = await response.text();
             const json = JSON.parse(text.substr(47).slice(0, -2));
             allProducts = json.table.rows;
-            console.log("Data loaded successfully");
+            console.log("Data loaded from TZ70");
         } catch (e) {
-            console.error("Error loading products:", e);
+            console.error("Error loading products");
         }
     }
 
-    // فتح صفحة القسم وفلترة المنتجات
+    // فتح القسم وفلترة المنتجات
     function openCategoryPage(catKey) {
         const grid = document.getElementById('category-products-grid');
         const title = document.getElementById('page-title');
@@ -399,8 +399,8 @@
             'watch': 'الساعات الملكية', 
             'perfume': 'العطور الفاخرة', 
             'clothing': 'الملابس الراقية', 
-            'access': 'الإكسسوارات', 
-            'tech': 'الإلكترونيات' 
+            'access': 'إكسسواراتنا', 
+            'tech': 'عالم الإلكترونيات' 
         };
         
         const arabicCats = { 
@@ -416,13 +416,16 @@
         allProducts.forEach(row => {
             const name = row.c[0] ? row.c[0].v : '';
             const price = row.c[1] ? row.c[1].v : '';
-            const img = row.c[2] ? row.c[2].v : '';
+            const imgStr = row.c[2] ? row.c[2].v : '';
             const category = row.c[3] ? row.c[3].v : '';
+            
+            // التعامل مع الروابط المتعددة: نأخذ أول رابط للعرض في الشبكة
+            const firstImg = imgStr.split(',')[0].trim();
 
             if (category === arabicCats[catKey]) {
                 grid.innerHTML += `
                     <div class="card-luxury">
-                        <img src="${img}" onclick="showProduct('${name}', 'Luxury Piece by OARA STORE', '${price}', this.src)">
+                        <img src="${firstImg}" onclick="showProduct('${name}', 'Luxury Piece by OARA STORE', '${price}', '${imgStr}')">
                         <p>${name}</p>
                         <div class="price-tag">${price} ILS</div>
                         <button class="btn-gold" onclick="addToCart('${name}', ${price})">إضافة للحقيبة</button>
@@ -434,38 +437,42 @@
         document.body.style.overflow = 'hidden';
     }
 
-    // إغلاق صفحة القسم
     function closeCategoryPage() {
         document.getElementById('category-page').style.display = 'none';
-        if(document.getElementById('detail-modal').style.display !== 'flex') {
-            document.body.style.overflow = 'auto';
-        }
+        document.body.style.overflow = 'auto';
     }
 
     window.addEventListener('DOMContentLoaded', preloadProducts);
-    </script>
-       <div id="detail-modal" style="position:fixed; inset:0; background:var(--black); z-index:9000; display:none; flex-direction:column; padding:20px; overflow-y:auto; text-align:center;">
-    <div onclick="closeDetail()" style="font-size: 35px; color: var(--gold); cursor: pointer; align-self: flex-start; padding: 10px;">✕</div>
+            </script>
+            <div id="detail-modal" style="position:fixed; inset:0; background:var(--black); z-index:9000; display:none; flex-direction:column; padding:20px; overflow-y:auto; text-align:center;">
+    <div onclick="closeDetail()" style="font-size: 35px; color: var(--gold); cursor: pointer; align-self: flex-start; padding: 10px; transition: var(--transition);">✕</div>
+    
     <div style="max-width: 600px; margin: 0 auto; width: 100%;">
-        <img id="detail-img" style="width: 100%; height: auto; max-height: 450px; object-fit: cover; border: 1px solid var(--medium-gray); margin-bottom: 25px;">
+        <div id="detail-img-container" style="width: 100%; position: relative; margin-bottom: 25px; border: 1px solid var(--medium-gray); overflow: hidden;">
+            </div>
+
         <h2 id="detail-title" style="color: var(--gold); font-family: 'Bodoni Moda', serif; letter-spacing: 2px; margin-bottom: 15px; font-size: 24px;"></h2>
-        <p id="detail-desc" style="color: var(--light-gray); font-size: 15px; margin-bottom: 25px; line-height: 1.8; padding: 0 10px;"></p>
-        <div id="detail-price" style="font-size: 22px; color: var(--gold); margin-bottom: 30px; font-weight: 300;"></div>
-        <button class="btn-gold" id="detail-add-btn" style="height: 55px; width: 100%; font-size: 14px;">إضافة إلى حقيبة التسوق</button>
+        
+        <p id="detail-desc" style="color: var(--light-gray); font-size: 15px; margin-bottom: 25px; line-height: 1.8; padding: 0 10px; font-weight: 300;"></p>
+        
+        <div id="detail-price" style="font-size: 22px; color: var(--gold); margin-bottom: 30px; font-weight: 300; letter-spacing: 1px;"></div>
+        
+        <button class="btn-gold" id="detail-add-btn" style="height: 55px; width: 100%; font-size: 14px; letter-spacing: 1px;">إضافة إلى حقيبة التسوق</button>
     </div>
 </div>
 
-<div id="cart-modal" style="position:fixed; inset:0; background:rgba(0,0,0,0.96); display:none; z-index:8000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(5px);">
-    <div style="background:var(--black); border: 1px solid var(--gold); width:100%; max-width:450px; padding:35px; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+<div id="cart-modal" style="position:fixed; inset:0; background:rgba(0,0,0,0.96); display:none; z-index:8000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
+    <div style="background:var(--black); border: 1px solid var(--gold); width:100%; max-width:450px; padding:35px; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
         <h3 style="color:var(--gold); text-align:center; font-family: 'Bodoni Moda', serif; letter-spacing: 3px; margin-bottom: 25px; text-transform: uppercase;">حقيبة التسوق</h3>
         
         <div id="cart-items" style="margin-bottom:25px; max-height:250px; overflow-y:auto; border-top: 1px solid var(--medium-gray); padding-top: 15px;">
             </div>
 
-        <div id="checkout-fields" style="display:none; border-top: 1px solid var(--medium-gray); padding-top: 20px;">
-            <input id="c-name" placeholder="الاسم الكامل" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; text-align:right; font-family: 'Tajawal';">
-            <select id="c-city" style="width:100%; background:var(--black); border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; direction: rtl; font-family: 'Tajawal';">
-                <option value="" disabled selected>اختر المدينة</option>
+        <div id="checkout-fields" style="display:none; border-top: 1px solid var(--medium-gray); padding-top: 20px; animation: fadeIn 0.5s ease;">
+            <input id="c-name" placeholder="الاسم الكامل" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; text-align:right; font-family: 'Tajawal'; outline: none;">
+            
+            <select id="c-city" style="width:100%; background:var(--black); border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; direction: rtl; font-family: 'Tajawal'; outline: none;">
+                <option value="" disabled selected>اختر المدينة للتوصيل</option>
                 <option value="القدس">القدس</option>
                 <option value="رام الله">رام الله</option>
                 <option value="نابلس">نابلس</option>
@@ -481,35 +488,30 @@
             </select>
         </div>
 
-        <button class="btn-gold" id="cart-action-btn" onclick="proceedToCheckout()" style="width:100%; height: 50px; letter-spacing: 1px;">إتمام الطلب</button>
-        <button onclick="closeCart()" style="width:100%; background:none; border:none; color:#555; margin-top:20px; cursor:pointer; font-size:12px; letter-spacing: 1px;">إغلاق النافذة</button>
+        <button class="btn-gold" id="cart-action-btn" onclick="proceedToCheckout()" style="width:100%; height: 50px; letter-spacing: 1px; font-weight: 500;">إتمام الطلب</button>
+        
+        <button onclick="closeCart()" style="width:100%; background:none; border:none; color:#555; margin-top:20px; cursor:pointer; font-size:12px; letter-spacing: 1px; text-transform: uppercase;">إغلاق النافذة</button>
     </div>
 </div>
 
 <div id="reviews-anchor" style="padding: 80px 25px; border-top: 1px solid var(--medium-gray); background: var(--black);">
     <div class="row-label">آراء النخبة</div>
-    <p class="section-moto">"ماذا يقول عملاؤنا عن تجربة OARA"</p>
+    <p class="section-moto">"نعتز بثقة عملائنا في جودة وفخامة OARA"</p>
     
     <div id="reviews-display" style="max-width: 700px; margin: 0 auto;">
         <div style="border-bottom: 1px solid var(--medium-gray); padding: 20px 0;">
             <div style="color: var(--gold); font-size: 14px; margin-bottom: 8px;">★★★★★</div>
-            <p style="font-size: 15px; color: #eee; line-height: 1.6;">"الجودة فاقت توقعاتي، الساعة قطعة فنية حقيقية والتغليف فخم جداً."</p>
-            <div style="color: var(--light-gray); font-size: 11px; margin-top: 10px; letter-spacing: 1px;">أحمد سليم - القدس</div>
-        </div>
-        
-        <div style="border-bottom: 1px solid var(--medium-gray); padding: 20px 0;">
-            <div style="color: var(--gold); font-size: 14px; margin-bottom: 8px;">★★★★★</div>
-            <p style="font-size: 15px; color: #eee; line-height: 1.6;">"العطر ثباته ممتاز وريحته ملكية، شكراً OARA على المصداقية."</p>
-            <div style="color: var(--light-gray); font-size: 11px; margin-top: 10px; letter-spacing: 1px;">ليلى محمود - رام الله</div>
+            <p style="font-size: 15px; color: #eee; line-height: 1.6; font-weight: 300;">"تجربة شراء ممتازة، الساعة فعلاً فخمة والتغليف كان راقياً جداً."</p>
+            <div style="color: var(--light-gray); font-size: 11px; margin-top: 10px; letter-spacing: 1px;">سارة الأحمد - القدس</div>
         </div>
         
         <div id="real-time-reviews"></div>
     </div>
 
     <div style="max-width: 500px; margin: 50px auto; text-align: center; background: var(--dark-gray); padding: 30px; border: 1px solid var(--medium-gray);">
-        <h4 style="color: var(--gold); margin-bottom: 20px; font-weight: 300;">شاركنا تجربتك</h4>
-        <input id="rev-name" placeholder="الاسم الكامل" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; text-align:right;">
-        <textarea id="user-comment-txt" placeholder="اكتب رأيك هنا..." style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; height:100px; text-align:right; font-family: 'Tajawal'; resize: none;"></textarea>
+        <h4 style="color: var(--gold); margin-bottom: 20px; font-weight: 300; letter-spacing: 1px;">شاركنا تجربتك الخاصة</h4>
+        <input id="rev-name" placeholder="الاسم الكامل" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; text-align:right; font-family: 'Tajawal'; outline: none;">
+        <textarea id="user-comment-txt" placeholder="اكتب رأيك هنا..." style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; height:100px; text-align:right; font-family: 'Tajawal'; resize: none; outline: none;"></textarea>
         <button class="btn-gold" onclick="submitReview()" style="width: 100%; margin-top:10px;">نشر المراجعة</button>
     </div>
 </div>
@@ -517,19 +519,45 @@
 <script>
     let cart = [];
 
-    // وظائف السلة والتفاصيل
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('active'); }
+    // وظيفة فتح القائمة الجانبية
+    function toggleSidebar() { 
+        document.getElementById('sidebar').classList.toggle('active'); 
+    }
 
-    function showProduct(title, desc, price, img) {
+    // عرض تفاصيل المنتج مع سلايدر الصور
+    function showProduct(title, desc, price, imgString) {
+        const container = document.getElementById('detail-img-container');
+        const images = imgString.split(',');
+        
+        // بناء هيكل السلايدر (Swipeable Slider)
+        let sliderHTML = `<div style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; ms-overflow-style: none;">`;
+        
+        images.forEach(imgUrl => {
+            sliderHTML += `<img src="${imgUrl.trim()}" style="min-width: 100%; height: 400px; object-fit: cover; scroll-snap-align: start;">`;
+        });
+        
+        sliderHTML += `</div>`;
+        
+        // تلميح للمستخدم إذا كان هناك أكثر من صورة
+        if(images.length > 1) {
+            sliderHTML += `<div style="font-size: 10px; color: var(--gold); margin-top: 10px; letter-spacing: 1px; text-align: center;">اسحب لمشاهدة الصور الأخرى ↔️</div>`;
+        }
+
         document.getElementById('detail-title').innerText = title;
         document.getElementById('detail-desc').innerText = desc;
         document.getElementById('detail-price').innerText = price + " ILS";
-        document.getElementById('detail-img').src = img;
-        document.getElementById('detail-add-btn').onclick = function() { addToCart(title, price); closeDetail(); };
+        container.innerHTML = sliderHTML;
+        
+        document.getElementById('detail-add-btn').onclick = function() { 
+            addToCart(title, price); 
+            closeDetail(); 
+        };
+        
         document.getElementById('detail-modal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
 
+    // إغلاق نافذة التفاصيل
     function closeDetail() { 
         document.getElementById('detail-modal').style.display = 'none'; 
         if (document.getElementById('category-page').style.display !== 'block') {
@@ -537,12 +565,14 @@
         }
     }
 
+    // إضافة منتج للسلة
     function addToCart(name, price) {
         cart.push({name: name, price: price});
         document.getElementById('cart-count').innerText = cart.length;
         showToast("تَمَّت إِضَافَةُ " + name + " إِلَى الحَقِيبَةِ");
     }
 
+    // فتح نافذة السلة
     function openCart() {
         const modal = document.getElementById('cart-modal');
         const list = document.getElementById('cart-items');
@@ -550,17 +580,18 @@
         document.body.style.overflow = 'hidden';
         
         if (cart.length === 0) {
-            list.innerHTML = "<p style='text-align:center; color:#555; padding: 20px;'>الحقيبة فارغة حالياً</p>";
+            list.innerHTML = "<p style='text-align:center; color:#555; padding: 30px; font-size: 13px;'>حقيبتك فارغة حالياً</p>";
         } else {
-            list.innerHTML = cart.map((item, index) => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #111;">
-                    <span style="font-size:14px;">${item.name}</span>
-                    <span style="color:var(--gold); font-size:13px;">${item.price} ILS</span>
+            list.innerHTML = cart.map((item) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #111;">
+                    <span style="font-size:14px; font-weight: 300;">${item.name}</span>
+                    <span style="color:var(--gold); font-size:13px; letter-spacing: 1px;">${item.price} ILS</span>
                 </div>
             `).join('');
         }
     }
 
+    // إغلاق نافذة السلة
     function closeCart() { 
         document.getElementById('cart-modal').style.display = 'none'; 
         document.body.style.overflow = 'auto';
@@ -568,6 +599,7 @@
         document.getElementById('cart-action-btn').innerText = 'إتمام الطلب';
     }
 
+    // إتمام الطلب والتحويل للواتساب
     function proceedToCheckout() {
         const fields = document.getElementById('checkout-fields');
         if (cart.length === 0) {
@@ -577,7 +609,7 @@
 
         if (fields.style.display === 'none') {
             fields.style.display = 'block';
-            document.getElementById('cart-action-btn').innerText = 'تأكيد الطلب عبر واتساب';
+            document.getElementById('cart-action-btn').innerText = 'تأكيد الطلب (WhatsApp)';
         } else {
             const name = document.getElementById('c-name').value;
             const city = document.getElementById('c-city').value;
@@ -587,30 +619,31 @@
                 return;
             }
 
-            let message = `🌟 *طلب جديد من متجر OARA STORE* 🌟\n\n`;
-            message += `*الزبون:* ${name}\n`;
-            message += `*المدينة:* ${city}\n\n`;
-            message += `*المنتجات:*\n`;
+            let message = `🌟 *طلب جديد من OARA STORE* 🌟\n\n`;
+            message += `👤 *العميل:* ${name}\n`;
+            message += `📍 *المدينة:* ${city}\n\n`;
+            message += `🛍️ *المنتجات:*\n`;
             
             let total = 0;
             cart.forEach((item, i) => {
-                message += `${i+1}. ${item.name} (${item.price} ILS)\n`;
+                message += `${i+1}. ${item.name} - ${item.price} ILS\n`;
                 total += parseInt(item.price);
             });
             
-            message += `\n*الإجمالي النهائي:* ${total} ILS\n`;
-            message += `\nرابط المتجر: oara-store.com`;
+            message += `\n💰 *الإجمالي:* ${total} ILS\n`;
+            message += `\nشكراً لاختياركم OARA.`;
 
             window.open(`https://wa.me/972568486065?text=${encodeURIComponent(message)}`);
             
-            // تصفير السلة بعد الطلب
+            // تصفير البيانات
             cart = [];
             document.getElementById('cart-count').innerText = "0";
             closeCart();
-            showToast("شكراً لثقتكم، تم تحويل الطلب");
+            showToast("شكراً لثقتكم، سيتم التواصل معكم");
         }
     }
 
+    // نشر مراجعة جديدة
     function submitReview() {
         const name = document.getElementById('rev-name').value;
         const text = document.getElementById('user-comment-txt').value;
@@ -623,14 +656,13 @@
         const reviewHTML = `
             <div style="border-bottom: 1px solid var(--medium-gray); padding: 20px 0; animation: fadeIn 0.8s ease;">
                 <div style="color: var(--gold); font-size: 14px; margin-bottom: 8px;">★★★★★</div>
-                <p style="font-size: 15px; color: #eee; line-height: 1.6;">"${text}"</p>
+                <p style="font-size: 15px; color: #eee; line-height: 1.6; font-weight: 300;">"${text}"</p>
                 <div style="color: var(--light-gray); font-size: 11px; margin-top: 10px; letter-spacing: 1px;">${name} - الآن</div>
             </div>
         `;
 
         document.getElementById('real-time-reviews').innerHTML = reviewHTML + document.getElementById('real-time-reviews').innerHTML;
         
-        // مسح الحقول بعد النشر
         document.getElementById('rev-name').value = '';
         document.getElementById('user-comment-txt').value = '';
         showToast("شكراً لمشاركتنا رأيك الراقي");
@@ -638,11 +670,18 @@
 </script>
 
 <style>
+    /* أنيميشن الظهور السلس */
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
+    
+    /* إخفاء شريط التمرير في السلايدر */
+    #detail-img-container div::-webkit-scrollbar {
+        display: none;
+    }
 </style>
 
 </body>
-</html>
+    </html>
+                
