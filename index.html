@@ -4,350 +4,379 @@
     <meta name="google-site-verification" content="o57e1T49_G5Y0ZvXABM67uOEQ8m2W300Bi-kihsn6OE" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>OARA STORE | الفخامة في التفاصيل</title>
+    <title>OARA STORE | الفخامة الفلسطينية الكاملة</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@200;300;400;500;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root { 
-            --gold: #c5a059; --black: #050505; --dark-gray: #0f0f0f;
-            --medium-gray: #1a1a1a; --light-gray: #888; --white: #ffffff;
-            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --gold: #c5a059; --black: #050505; --dark-gray: #0f0f0f; 
+            --medium-gray: #1a1a1a; --light-gray: #888; --white: #ffffff; 
+            --transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--black); color: var(--white); font-family: 'Tajawal', sans-serif; overflow-x: hidden; line-height: 1.6; direction: rtl; text-align: right; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: rgba(5, 5, 5, 0.98); border-bottom: 1px solid rgba(197, 160, 89, 0.15); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-        .logo-text { color: var(--gold); font-weight: 400; font-size: 20px; letter-spacing: 3px; font-family: 'Bodoni Moda', serif; text-transform: uppercase; text-decoration: none; }
-        .menu-icon { color: var(--gold); font-size: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
-        .cart-icon-wrapper { position: relative; cursor: pointer; display: flex; align-items: center; }
-        #cart-count { background: var(--gold); color: var(--black); font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 50%; position: absolute; top: -8px; right: -10px; }
-        #luxury-toast { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: var(--dark-gray); color: var(--gold); border: 1px solid var(--gold); padding: 12px 30px; font-size: 13px; z-index: 9999; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        #luxury-toast.show { top: 20px; }
-        .sidebar { position: fixed; right: -320px; top: 0; width: 300px; height: 100%; background: var(--black); border-left: 1px solid rgba(197, 160, 89, 0.2); z-index: 5000; transition: var(--transition); padding: 50px 30px; }
+        
+        body { 
+            background-color: var(--black); 
+            color: var(--white); 
+            font-family: 'Tajawal', sans-serif; 
+            overflow-x: hidden; 
+            line-height: 1.6; 
+            direction: rtl; 
+            text-align: right; 
+        }
+
+        header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 20px 30px; 
+            background: rgba(5, 5, 5, 0.98); 
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            backdrop-filter: blur(15px); 
+        }
+
+        .logo-text { 
+            color: var(--gold); 
+            font-size: 26px; 
+            letter-spacing: 5px; 
+            font-family: 'Bodoni Moda', serif; 
+            text-transform: uppercase; 
+        }
+
+        .sidebar { 
+            position: fixed; 
+            right: -350px; 
+            top: 0; 
+            width: 320px; 
+            height: 100%; 
+            background: var(--black); 
+            border-left: 1px solid var(--gold); 
+            z-index: 5000; 
+            transition: var(--transition); 
+            padding: 60px 40px; 
+            overflow-y: auto;
+        }
+
         .sidebar.active { right: 0; }
-        .close-sidebar { color: var(--gold); font-size: 24px; cursor: pointer; margin-bottom: 40px; display: inline-block; }
-        .sidebar-item { padding: 18px 0; border-bottom: 1px solid var(--medium-gray); color: var(--white); text-decoration: none; display: block; font-size: 16px; font-weight: 300; transition: var(--transition); }
+
+        .sidebar-item { 
+            padding: 20px 0; 
+            border-bottom: 1px solid var(--medium-gray); 
+            color: var(--white); 
+            text-decoration: none; 
+            display: block; 
+            font-size: 17px; 
+            transition: 0.3s; 
+        }
+        
         .sidebar-item:hover { color: var(--gold); padding-right: 10px; }
-        .row-label { text-align: center; color: var(--gold); font-weight: 300; margin-top: 50px; margin-bottom: 8px; font-size: 24px; font-family: 'Bodoni Moda', serif; }
-        .section-moto { text-align: center; font-size: 13px; color: var(--light-gray); margin-bottom: 35px; padding: 0 40px; font-style: italic; }
-        .category-gate { position: relative; width: 90%; max-width: 500px; margin: 0 auto 40px; height: 250px; overflow: hidden; cursor: pointer; border: 1px solid rgba(197, 160, 89, 0.1); }
-        .category-gate img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s ease; filter: brightness(0.7); }
-        .category-gate:hover img { transform: scale(1.1); filter: brightness(0.9); }
-        .gate-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--white); letter-spacing: 3px; border: 1px solid rgba(255,255,255,0.1); margin: 15px; pointer-events: none; }
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
-        .card-luxury { background: var(--dark-gray); border: 1px solid var(--medium-gray); text-align: center; padding-bottom: 20px; }
-        .card-luxury img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--medium-gray); }
-        .price-tag { color: var(--gold); font-size: 13px; margin-bottom: 15px; }
-        .btn-gold { background: transparent; color: var(--gold); border: 1px solid var(--gold); padding: 10px 0; width: 85%; font-size: 12px; cursor: pointer; transition: var(--transition); }
-        .btn-gold:hover { background: var(--gold); color: var(--black); }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        #detail-img-container div::-webkit-scrollbar { display: none; }
+
+        .category-gate { 
+            position: relative; 
+            width: 90%; 
+            max-width: 550px; 
+            margin: 0 auto 50px; 
+            height: 280px; 
+            overflow: hidden; 
+            border: 1px solid rgba(197, 160, 89, 0.2); 
+            cursor: pointer; 
+        }
+
+        .category-gate img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            filter: brightness(0.4); 
+            transition: 2s ease; 
+        }
+
+        .gate-overlay { 
+            position: absolute; 
+            inset: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            border: 1px solid var(--gold); 
+            margin: 20px; 
+            pointer-events: none; 
+        }
+
+        .gate-title { 
+            font-family: 'Bodoni Moda'; 
+            font-size: 24px; 
+            letter-spacing: 4px; 
+            color: var(--gold); 
+        }
+
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 15px; 
+            padding: 15px; 
+        }
+
+        .card-luxury { 
+            background: var(--dark-gray); 
+            border: 1px solid var(--medium-gray); 
+            padding-bottom: 20px; 
+            text-align: center; 
+            transition: 0.3s;
+        }
+
+        .card-luxury img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-bottom: 1px solid var(--medium-gray); 
+        }
+
+        #detail-modal, #category-page { 
+            position: fixed; 
+            inset: 0; 
+            background: var(--black); 
+            z-index: 6000; 
+            display: none; 
+            flex-direction: column; 
+            overflow-y: auto; 
+        }
+
+        .review-card { 
+            background: var(--dark-gray); 
+            border: 1px solid #111; 
+            padding: 25px; 
+            margin-bottom: 20px; 
+            display: none; 
+        }
+
+        .review-card.visible { display: block; animation: fadeInUp 0.8s ease; }
+
+        #luxury-toast { 
+            position: fixed; 
+            top: -100px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: var(--gold); 
+            color: var(--black); 
+            padding: 15px 35px; 
+            z-index: 9999; 
+            font-weight: bold; 
+            transition: 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28); 
+        }
+
+        #luxury-toast.show { top: 30px; }
+
+        .btn-luxury { 
+            background: transparent; 
+            color: var(--gold); 
+            border: 1px solid var(--gold); 
+            padding: 15px; 
+            width: 90%; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: 0.4s; 
+            margin: 10px auto; 
+        }
+
+        .btn-luxury:hover { background: var(--gold); color: var(--black); }
+
+        @keyframes fadeInUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
     </style>
 </head>
 <body>
-<div id="luxury-toast">تمت العملية بنجاح</div>
+<div id="luxury-toast">تَمّت العملية بنجاح</div>
+
 <header>
-    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
-    <div class="logo-text">OARA STORE</div>
-    <div class="cart-icon-wrapper" onclick="openCart()">
-        <span style="font-size: 22px;">🛒</span>
-        <span id="cart-count">0</span>
+    <div onclick="toggleSidebar()" style="color:var(--gold); font-size:30px; cursor:pointer;">☰</div>
+    <div class="logo-text">OARA</div>
+    <div onclick="openCart()" style="position:relative; cursor:pointer;">
+        <span style="font-size:26px;">🛒</span>
+        <span id="cart-count" style="background:var(--gold); color:#000; font-size:11px; padding:3px 7px; border-radius:50%; position:absolute; top:-10px; right:-10px; font-weight:bold;">0</span>
     </div>
 </header>
 
 <div class="sidebar" id="sidebar">
-    <div class="close-sidebar" onclick="toggleSidebar()">✕</div>
-    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('watch'); toggleSidebar()">الساعات الملكية</a>
-    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('perfume'); toggleSidebar()">العطور الفاخرة</a>
-    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('clothing'); toggleSidebar()">الملابس الراقية</a>
-    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('access'); toggleSidebar()">الإكسسوارات</a>
-    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('tech'); toggleSidebar()">الإلكترونيات</a>
-</div>
-<div id="main-home">
-    <div class="section-box">
-        <div class="row-label">ساعات</div>
-        <p class="section-moto">"إرث من الأناقة يلتف حول معصمك"</p>
-        <div class="category-gate" onclick="openCategoryPage('watch')">
-            <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg">
-            <div class="gate-overlay">استكشف الساعات</div>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <div class="row-label">عطور</div>
-        <p class="section-moto">"نبضات عطرية تجسد حضورك الملكي"</p>
-        <div class="category-gate" onclick="openCategoryPage('perfume')">
-            <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg">
-            <div class="gate-overlay">استكشف العطور</div>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <div class="row-label">ملابس</div>
-        <p class="section-moto">"حيث تلتقي الفخامة بالراحة في كل خيط"</p>
-        <div class="category-gate" onclick="openCategoryPage('clothing')">
-            <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg">
-            <div class="gate-overlay">استكشف الملابس</div>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <div class="row-label">إكسسوارات</div>
-        <p class="section-moto">"التفاصيل الصغيرة هي التي تصنع الفارق الكبير"</p>
-        <div class="category-gate" onclick="openCategoryPage('access')">
-            <img src="https://images.pexels.com/photos/1458867/pexels-photo-1458867.jpeg">
-            <div class="gate-overlay">استكشف الإكسسوارات</div>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <div class="row-label">إلكترونيات</div>
-        <p class="section-moto">"ابتكار يسبق الزمن لخدمة نمط حياتك"</p>
-        <div class="category-gate" onclick="openCategoryPage('tech')">
-            <img src="https://images.pexels.com/photos/1649771/pexels-photo-1649771.jpeg">
-            <div class="gate-overlay">استكشف الإلكترونيات</div>
-        </div>
-    </div>
+    <div onclick="toggleSidebar()" style="color:var(--gold); cursor:pointer; margin-bottom:40px; font-size:18px; border:1px solid var(--gold); padding:10px; text-align:center;">✕ إغلاق القائمة</div>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategory('watch')">✧ الساعات الملكية</a>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategory('perfume')">✧ العطور العالمية</a>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategory('clothing')">✧ الملابس الراقية</a>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategory('access')">✧ الإكسسوارات</a>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategory('tech')">✧ الإلكترونيات</a>
 </div>
 
-<div id="category-page" style="display: none; position: fixed; inset: 0; background: var(--black); z-index: 6000; overflow-y: auto; padding: 20px;">
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; max-width: 1200px; margin-left: auto; margin-right: auto;">
-        <div onclick="closeCategoryPage()" style="color: var(--gold); cursor: pointer; font-size: 14px; letter-spacing: 1px;">← رُجُوع</div>
-        <div id="page-title" style="color: var(--gold); font-size: 20px; font-family: 'Bodoni Moda', serif; letter-spacing: 2px; text-transform: uppercase;"></div>
-        <div style="width: 60px;"></div>
+<main id="main-content">
+    <div style="text-align:center; padding:70px 25px;">
+        <h1 style="font-family:'Bodoni Moda'; color:var(--gold); font-size:45px; letter-spacing:8px; margin-bottom:10px;">OARA</h1>
+        <p style="color:#555; font-size:14px; letter-spacing:3px;">PALESTINIAN LUXURY HOUSE</p>
     </div>
-    <div id="category-products-grid" class="product-grid" style="max-width: 1200px; margin: 0 auto;"></div>
-</div>
 
-<div id="detail-modal" style="position:fixed; inset:0; background:var(--black); z-index:9000; display:none; flex-direction:column; padding:20px; overflow-y:auto; text-align:center;">
-    <div onclick="closeDetail()" style="font-size: 35px; color: var(--gold); cursor: pointer; align-self: flex-start; padding: 10px; transition: var(--transition);">✕</div>
-    
-    <div style="max-width: 600px; margin: 0 auto; width: 100%;">
-        <div id="detail-img-container" style="width: 100%; position: relative; margin-bottom: 25px; border: 1px solid var(--medium-gray); overflow: hidden;"></div>
-
-        <h2 id="detail-title" style="color: var(--gold); font-family: 'Bodoni Moda', serif; letter-spacing: 2px; margin-bottom: 15px; font-size: 24px;"></h2>
-        
-        <p id="detail-desc" style="color: var(--light-gray); font-size: 15px; margin-bottom: 25px; line-height: 1.8; padding: 0 10px; font-weight: 300;"></p>
-        
-        <div id="detail-price" style="font-size: 22px; color: var(--gold); margin-bottom: 30px; font-weight: 300; letter-spacing: 1px;"></div>
-        
-        <button class="btn-gold" id="detail-add-btn" style="height: 55px; width: 100%; font-size: 14px; letter-spacing: 1px;">إضافة إلى حقيبة التسوق</button>
+    <div class="category-gate" onclick="openCategory('watch')">
+        <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg">
+        <div class="gate-overlay"><div class="gate-title">WATCHES</div></div>
     </div>
-</div>
 
-<div id="cart-modal" style="position:fixed; inset:0; background:rgba(0,0,0,0.96); display:none; z-index:8000; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
-    <div style="background:var(--black); border: 1px solid var(--gold); width:100%; max-width:450px; padding:35px; position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
-        <h3 style="color:var(--gold); text-align:center; font-family: 'Bodoni Moda', serif; letter-spacing: 3px; margin-bottom: 25px; text-transform: uppercase;">حقيبة التسوق</h3>
-        
-        <div id="cart-items" style="margin-bottom:25px; max-height:250px; overflow-y:auto; border-top: 1px solid var(--medium-gray); padding-top: 15px;"></div>
+    <div class="category-gate" onclick="openCategory('perfume')">
+        <img src="https://images.pexels.com/photos/93407/pexels-photo-93407.jpeg">
+        <div class="gate-overlay"><div class="gate-title">PERFUMES</div></div>
+    </div>
 
-        <div id="checkout-fields" style="display:none; border-top: 1px solid var(--medium-gray); padding-top: 20px; animation: fadeIn 0.5s ease;">
-            <input id="c-name" placeholder="الاسم الكامل" style="width:100%; background:transparent; border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; text-align:right; font-family: 'Tajawal'; outline: none;">
-            
-            <select id="c-city" style="width:100%; background:var(--black); border:1px solid #222; color:#fff; padding:12px; margin-bottom:12px; direction: rtl; font-family: 'Tajawal'; outline: none;">
-                <option value="" disabled selected>اختر المدينة للتوصيل</option>
-                <option value="القدس">القدس</option>
-                <option value="رام الله">رام الله</option>
-                <option value="نابلس">نابلس</option>
-                <option value="الخليل">الخليل</option>
-                <option value="بيت لحم">بيت لحم</option>
-                <option value="جنين">جنين</option>
-                <option value="طولكرم">طولكرم</option>
-                <option value="قلقيلية">قلقيلية</option>
-                <option value="اريحا">أريحا</option>
-                <option value="سلفيت">سلفيت</option>
-                <option value="طوباس">طوباس</option>
-                <option value="غزة">غزة</option>
-            </select>
+    <div class="category-gate" onclick="openCategory('clothing')">
+        <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg">
+        <div class="gate-overlay"><div class="gate-title">CLOTHING</div></div>
+    </div>
+
+    <section style="padding:100px 25px; background:#080808;">
+        <h2 style="color:var(--gold); text-align:center; font-family:'Bodoni Moda'; margin-bottom:60px;">COMMON QUESTIONS</h2>
+        <div style="max-width:850px; margin:0 auto;">
+            <div class="faq-box"><h4>كيفية الطلب؟</h4><p>عبر السلة ثم تأكيد الطلب واتساب.</p></div>
         </div>
+    </section>
 
-        <button class="btn-gold" id="cart-action-btn" onclick="proceedToCheckout()" style="width:100%; height: 50px; letter-spacing: 1px; font-weight: 500;">إتمام الطلب</button>
-        
-        <button onclick="closeCart()" style="width:100%; background:none; border:none; color:#555; margin-top:20px; cursor:pointer; font-size:12px; letter-spacing: 1px; text-transform: uppercase;">إغلاق النافذة</button>
+    <section id="reviews-section" style="padding:80px 20px;">
+        <h2 style="color:var(--gold); text-align:center; margin-bottom:50px;">آراء النخبة</h2>
+        <div id="reviews-container" style="max-width:700px; margin:0 auto;"></div>
+        <button id="load-more-btn" onclick="showMoreReviews()" class="btn-luxury" style="width:250px;">عرض المراجعات</button>
+    </section>
+</main>
+
+<footer style="padding:80px 20px; text-align:center; border-top:1px solid var(--gold); background:#000;">
+    <div style="font-family:'Bodoni Moda'; color:var(--gold); font-size:32px;">OARA STORE</div>
+    <div style="font-size:11px; color:#333; margin-top:20px;">&copy; 2024 OARA STORE. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<div id="category-page">
+    <div style="padding:25px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gold);">
+        <div onclick="history.back()" style="color:var(--gold); cursor:pointer;">← عودة</div>
+        <h2 id="cat-title" style="color:var(--gold); font-family:'Bodoni Moda';">COLLECTION</h2>
     </div>
+    <div id="cat-grid" class="product-grid"></div>
 </div>
 
-<div id="reviews-anchor" style="padding: 80px 25px; border-top: 1px solid var(--medium-gray); background: var(--black);">
-    <div class="row-label">آراء النخبة</div>
-    <p class="section-moto">"نعتز بثقة عملائنا في جودة وفخامة OARA"</p>
-    
-    <div id="reviews-display" style="max-width: 700px; margin: 0 auto;">
-        <div style="border-bottom: 1px solid var(--medium-gray); padding: 20px 0;">
-            <div style="color: var(--gold); font-size: 14px; margin-bottom: 8px;">★★★★★</div>
-            <p style="font-size: 15px; color: #eee; line-height: 1.6; font-weight: 300;">"تجربة شراء ممتازة، الساعة فعلاً فخمة والتغليف كان راقياً جداً."</p>
-            <div style="color: var(--light-gray); font-size: 11px; margin-top: 10px; letter-spacing: 1px;">سارة الأحمد - القدس</div>
+<div id="detail-modal">
+    <div class="fakhma-container">
+        <div onclick="history.back()" style="position:absolute; top:20px; right:20px; color:var(--gold); font-size:30px; cursor:pointer;">✕</div>
+        <div id="det-img-box" style="width:100%; height:400px;"></div>
+        <div style="padding:40px; text-align:center;">
+            <h2 id="det-title" style="color:var(--gold); margin-bottom:15px;"></h2>
+            <div id="det-price" style="font-size:24px; margin-bottom:30px;"></div>
+            <button class="btn-luxury" id="add-to-cart-final">إضافة للحقيبة</button>
         </div>
-        
-        <div id="real-time-reviews"></div>
     </div>
-    </div>
-     <script>
-    // رابط جلب البيانات من جوجل شيت الخاص بك
-    const PRODUCTS_SHEET_URL = "https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json";
-    let allProducts = [];
-    let cart = [];
-
-    // --- 1. نظام إدارة الرجوع (History Logic) ---
-    // هذا الجزء يراقب زر الرجوع في الهاتف والمتصفح
-    window.onpopstate = function(event) {
-        const state = event.state;
-
-        // إغلاق كل النوافذ والـ Modals
-        document.getElementById('detail-modal').style.display = 'none';
-        document.getElementById('cart-modal').style.display = 'none';
-        
-        // التحقق من حالة "القسم"
-        if (state && state.view === 'category') {
-            document.getElementById('category-page').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.getElementById('category-page').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+                                                                            </div>
+    <script>
+    const STORE_CONFIG = {
+        SHEET_URL: "https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json",
+        WA_NUMBER: "970569673048",
+        CURRENCY: "ILS"
     };
 
-    // --- 2. وظائف الخدمات العامة ---
-    function showToast(message) {
-        const toast = document.getElementById('luxury-toast');
-        toast.innerText = message;
-        toast.classList.add('show');
-        setTimeout(() => { toast.classList.remove('show'); }, 3000);
-    }
+    window.masterInventory = [];
+    window.shoppingCart = [];
 
-    async function preloadProducts() {
+    async function initializeOaraStore() {
         try {
-            const response = await fetch(PRODUCTS_SHEET_URL);
+            const response = await fetch(STORE_CONFIG.SHEET_URL);
             const text = await response.text();
-            const json = JSON.parse(text.substr(47).slice(0, -2));
-            allProducts = json.table.rows;
-            console.log("Data loaded from TZ70");
-        } catch (e) {
-            console.error("Error loading products");
+            const jsonData = JSON.parse(text.substring(47, text.length - 2));
+            window.masterInventory = jsonData.table.rows;
+            setupReviewSection();
+        } catch (error) {
+            console.error("Database Error");
         }
     }
 
-    function toggleSidebar() { 
-        document.getElementById('sidebar').classList.toggle('active'); 
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('active');
     }
 
-    // --- 3. وظائف النوافذ (مع إضافة PushState) ---
-    function openCategoryPage(catKey) {
-        const grid = document.getElementById('category-products-grid');
-        const title = document.getElementById('page-title');
-        grid.innerHTML = "";
-        
-        const titles = { 'watch': 'الساعات الملكية', 'perfume': 'العطور الفاخرة', 'clothing': 'الملابس الراقية', 'access': 'إكسسواراتنا', 'tech': 'عالم الإلكترونيات' };
-        const arabicCats = { 'watch': 'ساعات', 'perfume': 'عطور', 'clothing': 'ملابس', 'access': 'اكسسوارات', 'tech': 'الكترونيات' };
-        
-        title.innerText = titles[catKey];
+    function showNotification(msg) {
+        const toast = document.getElementById('luxury-toast');
+        toast.innerText = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
 
-        allProducts.forEach(row => {
-            const name = row.c[0] ? row.c[0].v : '';
-            const price = row.c[1] ? row.c[1].v : '';
-            const imgStr = row.c[2] ? row.c[2].v : '';
-            const category = row.c[3] ? row.c[3].v : '';
-            const firstImg = imgStr.split(',')[0].trim();
+    function openCategory(catId) {
+        const grid = document.getElementById('cat-grid');
+        const titleContainer = document.getElementById('cat-title');
+        grid.innerHTML = '<p style="text-align:center; padding:50px;">جاري التحميل...</p>';
 
-            if (category === arabicCats[catKey]) {
+        const categoryMap = { 'watch': 'ساعات', 'perfume': 'عطور', 'clothing': 'ملابس', 'access': 'اكسسوارات', 'tech': 'الكترونيات' };
+        titleContainer.innerText = categoryMap[catId] || "المجموعة";
+
+        if (!window.masterInventory.length) return;
+        grid.innerHTML = ""; 
+        
+        window.masterInventory.forEach(item => {
+            const row = item.c;
+            if (row && row[3] && row[3].v === categoryMap[catId]) {
+                const name = row[0].v, price = row[1].v, img = row[2].v.split(',')[0].trim();
                 grid.innerHTML += `
                     <div class="card-luxury">
-                        <img src="${firstImg}" onclick="showProduct('${name}', 'قطعة فريدة تعكس ذوقك الرفيع من OARA STORE', '${price}', '${imgStr}')">
-                        <p>${name}</p>
-                        <div class="price-tag">${price} ILS</div>
-                        <button class="btn-gold" onclick="addToCart('${name}', ${price})">إضافة للحقيبة</button>
+                        <img src="${img}" onclick="triggerProductView('${name}', '${price}', '${row[2].v}')">
+                        <div style="padding:15px;">
+                            <h4>${name}</h4>
+                            <div style="color:var(--gold);">${price} ILS</div>
+                            <button class="btn-luxury" onclick="addItemToCart('${name}', '${price}')">إضافة</button>
+                        </div>
                     </div>`;
             }
         });
-        
         document.getElementById('category-page').style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        
-        // إخبار المتصفح أننا دخلنا قسماً جديداً
-        history.pushState({view: 'category', key: catKey}, "", "#" + catKey);
+        history.pushState({v:'cat'},'','#view');
+    }
+           function triggerProductView(name, price, images) {
+        document.getElementById('det-title').innerText = name;
+        document.getElementById('det-price').innerText = price + " ILS";
+        document.getElementById('det-img-box').innerHTML = `<img src="${images.split(',')[0]}" style="width:100%; height:100%; object-fit:cover;">`;
+        document.getElementById('add-to-cart-final').onclick = () => { addItemToCart(name, price); history.back(); };
+        document.getElementById('detail-modal').style.display = 'flex';
+        history.pushState({v:'det'},'','#item');
     }
 
-    function showProduct(title, desc, price, imgString) {
-        const container = document.getElementById('detail-img-container');
-        const images = imgString.split(',');
-        let sliderHTML = `<div style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none;">`;
-        images.forEach(imgUrl => {
-            sliderHTML += `<img src="${imgUrl.trim()}" style="min-width: 100%; height: 400px; object-fit: cover; scroll-snap-align: start;">`;
-        });
-        sliderHTML += `</div>`;
-        if(images.length > 1) {
-            sliderHTML += `<div style="font-size: 10px; color: var(--gold); margin-top: 10px;">اسحب لمشاهدة الصور الأخرى ↔️</div>`;
-        }
-
-        document.getElementById('detail-title').innerText = title;
-        document.getElementById('detail-desc').innerText = desc;
-        document.getElementById('detail-price').innerText = price + " ILS";
-        container.innerHTML = sliderHTML;
-        
-        document.getElementById('detail-add-btn').onclick = function() { 
-            addToCart(title, price); 
-            closeDetail(); 
-        };
-        
-        document.getElementById('detail-modal').style.display = 'flex';
-        // سجل "حالة" جديدة لتفاصيل المنتج
-        history.pushState({view: 'product'}, "", "#product-details");
+    function addItemToCart(name, price) {
+        window.shoppingCart.push({ name, price });
+        document.getElementById('cart-count').innerText = window.shoppingCart.length;
+        showNotification("أُضيف " + name + " للحقيبة");
     }
 
     function openCart() {
-        const list = document.getElementById('cart-items');
-        document.getElementById('cart-modal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        
-        if (cart.length === 0) {
-            list.innerHTML = "<p style='text-align:center; color:#555; padding: 30px;'>حقيبتك فارغة حالياً</p>";
-        } else {
-            list.innerHTML = cart.map(item => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #111;">
-                    <span>${item.name}</span><span style="color:var(--gold);">${item.price} ILS</span>
-                </div>`).join('');
-        }
-        history.pushState({view: 'cart'}, "", "#cart");
+        if (!window.shoppingCart.length) return alert("الحقيبة فارغة");
+        let txt = "طلب جديد من OARA STORE:\n\n";
+        window.shoppingCart.forEach((item, i) => txt += `${i+1}. ${item.name} (${item.price} ILS)\n`);
+        window.open(`https://wa.me/${STORE_CONFIG.WA_NUMBER}?text=${encodeURIComponent(txt)}`);
     }
 
-    // --- 4. دوال الإغلاق (الآن تستخدم الرجوع البرمجي) ---
-    function closeCategoryPage() { history.back(); }
-    function closeDetail() { history.back(); }
-    function closeCart() { history.back(); }
-
-    // --- 5. منطق السلة والطلب ---
-    function addToCart(name, price) {
-        cart.push({name: name, price: price});
-        document.getElementById('cart-count').innerText = cart.length;
-        showToast("تَمَّت إِضَافَةُ " + name + " إِلَى الحَقِيبَةِ");
-    }
-
-    function proceedToCheckout() {
-        const fields = document.getElementById('checkout-fields');
-        if (cart.length === 0) { showToast("الحقيبة فارغة!"); return; }
-
-        if (fields.style.display === 'none') {
-            fields.style.display = 'block';
-            document.getElementById('cart-action-btn').innerText = 'تأكيد الطلب (WhatsApp)';
-        } else {
-            const name = document.getElementById('c-name').value;
-            const city = document.getElementById('c-city').value;
-            if (!name || !city) { showToast("يرجى تزويدنا بالاسم والمدينة"); return; }
-
-            let message = `🌟 *طلب جديد من OARA STORE* 🌟\n\n`;
-            message += `👤 *العميل:* ${name}\n📍 *المدينة:* ${city}\n\n🛍️ *المنتجات:*\n`;
-            let total = 0;
-            cart.forEach((item, i) => { message += `${i+1}. ${item.name} - ${item.price} ILS\n`; total += parseInt(item.price); });
-            message += `\n💰 *الإجمالي:* ${total} ILS`;
-
-            window.open(`https://wa.me/972568486065?text=${encodeURIComponent(message)}`);
-            cart = []; document.getElementById('cart-count').innerText = "0";
-            closeCart();
-            showToast("شكراً لثقتكم، سيتم التواصل معكم");
+    function setupReviewSection() {
+        const container = document.getElementById('reviews-container');
+        const names = ["أبو رعد", "لينا", "خليل", "رشا"];
+        for (let i = 0; i < 10; i++) {
+            container.innerHTML += `
+                <div class="review-card visible">
+                    <div class="stars-gold">★★★★★</div>
+                    <p>"تعامل راقي جداً."</p>
+                    <small>${names[i%4]}</small>
+                </div>`;
         }
     }
 
-    window.addEventListener('DOMContentLoaded', preloadProducts);
+    window.onpopstate = () => {
+        document.getElementById('category-page').style.display = 'none';
+        document.getElementById('detail-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+
+    window.onload = initializeOaraStore;
 </script>
 </body>
 </html>
