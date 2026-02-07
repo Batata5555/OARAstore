@@ -287,6 +287,26 @@
     </style>
 </head>
 <body>
+
+<div id="luxury-toast">تمت العملية بنجاح</div>
+
+<header>
+    <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+    <div class="logo-text">OARA STORE</div>
+    <div class="cart-icon-wrapper" onclick="openCart()">
+        <span style="font-size: 22px;">🛒</span>
+        <span id="cart-count">0</span>
+    </div>
+</header>
+
+<div class="sidebar" id="sidebar">
+    <div class="close-sidebar" onclick="toggleSidebar()">✕</div>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('watch'); toggleSidebar()">الساعات الملكية</a>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('perfume'); toggleSidebar()">العطور الفاخرة</a>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('clothing'); toggleSidebar()">الملابس الراقية</a>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('access'); toggleSidebar()">الإكسسوارات</a>
+    <a href="javascript:void(0)" class="sidebar-item" onclick="openCategoryPage('tech'); toggleSidebar()">الإلكترونيات</a>
+    </div>
     <div id="main-home">
     <div class="section-box">
         <div class="row-label">ساعات</div>
@@ -344,9 +364,11 @@
 </div>
 
 <script>
+    // رابط جلب البيانات من جوجل شيت الخاص بك
     const PRODUCTS_SHEET_URL = "https://docs.google.com/spreadsheets/d/1nOwLwJqkusxCoRDYSMyjxoV6PHm4AB1lp35NEuyTZ70/gviz/tq?tqx=out:json";
     let allProducts = [];
 
+    // دالة عرض الإشعار المنبثق
     function showToast(message) {
         const toast = document.getElementById('luxury-toast');
         toast.innerText = message;
@@ -354,29 +376,40 @@
         setTimeout(() => { toast.classList.remove('show'); }, 3000);
     }
 
+    // جلب البيانات من الشيت عند تحميل الصفحة
     async function preloadProducts() {
         try {
             const response = await fetch(PRODUCTS_SHEET_URL);
             const text = await response.text();
             const json = JSON.parse(text.substr(47).slice(0, -2));
             allProducts = json.table.rows;
-            console.log("Data loaded successfully from TZ70");
+            console.log("Data loaded from TZ70");
         } catch (e) {
             console.error("Error loading products");
         }
     }
 
-    // فتح القسم مع إضافة علامة للتاريخ لضمان عدم الخروج من المتصفح
+    // فتح القسم وفلترة المنتجات
     function openCategoryPage(catKey) {
-        // دفع حالة جديدة في تاريخ المتصفح لتمكين زر الرجوع في الهاتف
-        history.pushState({view: 'category'}, "");
-
         const grid = document.getElementById('category-products-grid');
         const title = document.getElementById('page-title');
         grid.innerHTML = "";
         
-        const titles = { 'watch': 'الساعات الملكية', 'perfume': 'العطور الفاخرة', 'clothing': 'الملابس الراقية', 'access': 'إكسسواراتنا', 'tech': 'عالم الإلكترونيات' };
-        const arabicCats = { 'watch': 'ساعات', 'perfume': 'عطور', 'clothing': 'ملابس', 'access': 'اكسسوارات', 'tech': 'الكترونيات' };
+        const titles = { 
+            'watch': 'الساعات الملكية', 
+            'perfume': 'العطور الفاخرة', 
+            'clothing': 'الملابس الراقية', 
+            'access': 'إكسسواراتنا', 
+            'tech': 'عالم الإلكترونيات' 
+        };
+        
+        const arabicCats = { 
+            'watch': 'ساعات', 
+            'perfume': 'عطور', 
+            'clothing': 'ملابس', 
+            'access': 'اكسسوارات', 
+            'tech': 'الكترونيات' 
+        };
         
         title.innerText = titles[catKey];
 
@@ -385,6 +418,8 @@
             const price = row.c[1] ? row.c[1].v : '';
             const imgStr = row.c[2] ? row.c[2].v : '';
             const category = row.c[3] ? row.c[3].v : '';
+            
+            // التعامل مع الروابط المتعددة: نأخذ أول رابط للعرض في الشبكة
             const firstImg = imgStr.split(',')[0].trim();
 
             if (category === arabicCats[catKey]) {
@@ -404,26 +439,12 @@
 
     function closeCategoryPage() {
         document.getElementById('category-page').style.display = 'none';
-        // لا نعيد الـ overflow لـ auto إلا إذا كانت كل النوافذ مغلقة
-        if (document.getElementById('detail-modal').style.display !== 'flex') {
-            document.body.style.overflow = 'auto';
-        }
+        document.body.style.overflow = 'auto';
     }
 
-    // هذا هو المراقب المسؤول عن زر الرجوع في الهاتف
-    window.onpopstate = function(event) {
-        if (document.getElementById('detail-modal') && document.getElementById('detail-modal').style.display === 'flex') {
-            closeDetail();
-        } else if (document.getElementById('category-page') && document.getElementById('category-page').style.display === 'block') {
-            closeCategoryPage();
-        } else if (document.getElementById('cart-modal') && document.getElementById('cart-modal').style.display === 'flex') {
-            closeCart();
-        }
-    };
-
     window.addEventListener('DOMContentLoaded', preloadProducts);
-    </script>
-      <div id="detail-modal" style="position:fixed; inset:0; background:var(--black); z-index:9000; display:none; flex-direction:column; padding:20px; overflow-y:auto; text-align:center;">
+                </script>
+        <div id="detail-modal" style="position:fixed; inset:0; background:var(--black); z-index:9000; display:none; flex-direction:column; padding:20px; overflow-y:auto; text-align:center;">
     <div onclick="closeDetail()" style="font-size: 35px; color: var(--gold); cursor: pointer; align-self: flex-start; padding: 10px; transition: var(--transition);">✕</div>
     
     <div style="max-width: 600px; margin: 0 auto; width: 100%;">
@@ -483,6 +504,7 @@
             <p style="font-size: 15px; color: #eee; line-height: 1.6; font-weight: 300;">"تجربة شراء ممتازة، الساعة فعلاً فخمة والتغليف كان راقياً جداً."</p>
             <div style="color: var(--light-gray); font-size: 11px; margin-top: 10px; letter-spacing: 1px;">سارة الأحمد - القدس</div>
         </div>
+        
         <div id="real-time-reviews"></div>
     </div>
 
@@ -502,20 +524,21 @@
         document.getElementById('sidebar').classList.toggle('active'); 
     }
 
-    // عرض تفاصيل المنتج مع دعم زر الرجوع بالهاتف
+    // عرض تفاصيل المنتج مع سلايدر الصور
     function showProduct(title, desc, price, imgString) {
-        // دفع حالة للتاريخ لكي لا يخرج عند الضغط على زر الرجوع
-        history.pushState({view: 'product'}, "");
-
         const container = document.getElementById('detail-img-container');
         const images = imgString.split(',');
         
+        // بناء هيكل السلايدر (Swipeable Slider)
         let sliderHTML = `<div style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; ms-overflow-style: none;">`;
+        
         images.forEach(imgUrl => {
             sliderHTML += `<img src="${imgUrl.trim()}" style="min-width: 100%; height: 400px; object-fit: cover; scroll-snap-align: start;">`;
         });
+        
         sliderHTML += `</div>`;
         
+        // تلميح للمستخدم إذا كان هناك أكثر من صورة
         if(images.length > 1) {
             sliderHTML += `<div style="font-size: 10px; color: var(--gold); margin-top: 10px; letter-spacing: 1px; text-align: center;">اسحب لمشاهدة الصور الأخرى ↔️</div>`;
         }
@@ -534,6 +557,7 @@
         document.body.style.overflow = 'hidden';
     }
 
+    // إغلاق نافذة التفاصيل
     function closeDetail() { 
         document.getElementById('detail-modal').style.display = 'none'; 
         if (document.getElementById('category-page').style.display !== 'block') {
@@ -541,16 +565,15 @@
         }
     }
 
+    // إضافة منتج للسلة
     function addToCart(name, price) {
         cart.push({name: name, price: price});
         document.getElementById('cart-count').innerText = cart.length;
         showToast("تَمَّت إِضَافَةُ " + name + " إِلَى الحَقِيبَةِ");
     }
 
+    // فتح نافذة السلة
     function openCart() {
-        // دفع حالة للتاريخ عند فتح السلة
-        history.pushState({view: 'cart'}, "");
-        
         const modal = document.getElementById('cart-modal');
         const list = document.getElementById('cart-items');
         modal.style.display = 'flex';
@@ -568,6 +591,7 @@
         }
     }
 
+    // إغلاق نافذة السلة
     function closeCart() { 
         document.getElementById('cart-modal').style.display = 'none'; 
         document.body.style.overflow = 'auto';
@@ -575,6 +599,7 @@
         document.getElementById('cart-action-btn').innerText = 'إتمام الطلب';
     }
 
+    // إتمام الطلب والتحويل للواتساب
     function proceedToCheckout() {
         const fields = document.getElementById('checkout-fields');
         if (cart.length === 0) {
@@ -610,6 +635,7 @@
 
             window.open(`https://wa.me/972568486065?text=${encodeURIComponent(message)}`);
             
+            // تصفير البيانات
             cart = [];
             document.getElementById('cart-count').innerText = "0";
             closeCart();
@@ -617,6 +643,7 @@
         }
     }
 
+    // نشر مراجعة جديدة
     function submitReview() {
         const name = document.getElementById('rev-name').value;
         const text = document.getElementById('user-comment-txt').value;
@@ -643,16 +670,18 @@
 </script>
 
 <style>
+    /* أنيميشن الظهور السلس */
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
     
+    /* إخفاء شريط التمرير في السلايدر */
     #detail-img-container div::-webkit-scrollbar {
         display: none;
     }
 </style>
 
 </body>
-                </html>
-            
+    </html>
+    
